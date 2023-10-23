@@ -36,7 +36,7 @@ instance.interceptors.response.use(
         console.log("result:")
         console.log(res.Result)
         // 对于业务模块，只需关注结果，无需做验证提示
-        return res.Result
+        return res.Result   //只要ApiResult里面的Result
     },
     // 请求异常走这里
     async error => {

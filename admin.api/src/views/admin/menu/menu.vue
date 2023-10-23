@@ -1,5 +1,4 @@
 <template>
-    <h1>test</h1>
     <el-card class="box-card">
         <el-row>
             <el-col :span="5">
@@ -47,8 +46,8 @@
     
 <script lang="ts" setup>
 import { onMounted, Ref, ref } from 'vue';
-import Menu from '../../class/Menu';
-import { getTreeMenu } from '../../http';
+import Menu from '../../../class/Menu'
+import { getTreeMenu } from '../../../http';
 let parms = {
     Name: "",
     Index: "",
@@ -78,42 +77,9 @@ const Search = async () => {
 onMounted(load)
 
 
-///debug
-// import { onMounted, Ref, ref } from 'vue';
-// import Menu from '../../class/Menu';
-// import { getTreeMenu } from '../../http';
-
-// const parms = ref({
-//     Name: "",
-//     Index: "",
-//     FilePath: "",
-//     Description: ""
-// });
-
-// // 载入数据
-// const tableData: Ref<Array<Menu>> = ref([]);
-// const load = async () => {
-//     parms.value.Name = searchVal.value; // 更新参数对象的 Name 字段
-//     console.log('Before request:', parms.value);
-//     try {
-//         // tableData.value = await getTreeMenu(parms.value) as Array<Menu>;
-//         tableData.value = (await getTreeMenu(parms.value)).data as Menu[];
-//         console.log('After request:', tableData.value);
-//     } catch (error) {
-//         console.error('Request error:', error);
-//     }
-// };
-
-// const searchVal = ref("");
-// const Search = async () => {
-//     await load();
-// }
-// onMounted(load);
 
 
 
-
-// -------------------- 新增、修改、删除逻辑 Start --------------------
 const isShow = ref(false)
 const open = () => {
     isShow.value = true

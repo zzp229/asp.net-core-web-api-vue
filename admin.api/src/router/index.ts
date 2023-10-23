@@ -8,19 +8,26 @@ const router = createRouter({
             component: () => import("../views/index/LoginPage.vue")
         },
         {
-            name: "test",
-            path: "/",
-            component: () => import("../views/index/test.vue")
-        },
-        {
             name: "father",
             path: "/father",
             component: () => import("../views/index/father.vue")
         },
         {
-            name: "menu",
-            path: "/menu",
-            component: () => import("../views/index/menu.vue")
+            name: "NotFound",
+            path: "/NotFound",
+            component: () => import("../views/index/NotFound.vue")
+        },
+        {
+            name: "admin",
+            path: "/",
+            component: () => import("../views/index/RootPage.vue"),
+            children: [
+                {
+                    name: "menu",
+                    path: "/menu",
+                    component: () => import("../views/admin/menu/menu.vue")
+                }
+            ]
         }
     ]
 })
