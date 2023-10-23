@@ -8,16 +8,12 @@ const router = createRouter({
             component: () => import("../views/index/LoginPage.vue")
         },
         {
-            name: "father",
-            path: "/father",
-            component: () => import("../views/index/father.vue")
-        },
-        {
             name: "NotFound",
             path: "/NotFound",
             component: () => import("../views/index/NotFound.vue")
         },
         {
+            //要被包在RootPage中
             name: "admin",
             path: "/",
             component: () => import("../views/index/RootPage.vue"),
@@ -25,7 +21,7 @@ const router = createRouter({
                 {
                     name: "menu",
                     path: "/menu",
-                    component: () => import("../views/admin/menu/menu.vue")
+                    component: () => import("../views/admin/Permission/Permission.vue")
                 }
             ]
         }

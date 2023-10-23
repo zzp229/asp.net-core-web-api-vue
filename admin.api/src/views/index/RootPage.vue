@@ -17,11 +17,24 @@
                         <IconCom icon="monitor"></IconCom>
                         <span>个人信息</span>
                     </el-menu-item>
-                    <el-menu-item index="/menu">
-                        <IconCom icon="monitor"></IconCom>
-                        <span>菜单管理</span>
-                    </el-menu-item>
                 </el-sub-menu>
+
+                <el-menu-item index="/menu">
+                    <IconCom icon="monitor"></IconCom>
+                    <span>账户权限管理</span>
+                </el-menu-item>
+                <el-menu-item index="/menu">
+                    <IconCom icon="monitor"></IconCom>
+                    <span>顾客信息</span>
+                </el-menu-item>
+                <el-menu-item index="/menu">
+                    <IconCom icon="monitor"></IconCom>
+                    <span>经办人信息</span>
+                </el-menu-item>
+                <el-menu-item index="/menu">
+                    <IconCom icon="monitor"></IconCom>
+                    <span>药品信息</span>
+                </el-menu-item>
                 <!-- 这里应该获取剩下的菜单 -->
                 <!-- <TreeMenu :list="list"></TreeMenu> -->
             </el-menu>
