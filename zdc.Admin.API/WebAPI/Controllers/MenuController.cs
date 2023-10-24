@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         public async Task<ApiResult> GetMenus(MenuReq req)
         {
             //userId = HttpContext.User.Claims.ToList()[0].Value;
-            userId = "2bb05ced-3200-4cdd-b021-61ed1d2ae09f";
+            userId = "0a837d12-9951-40fd-a58b-8571be877cdd";
             return ResultHelper.Success(await _Menu.GetMenus(req, userId));
         }
         [HttpGet]

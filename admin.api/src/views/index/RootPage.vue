@@ -19,19 +19,19 @@
                     </el-menu-item>
                 </el-sub-menu>
 
-                <el-menu-item index="/menu">
+                <el-menu-item index="/permission">
                     <IconCom icon="monitor"></IconCom>
                     <span>账户权限管理</span>
                 </el-menu-item>
-                <el-menu-item index="/menu">
+                <el-menu-item index="/client">
                     <IconCom icon="monitor"></IconCom>
                     <span>顾客信息</span>
                 </el-menu-item>
-                <el-menu-item index="/menu">
+                <el-menu-item index="/agency">
                     <IconCom icon="monitor"></IconCom>
                     <span>经办人信息</span>
                 </el-menu-item>
-                <el-menu-item index="/menu">
+                <el-menu-item index="/medicine">
                     <IconCom icon="monitor"></IconCom>
                     <span>药品信息</span>
                 </el-menu-item>

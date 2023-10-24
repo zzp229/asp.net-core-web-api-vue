@@ -1,0 +1,91 @@
+[
+    {
+        "id":1,
+        "index": "rolemanager",
+        "name": "角色管理",
+        "filePath":"../views/admin/role/RoleManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": [
+            {
+                "index": "rolemanager",
+                "name": "角色列表"
+            }
+        ]
+    },
+    {
+        "id":2,
+        "index": "personmanager",
+        "name": "人员管理",
+        "filePath":"../views/admin/person/PersonManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": [
+            {
+                "index": "personmanager",
+                "name": "人员列表"
+            }
+        ]
+    },
+    {
+        "id":3,
+        "index": "menumanager",
+        "name": "菜单管理",
+        "filePath":"../views/admin/menu/MenuManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": [
+            {
+                "index": "menumanager",
+                "name": "菜单列表"
+            }
+        ]
+    },
+    {
+        "id":4,
+        "index": "authmanager",
+        "name": "权限管理",
+        "filePath":"../views/admin/AuthManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": null
+    },
+    {
+        "id":5,
+        "index": "test",
+        "name": "多层级菜单测试1",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "filePath":"test",
+        "children": [
+            {
+                "index": "test2",
+                "name": "权限列表2",
+                "children": [
+                    {
+                        "index": "test3",
+                        "name": "权限列表3"
+                    }
+                ]
+            },
+            {
+                "index": "test23",
+                "name": "权限列表2"
+            },
+            {
+                "index": "test24",
+                "name": "权限列表2"
+            }
+        ]
+    }
+]
