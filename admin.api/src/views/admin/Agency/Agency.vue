@@ -45,7 +45,6 @@ import { delUser, getAgency } from '../../../http';
 import add from './add.vue';
 import setting from './setting.vue';
 const total = ref(0)
-const tableData = ref<Array<Agency>>([])
 const parms = ref({
     Ano: "",
     Aname: "",
@@ -55,14 +54,16 @@ const parms = ref({
     PageIndex: 1,
     PageSize: 10
 })
+
+//载入数据
+const tableData: Ref<Array<Agency>> = ref<Array<Agency>>([])
 const load = async () => {
-    let res = await getAgency(parms.value) as any
+    let res = await getAgency(parms.value)
     console.log("load中")
-    console.log( "res:" + res.data)
-    tableData.value = res.Data
-    console.log("tableData.value")
+    console.log( "res:" + res)
+    tableData.value = res as any as Array<Agency>
+    console.log("tableData.value:")
     console.log(tableData.value)
-    total.value = res.Total
 }
 
 onMounted(async () => {

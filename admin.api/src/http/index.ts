@@ -28,7 +28,8 @@ instance.interceptors.response.use(
     response => {
         // 拿到请求结果后统一返回，并设置返回结果
         const res: ApiResult = response.data
-        console.log("res")
+        console.log("拦截器中：")
+        console.log("res:")
         console.log(res)
         if (!res.IsSuccess) {
             ElMessage.error(res.Msg)
