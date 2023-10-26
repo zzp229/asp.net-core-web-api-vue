@@ -34,7 +34,8 @@ const value = ref()
 // ref(((await getRoles(parms.value) as any).Data as Array<RoleRes>)) 
 const options = ref<Array<RoleRes>>([])
 onMounted(async () => {
-    options.value = ((await getRoles(parms.value) as any).Data as Array<RoleRes>)
+    // 这里原本是有东西的
+    // options.value = ((await getRoles(parms.value) as any).Data as Array<RoleRes>)    
 })
 const close = () => {
     emits("closeSettingAdd")

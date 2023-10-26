@@ -15,27 +15,12 @@
             <el-col>
                 <el-table :data="tableData" style="width: 100%;height: 65vh;" border ref="tb">
                     <el-table-column type="selection" width="55" />
-                    <el-table-column prop="Name" label="名称" width="90" />
-                    <el-table-column prop="NickName" label="昵称" width="90" />
-                    <el-table-column prop="Image" label="头像" width="90">
-                        <template #default="scope">
-                            <el-image src="01.jpeg" :zoom-rate="1.2" :preview-teleported="true"
-                                :preview-src-list="['01.jpeg']" />
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="Password" label="密码" width="120" />
-                    <el-table-column prop="RoleName" label="角色" width="100" />
-                    <el-table-column prop="IsEnable" label="是否启用" width="100">
-                        <template #default="scope">
-                            <el-switch v-model="scope.row.IsEnable" disabled />
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="Description" label="描述" />
-                    <el-table-column prop="CreateUserName" label="创建人" width="80" />
-                    <el-table-column prop="CreateDate" label="创建时间" />
-                    <el-table-column prop="ModifyUserName" label="修改人" width="80" />
-                    <el-table-column prop="ModifyDate" label="修改时间" />
-                    <el-table-column prop="IsDelete" label="是否删除" width="90" />
+                    <el-table-column prop="Ano" label="编号" width="150" />
+                    <el-table-column prop="Aname" label="姓名" width="150" />
+                    <el-table-column prop="Asex" label="性别" width="150" />
+                    <el-table-column prop="Aphone" label="电话" width="150" />
+                    <el-table-column prop="Aremark" label="备注" width="190" />
+        
                     <el-table-column label="操作" align="center">
                         <template #default="scope">
                             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -55,23 +40,31 @@
 <script lang="ts" setup>
 import { ElMessage, ElTable } from 'element-plus';
 import { onMounted, reactive, Ref, ref } from 'vue';
-import UserRes from '../../../class/UserRes';
-import { delUser, getUsers } from '../../../http';
+import Agency from '../../../class/Agency';
+import { delUser, getAgency } from '../../../http';
 import add from './add.vue';
 import setting from './setting.vue';
 const total = ref(0)
-const tableData = ref<Array<UserRes>>([])
+const tableData = ref<Array<Agency>>([])
 const parms = ref({
-    Name: "",
-    Description: "",
+    Ano: "",
+    Aname: "",
+    Asex: "",
+    Aphone: "",
+    Aremark: "",
     PageIndex: 1,
     PageSize: 10
 })
 const load = async () => {
-    let res = await getUsers(parms.value) as any
+    let res = await getAgency(parms.value) as any
+    console.log("load中")
+    console.log( "res:" + res.data)
     tableData.value = res.Data
+    console.log("tableData.value")
+    console.log(tableData.value)
     total.value = res.Total
 }
+
 onMounted(async () => {
     await load()
 })
@@ -90,20 +83,20 @@ const open = () => {
 }
 const closeAdd = () => {
     isShow.value = false
-    info.value = new UserRes()
+    info.value = new Agency()
 }
-const info: Ref<UserRes> = ref<UserRes>(new UserRes());
-const handleEdit = (index: number, row: UserRes) => {
+const info: Ref<Agency> = ref<Agency>(new Agency());
+const handleEdit = (index: number, row: Agency) => {
     info.value = row
     isShow.value = true
 }
 const success = async (message: string) => {
     isShow.value = false
-    info.value = new UserRes()
+    info.value = new Agency()
     ElMessage.success(message)
     await load()
 }
-const handleDelete = async (index: number, row: UserRes) => {
+const handleDelete = async (index: number, row: Agency) => {
     await delUser(row.Id)
     await load()
 }
@@ -120,7 +113,7 @@ const openSet = () => {
     } else if (rows.length > 1) {
         ElMessage.warning("请选择【一个】需要分配的用户")
     } else {
-        uid.value = tb.value?.getSelectionRows().map((item: UserRes) => item.Id)[0]
+        uid.value = tb.value?.getSelectionRows().map((item: Agency) => item.Id)[0]
         isShow_Set.value = true
     }
 }

@@ -21,8 +21,9 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ApiResult> GetAgencys(Agency req)
         {
+            var tmp = ResultHelper.Success(await _Agency.GetAgencys(req));
             //这样不知道能不能获取出所有的agency
-            return ResultHelper.Success(await _Agency.GetAgencys(req));
+            return tmp;
         }
     }
 }

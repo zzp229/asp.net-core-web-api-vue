@@ -23,7 +23,7 @@ instance.interceptors.request.use(
         return config
     }
 )
-// 拦截响应
+// 拦截响应（获取到值后才跑到这里）
 instance.interceptors.response.use(
     response => {
         // 拿到请求结果后统一返回，并设置返回结果
@@ -82,7 +82,15 @@ instance.interceptors.response.use(
     }
 )
 
-
+// 我自己需要的
+//api/控制器/方法
+//注意这里要使用instance，不是axios
+export const getAgency = (obj: {}) => {
+    console.log("getAgency返回值")
+    var tmp = instance.post(`/api/Agency/GetAgencys`, obj)
+    console.log(tmp)
+    return tmp
+}
 
 
 export const getToken = (obj: {}) => {
