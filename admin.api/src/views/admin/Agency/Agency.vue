@@ -2,7 +2,7 @@
     <el-card class="box-card">
         <el-row>
             <el-col :span="5">
-                <el-input v-model="searchVal" placeholder="Please input" @change="Search" />
+                <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
             <el-col :span="12">
                 <el-button type="primary" @click="Search">查询</el-button>
@@ -20,7 +20,7 @@
                     <el-table-column prop="Asex" label="性别" width="150" />
                     <el-table-column prop="Aphone" label="电话" width="150" />
                     <el-table-column prop="Aremark" label="备注" width="190" />
-        
+
                     <el-table-column label="操作" align="center">
                         <template #default="scope">
                             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -29,12 +29,14 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="total" />
+                <!-- <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="total" /> -->
+                <!-- <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="pageSize"
+                    @current-change="handlePageChange" /> -->
+                <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="total"
+                    :current-page="parms.PageIndex" :page-size="pageSize" @current-change="handlePageChange" />
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
-        <setting :isShow="isShow_Set" :uid="uid" @closeSettingAdd="closeSettingAdd" @settingSuccess="settingSuccess">
-        </setting>
     </el-card>
 </template>
 <script lang="ts" setup>
@@ -43,8 +45,7 @@ import { onMounted, reactive, Ref, ref } from 'vue';
 import Agency from '../../../class/Agency';
 import { delUser, getAgency } from '../../../http';
 import add from './add.vue';
-import setting from './setting.vue';
-const total = ref(0)
+const total = ref(10)
 const parms = ref({
     Ano: "",
     Aname: "",
@@ -60,7 +61,7 @@ const tableData: Ref<Array<Agency>> = ref<Array<Agency>>([])
 const load = async () => {
     let res = await getAgency(parms.value)
     console.log("load中")
-    console.log( "res:" + res)
+    console.log("res:" + res)
     tableData.value = res as any as Array<Agency>
     console.log("tableData.value:")
     console.log(tableData.value)
@@ -127,6 +128,15 @@ const settingSuccess = async () => {
     uid.value = ""
     await load()
 }
-// -------------------- 设置角色逻辑 End ----------------------
+// -------------------- 设置分页 ----------------------
+const pageSize = ref(10); // Number of records to display per page
+
+// Handle page change
+const handlePageChange = async (page) => {
+    // parms.PageIndex = page;
+    page ++;
+    // page = 10;
+    await load();
+};
 </script>
 <style lang="scss" scoped></style>  
