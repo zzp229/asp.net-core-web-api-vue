@@ -7,7 +7,6 @@
             <el-col :span="12">
                 <el-button type="primary" @click="Search">查询</el-button>
                 <el-button @click="open" type="primary">新增</el-button>
-                <!-- <el-button @click="openSet" type="primary">设置角色</el-button> -->
             </el-col>
         </el-row>
         <br>
@@ -61,23 +60,26 @@ const parms = ref({
 //载入数据
 const tableData: Ref<Array<Agency>> = ref<Array<Agency>>([])
 const load = async () => {
-    let res = await getAgency(parms.value)
-    console.log("load中")
-    console.log("res:" + res)
-    tableData.value = res as any as Array<Agency>
-    console.log("tableData.value:")
-    console.log(tableData.value)
+    console.log("load中：" + parms.value.Aname)
+    let res = await getAgency(parms.value) as any
+    // console.log("查询结果：" + res as Array<Agency>)
+    tableData.value = res as Array<Agency>
+    console.log("tableData.value:" + tableData.value)
+}
+// 查询
+const searchVal = ref("")
+const Search = async () => {
+    parms.value.Aname = searchVal.value
+    // console.log("parms.value.Aname:" + parms.value.Aname)
+    await load()
 }
 
 onMounted(async () => {
     await load()
 })
 
-const searchVal = ref("")
-const Search = async () => {
-    parms.value.Name = searchVal.value
-    await load()
-}
+
+
 
 
 // -------------------- 新增、修改、删除逻辑 Start --------------------
@@ -104,32 +106,9 @@ const handleDelete = async (index: number, row: Agency) => {
     await delAgency(row.Id)
     await load()
 }
-// -------------------- 新增、修改、删除逻辑 End ----------------------
 
-// -------------------- 设置角色逻辑 Start --------------------
-const isShow_Set = ref(false)
-const uid = ref("")
 const tb = ref<InstanceType<typeof ElTable>>()
-const openSet = () => {
-    let rows = tb.value?.getSelectionRows()
-    if (rows.length == 0) {
-        ElMessage.warning("请选择一个需要分配的用户")
-    } else if (rows.length > 1) {
-        ElMessage.warning("请选择【一个】需要分配的用户")
-    } else {
-        uid.value = tb.value?.getSelectionRows().map((item: Agency) => item.Id)[0]
-        isShow_Set.value = true
-    }
-}
-const closeSettingAdd = () => {
-    isShow_Set.value = false;
-    uid.value = ""
-}
-const settingSuccess = async () => {
-    isShow_Set.value = false;
-    uid.value = ""
-    await load()
-}
+
 // -------------------- 设置分页 ----------------------
 const pageSize = ref(10); // Number of records to display per page
 
