@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Model.Common;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Model.Entitys
     /// <summary>
     /// 药品信息表
     /// </summary>
-    public class Medicine
+    public class Medicine: Base
     {
-        [SugarColumn(IsPrimaryKey = true)]
+        [SugarColumn(IsNullable = false)]
         public string Mno { get; set; }
 
         [SugarColumn(IsNullable = false)]

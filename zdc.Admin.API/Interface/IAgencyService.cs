@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Model.Dto.Role;
 using Model.Entitys;
 
 namespace Interface
@@ -11,5 +12,11 @@ namespace Interface
     public interface IAgencyService
     {
         Task<List<Agency>> GetAgencys(Agency agency);
+
+        Task<bool> Edit(Agency req);
+
+        Task<bool> Del(int id);
+
+        Task<bool> Add(Agency req);
     }
 }

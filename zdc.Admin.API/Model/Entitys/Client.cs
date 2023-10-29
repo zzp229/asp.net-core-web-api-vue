@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Model.Common;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Model.Entitys
 {
-    public class Client
+    public class Client: Base
     {
-        [SugarColumn(IsPrimaryKey = true)]
+        [SugarColumn(IsNullable = false)]
         public string Cno { get; set; }
 
         [SugarColumn(IsNullable = false)]

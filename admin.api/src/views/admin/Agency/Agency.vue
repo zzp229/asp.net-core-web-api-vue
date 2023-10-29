@@ -7,7 +7,7 @@
             <el-col :span="12">
                 <el-button type="primary" @click="Search">查询</el-button>
                 <el-button @click="open" type="primary">新增</el-button>
-                <el-button @click="openSet" type="primary">设置角色</el-button>
+                <!-- <el-button @click="openSet" type="primary">设置角色</el-button> -->
             </el-col>
         </el-row>
         <br>
@@ -23,9 +23,10 @@
 
                     <el-table-column label="操作" align="center">
                         <template #default="scope">
-                            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                            <!-- 将这一行的数据都传出去 -->
+                            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
                             <el-button size="small" type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -43,10 +44,11 @@
 import { ElMessage, ElTable } from 'element-plus';
 import { onMounted, reactive, Ref, ref } from 'vue';
 import Agency from '../../../class/Agency';
-import { delUser, getAgency } from '../../../http';
+import { delAgency, getAgency } from '../../../http';
 import add from './add.vue';
 const total = ref(10)
 const parms = ref({
+    Id: 0,
     Ano: "",
     Aname: "",
     Asex: "",
@@ -87,7 +89,7 @@ const closeAdd = () => {
     isShow.value = false
     info.value = new Agency()
 }
-const info: Ref<Agency> = ref<Agency>(new Agency());
+const info: Ref<Agency> = ref<Agency>(new Agency());    //响应式对象
 const handleEdit = (index: number, row: Agency) => {
     info.value = row
     isShow.value = true
@@ -99,7 +101,7 @@ const success = async (message: string) => {
     await load()
 }
 const handleDelete = async (index: number, row: Agency) => {
-    await delUser(row.Id)
+    await delAgency(row.Id)
     await load()
 }
 // -------------------- 新增、修改、删除逻辑 End ----------------------
