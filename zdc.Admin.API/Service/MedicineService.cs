@@ -36,22 +36,26 @@ namespace Service
 
         public async Task<List<Medicine>> GetMedicines(Medicine med)
         {
-
-            List<Medicine> medicines1 = await _db.Queryable<Medicine>()
-                .WhereIF(!string.IsNullOrEmpty(med.Mno), m => m.Mno.Contains(med.Mname))
-                .WhereIF(!string.IsNullOrEmpty(med.Mname), m => m.Mname.Contains(med.Mname))
-                .WhereIF(!string.IsNullOrEmpty(med.Mmode), m => m.Mmode.Contains(med.Mname))
-                .WhereIF(!string.IsNullOrEmpty(med.Mefficacy), m => m.Mefficacy.Contains(med.Mname))
-                .Select(m => new Medicine() { }, true)
-                .ToListAsync();
-
             List<Medicine> medicines = await _db.Queryable<Medicine>()
-                .WhereIF(!string.IsNullOrEmpty(med.Mno), m => m.Mno.Contains(med.Mno))
-                .WhereIF(!string.IsNullOrEmpty(med.Mname), m => m.Mname.Contains(med.Mname))
-                .WhereIF(!string.IsNullOrEmpty(med.Mmode), m => m.Mmode.Contains(med.Mmode))
-                .WhereIF(!string.IsNullOrEmpty(med.Mefficacy), m => m.Mefficacy.Contains(med.Mefficacy))
+                .Where(m => m.Mno.Contains(med.Mname) || m.Mname.Contains(med.Mname) || m.Mmode.Contains(med.Mname) || m.Mefficacy.Contains(med.Mname))
                 .Select(m => new Medicine() { }, true)
                 .ToListAsync();
+
+            //List<Medicine> medicines = await _db.Queryable<Medicine>()
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mno), m => m.Mno.Contains(med.Mname))
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mname), m => m.Mname.Contains(med.Mname))
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mmode), m => m.Mmode.Contains(med.Mname))
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mefficacy), m => m.Mefficacy.Contains(med.Mname))
+            //    .Select(m => new Medicine() { }, true)
+            //    .ToListAsync();
+
+            //List<Medicine> medicines = await _db.Queryable<Medicine>()
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mno), m => m.Mno.Contains(med.Mno))
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mname), m => m.Mname.Contains(med.Mname))
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mmode), m => m.Mmode.Contains(med.Mmode))
+            //    .WhereIF(!string.IsNullOrEmpty(med.Mefficacy), m => m.Mefficacy.Contains(med.Mefficacy))
+            //    .Select(m => new Medicine() { }, true)
+            //    .ToListAsync();
 
             return medicines;
         }

@@ -23,15 +23,23 @@ namespace Service
 
         public async Task<List<Agency>> GetAgencys(Agency agency)
         {
-            //List<Agency> agencies = await _db.Queryable<Agency>().ToListAsync();
             List<Agency> agencies = await _db.Queryable<Agency>()
-                .WhereIF(!string.IsNullOrEmpty(agency.Ano), m => m.Ano.Contains(agency.Ano))
-                .WhereIF(!string.IsNullOrEmpty(agency.Aname), m => m.Aname.Contains(agency.Aname))
-                .WhereIF(!string.IsNullOrEmpty(agency.Asex), m => m.Asex.Contains(agency.Asex))
-                .WhereIF(!string.IsNullOrEmpty(agency.Aphone), m => m.Aphone.Contains(agency.Aphone))
-                .WhereIF(!string.IsNullOrEmpty(agency.Aremark), m => m.Aremark.Contains(agency.Aremark))
+                .Where(m=>m.Ano.Contains(agency.Aname) || m.Aname.Contains(agency.Aname) || m.Asex.Contains(agency.Aname) || m.Aphone.Contains(agency.Aname) || m.Aremark.Contains(agency.Aremark))
                 .Select(m => new Agency() { }, true)
                 .ToListAsync();
+
+            //||  
+
+            // 改为非并列条件
+
+            //List<Agency> agencies1 = await _db.Queryable<Agency>()
+            //    .WhereIF(!string.IsNullOrEmpty(agency.Ano), m => m.Ano.Contains(agency.Ano))
+            //    .WhereIF(!string.IsNullOrEmpty(agency.Aname), m => m.Aname.Contains(agency.Aname))
+            //    .WhereIF(!string.IsNullOrEmpty(agency.Asex), m => m.Asex.Contains(agency.Asex))
+            //    .WhereIF(!string.IsNullOrEmpty(agency.Aphone), m => m.Aphone.Contains(agency.Aphone))
+            //    .WhereIF(!string.IsNullOrEmpty(agency.Aremark), m => m.Aremark.Contains(agency.Aremark))
+            //    .Select(m => new Agency() { }, true)
+            //    .ToListAsync();
             return agencies;
         }
 
