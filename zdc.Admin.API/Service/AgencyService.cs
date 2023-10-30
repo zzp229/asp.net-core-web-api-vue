@@ -24,11 +24,11 @@ namespace Service
         public async Task<List<Agency>> GetAgencys(Agency agency)
         {
             List<Agency> agencies = await _db.Queryable<Agency>()
-                .Where(m=>m.Ano.Contains(agency.Aname) || m.Aname.Contains(agency.Aname) || m.Asex.Contains(agency.Aname) || m.Aphone.Contains(agency.Aname) || m.Aremark.Contains(agency.Aremark))
+                .Where(m=>m.Ano.Contains(agency.Aname) || m.Aname.Contains(agency.Aname) || m.Asex.Contains(agency.Aname) || m.Aremark.Contains(agency.Aname))
                 .Select(m => new Agency() { }, true)
                 .ToListAsync();
 
-            //||  
+            //||  || m.Aphone.Contains(agency.Aname) || m.Aremark.Contains(agency.Aremark)
 
             // 改为非并列条件
 

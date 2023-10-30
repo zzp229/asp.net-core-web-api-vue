@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj": {}
+    "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj": {}
   },
   "projects": {
-    "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj": {
+    "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
+        "projectUniqueName": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
         "projectName": "Interface",
-        "projectPath": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
+        "projectPath": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
         "packagesPath": "C:\\Users\\13556\\.nuget\\packages\\",
-        "outputPath": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\obj\\",
+        "outputPath": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\c\\app\\Visual Studio\\tool\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
-                "projectPath": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj"
+              "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
+                "projectPath": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj"
               }
             }
           }
@@ -67,14 +67,14 @@
         }
       }
     },
-    "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
+    "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
+        "projectUniqueName": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
+        "projectPath": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\13556\\.nuget\\packages\\",
-        "outputPath": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\obj\\",
+        "outputPath": "D:\\desktop\\tmp\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\c\\app\\Visual Studio\\tool\\NuGetPackages"
