@@ -39,6 +39,7 @@ namespace Service
         {
             // var info = _db.Queryable<Agency>().First(p => p.Id == req.Id);
             //好像不用查询id都行的，就改就行
+            
             var tmp = await _db.Updateable(req).ExecuteCommandAsync() > 0;
             return tmp;
         }

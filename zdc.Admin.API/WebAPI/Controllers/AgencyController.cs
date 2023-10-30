@@ -41,7 +41,8 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ApiResult> Del(int id)
         {
-            return ResultHelper.Success(await _Agency.Del(id));
+            var tmp =  ResultHelper.Success(await _Agency.Del(id));
+            return tmp;
         }
 
         [HttpPost]

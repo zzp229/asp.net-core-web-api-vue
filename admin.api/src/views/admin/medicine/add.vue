@@ -2,23 +2,23 @@
     <el-dialog v-model="dialogVisible" :title="form.Id != 0 ? '修改' : '新增'" width="30%" draggable
         @close="$emit('closeAdd')">
         <el-form :model="form" label-width="80px" ref="ruleFormRef" :rules="rules">
-            <el-form-item label="编号" prop="Ano">
-                <el-input v-model="form.Ano" />
+            <el-form-item label="编号" prop="Mno">
+                <el-input v-model="form.Mno" />
             </el-form-item>
-            <el-form-item label="姓名" prop="Aname">
-                <el-input v-model="form.Aname" />
+            <el-form-item label="名称" prop="Mname">
+                <el-input v-model="form.Mname" />
             </el-form-item>
-            <el-form-item label="性别" prop="Asex">
-                <el-select v-model="form.Asex">
-                    <el-option label="男" value="男"></el-option>
-                    <el-option label="女" value="女"></el-option>
+            <el-form-item label="服用方法" prop="Mmode">
+                <el-select v-model="form.Mmode">
+                    <el-option label="内服" value="内服"></el-option>
+                    <el-option label="外用" value="外用"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="电话" prop="Aphone">
-                <el-input v-model="form.Aphone" />
+            <el-form-item label="功效" prop="Mefficacy">
+                <el-input v-model="form.Mefficacy" />
             </el-form-item>
-            <el-form-item label="描述" prop="Aremark">
-                <el-input v-model="form.Aremark" />
+            <el-form-item label="数量" prop="Mnum">
+                <el-input v-model="form.Mnum" />
             </el-form-item>
         </el-form>
         <template #footer>
@@ -32,22 +32,22 @@
 <script lang="ts" setup>
 import { ref, computed, defineEmits, reactive, watch } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-import { addAgency, editAgency } from '../../../http/index'
-import Agency from '../../../class/Agency';
+import { addMedicine, editMedicine } from '../../../http/index'
+import Medicine from '../../../class/Medicine';
 const props = defineProps({
     isShow: Boolean,
-    info: Agency
+    info: Medicine
 })
 const dialogVisible = computed(() => props.isShow)
 
 const ruleFormRef = ref<FormInstance>()
 const form = ref({
     Id: 0,
-    Ano: "",
-    Aname: "",
-    Asex: "",
-    Aphone: "",
-    Aremark: "",
+    Mno: "",
+    Mname: "",
+    Mmode: "",
+    Mefficacy: "",
+    Mnum: 0
 })
 //组件的实例只会在加载的时候渲染一次，如果想实现form的值和参数联动，需要使用监听
 //props.info改变，就执行回调函数，将修改后的值复制回去给form
@@ -57,20 +57,20 @@ watch(() => props.info, (newInfo: any) => {
     }
 })
 const rules = reactive<FormRules>({
-    Ano: [
+    Mno: [
         { required: true, message: '请输入编号', trigger: 'blur' }
     ],
-    Aname: [
-        { required: true, message: '请输入姓名', trigger: 'blur' }
+    Mname: [
+        { required: true, message: '请输入名称', trigger: 'blur' }
     ],
-    Asex: [
-        { required: false, message: '请输入性别', trigger: 'blur' }
+    Mmode: [
+        { required: false, message: '请输入服用方法', trigger: 'blur' }
     ],
-    Aphone: [
-        { required: true, message: '请输入电话', trigger: 'blur' }
+    Mefficacy: [
+        { required: true, message: '请输入功效', trigger: 'blur' }
     ],
-    Aremark: [
-        { required: true, message: '请输入备注', trigger: 'blur' }
+    Mnum: [
+        { required: true, message: '请输入数量', trigger: 'blur' }
     ],
 })
 
@@ -89,10 +89,10 @@ const save = async (formEl: FormInstance | undefined) => {
         if (valid) {
             console.log("form.value.Id=" + form.value.Id)
             // ts中也是和c语言一样0是false
+            console.log("form.value.Id=" + form.value.Id)
             if (form.value.Id) {
-                console.log("进入了修改的")
                 //then是回调
-                editAgency(form.value).then(function (res) {
+                editMedicine(form.value).then(function (res) {
                     if (res) {
                         emits("success", "修改成功！")
                     }
@@ -101,7 +101,7 @@ const save = async (formEl: FormInstance | undefined) => {
             //添加
             else {
                 console.log("进入了添加的")
-                addAgency(form.value).then(function (res) {
+                addMedicine(form.value).then(function (res) {
                     if (res) {
                         emits("success", "添加成功！")
                     }

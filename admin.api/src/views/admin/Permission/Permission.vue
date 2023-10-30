@@ -64,7 +64,6 @@ const load = async () => {
     console.log("parms" + parms)
     console.log("Menu:" + Menu)
     tableData.value = await getTreeMenu(parms) as any as Array<Menu>
-    //这个可以返回，我的不行啊
     console.log("tableData.value:")
     console.log(tableData.value)
 }
@@ -75,10 +74,6 @@ const Search = async () => {
     await load()
 }
 onMounted(load)
-
-
-
-
 
 const isShow = ref(false)
 const open = () => {

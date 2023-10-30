@@ -37,9 +37,7 @@
 <script lang="ts" setup>
 import { ref, computed, defineEmits, reactive, watch } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
-// import { addMenu, editMenu } from '../../../http/index'
-// import store from '../../../store/index'
-// import Menu from '../../../class/Menu';
+
 
 //传入参数，defineProps是直接传入
 const props = defineProps({
@@ -93,8 +91,8 @@ const closeAdd = async (formEl: FormInstance | undefined) => {
 }
 
 const save = async (formEl: FormInstance | undefined) => {
+    if(!formEl) return
     emits("success", "修改成功！")
-
 }
 </script>
 

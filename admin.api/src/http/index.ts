@@ -23,6 +23,7 @@ instance.interceptors.request.use(
         return config
     }
 )
+
 // 拦截响应（获取到值后才跑到这里）
 instance.interceptors.response.use(
     response => {
@@ -100,6 +101,21 @@ export const addAgency = (req: {}) => {
     return instance.post("/api/Agency/Add", req)
 }
 
+
+// ---------------医药--------------
+export const getMedicines = (obj: {}) => {
+    return instance.post(`/api/Medicine/GetMedicines`, obj)
+}
+export const editMedicine = (req: {}) => {
+    return instance.post(`/api/Medicine/Edit`, req)
+}
+export const delMedicine = (id: number) => {
+    console.log("进入删除api：delMedicine")
+    return instance.get(`/api/Medicine/Del?id=${id}`)
+}
+export const addMedicine = (req: {}) => {
+    return instance.post("/api/Medicine/Add", req)
+}
 
 
 export const getToken = (obj: {}) => {

@@ -41,7 +41,7 @@
 </template>
 <script lang="ts" setup>
 import { ElMessage, ElTable } from 'element-plus';
-import { onMounted, reactive, Ref, ref } from 'vue';
+import { onMounted, Ref, ref } from 'vue';
 import Agency from '../../../class/Agency';
 import { delAgency, getAgency } from '../../../http';
 import add from './add.vue';
@@ -57,14 +57,14 @@ const parms = ref({
     PageSize: 10
 })
 
-//载入数据
+
+// -------------------- 载入数据 --------------------
 const tableData: Ref<Array<Agency>> = ref<Array<Agency>>([])
 const load = async () => {
     console.log("load中：" + parms.value.Aname)
     let res = await getAgency(parms.value) as any
     // console.log("查询结果：" + res as Array<Agency>)
     tableData.value = res as Array<Agency>
-    console.log("tableData.value:" + tableData.value)
 }
 // 查询
 const searchVal = ref("")
@@ -94,6 +94,7 @@ const closeAdd = () => {
 const info: Ref<Agency> = ref<Agency>(new Agency());    //响应式对象
 const handleEdit = (index: number, row: Agency) => {
     info.value = row
+    index ++
     isShow.value = true
 }
 const success = async (message: string) => {
@@ -104,6 +105,7 @@ const success = async (message: string) => {
 }
 const handleDelete = async (index: number, row: Agency) => {
     await delAgency(row.Id)
+    index ++
     await load()
 }
 
@@ -113,7 +115,7 @@ const tb = ref<InstanceType<typeof ElTable>>()
 const pageSize = ref(10); // Number of records to display per page
 
 // Handle page change
-const handlePageChange = async (page) => {
+const handlePageChange = async (page: number) => {
     // parms.PageIndex = page;
     page ++;
     // page = 10;
