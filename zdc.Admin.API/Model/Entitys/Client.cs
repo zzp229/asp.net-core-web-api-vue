@@ -17,7 +17,7 @@ namespace Model.Entitys
         public string Cname { get; set; }
 
         [SugarColumn(IsNullable = false)]
-        public bool Csex { get; set; }
+        public string Csex { get; set; }
 
         [SugarColumn(IsNullable = false)]
         public int Cage { get; set; }

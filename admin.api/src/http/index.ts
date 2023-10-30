@@ -117,7 +117,22 @@ export const addMedicine = (req: {}) => {
     return instance.post("/api/Medicine/Add", req)
 }
 
+// ---------------顾客--------------
+export const getClients = (obj: {}) => {
+    return instance.post(`/api/Client/GetClients`, obj)
+}
+export const editClient = (req: {}) => {
+    return instance.post(`/api/Client/Edit`, req)
+}
+export const delClient = (id: number) => {
+    return instance.get(`/api/Client/Del?id=${id}`)
+}
+export const addClient = (req: {}) => {
+    return instance.post("/api/Client/Add", req)
+}
 
+
+// ---------------认证相关的--------------
 export const getToken = (obj: {}) => {
     return instance.post(`/api/Login/GetToken`, obj)
 }
