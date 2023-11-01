@@ -2,10 +2,11 @@
     <el-row>
         <el-col :span="1">
             <el-link :underline="false" @click="ChangeisCollapse">
+                <!-- 没import也没有报错，被坑了 -->
                 <IconCom icon="expand"></IconCom>
             </el-link>
-
         </el-col>
+        
         <el-col :span="11">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item><a href="/">
@@ -26,13 +27,14 @@
                 <el-dropdown>
                     <span>
                         <!-- {{ NickName }} -->
+                        用户名
                         <el-icon>
                             <arrow-down />
                         </el-icon>
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>我的主页</el-dropdown-item>
+                            <el-dropdown-item @click="toPerson">我的主页</el-dropdown-item>
                             <el-dropdown-item @click="logOut">退出</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -57,6 +59,7 @@
 <script setup lang="ts">
 import store from '../store/index'
 import router from '../router';
+import IconCom from './IconCom.vue';
 
 
 // console.log(`折叠菜单全局状态的值：${store().isCollapse}`)
@@ -68,6 +71,10 @@ const ChangeisCollapse = () => {
 const logOut = () => {
     store().reset()
     router.push({ path: "/login" })
+}
+
+const toPerson = () => {
+    router.push({ path: "/person" })
 }
 </script>
 

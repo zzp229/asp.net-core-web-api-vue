@@ -44,6 +44,7 @@
             <el-header>
                 <!-- 放到组件里面了 -->
                 <HeaderCom></HeaderCom>
+                <IconCom icon="expand"></IconCom>
             </el-header>
             <!-- 其它窗体嵌入到这里 -->
             <el-main>

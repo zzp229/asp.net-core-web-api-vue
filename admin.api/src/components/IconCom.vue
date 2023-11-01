@@ -1,18 +1,15 @@
 <template>
     <div>
-        <component is="icon" class="icon"></component>
+        <component :is="icon" class="icon"></component>
     </div>
 </template>
-
 <script setup lang="ts">
-//传入值
 defineProps({
     icon: String
 })
 </script>
-
-<!-- 调整一下，要不然图标非常大 -->
 <style scoped>
+/* 参照Element Plus官方效果编写图标样式 */
 .icon {
     height: 1em;
     width: 1em;
