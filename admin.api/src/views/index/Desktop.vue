@@ -37,20 +37,20 @@ const form = ref({
 const formRef = ref<FormInstance>()
 const tolist = ref([
     {
-        day: "2023-03-03",
-        todo: "Vue3+.NET7招聘网站实战课"
+        day: "2023-11-03",
+        todo: "test1"
     },
     {
-        day: "2023-03-05",
-        todo: "SignalR在线聊天室"
+        day: "2023-11-05",
+        todo: "ghjk"
     },
     {
-        day: "2023-03-08",
-        todo: "Vue3项目实战"
+        day: "2023-11-08",
+        todo: "hoij"
     },
     {
-        day: "2023-03-09",
-        todo: "Vue3项目实战"
+        day: "2023-11-09",
+        todo: "joij"
     }
 ])
 const read = (day: string): string => {

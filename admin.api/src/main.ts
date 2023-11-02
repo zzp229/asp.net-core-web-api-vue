@@ -7,7 +7,8 @@ import router from './router'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-
+// 让日历组件可以显示中文，需要到src下面声明一下vite-env.d.ts才行
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 
 import { createPinia } from 'pinia'
@@ -22,6 +23,11 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
+
+// 中文
+app.use(ElementPlus, {
+    locale: zhCn,
+})
 
 app.use(pinia)
 app.use(router)

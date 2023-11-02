@@ -43,6 +43,12 @@
                                 <el-button class="submitBtn" type="primary" @click="onSubmit(ruleFormRef)">登录
                                 </el-button>
                             </el-form-item>
+
+                            <a href="Register">注册</a>
+                            <!-- <el-form-item>
+                                <el-button class="submitBtn" type="primary" @click="onSubmit(ruleFormRef)">注册
+                                </el-button>
+                            </el-form-item> -->
                         </el-form>
                     </el-col>
                 </el-row>

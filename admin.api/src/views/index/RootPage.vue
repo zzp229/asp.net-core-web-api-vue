@@ -1,8 +1,11 @@
 <template>
     <el-container>
         <el-aside style="width:inherit;">
+            <!-- default-active实现通过路由来进行设置选中（vue router提供路由） -->
+            <!-- :unique-opened="true"设置只能打开一个 -->
             <el-menu :collapse="isCollapse" router :unique-opened="true"
-                style="height: 100vh;background-color:blanchedalmond;" @select="handleSelect"
+                style="height: 100vh;background-color:blanchedalmond;" 
+                @select="handleSelect"
                 :default-active="router.currentRoute.value.path">
                 <el-sub-menu index="/desktop">
                     <template #title>
