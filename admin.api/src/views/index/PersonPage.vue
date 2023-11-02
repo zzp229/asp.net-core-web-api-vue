@@ -9,15 +9,15 @@
                     <el-form-item label="密码">
                         <el-input type="password"/>
                     </el-form-item>
-                    <el-form-item label="头像">
-                        <!-- <el-upload class="avatar-uploader" :action="fromAction" :show-file-list="false"
+                    <!-- <el-form-item label="头像">
+                        <el-upload class="avatar-uploader" :action="fromAction" :show-file-list="false"
                             :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                             <img v-if="imageUrl" :src="imageUrl" class="avatar" />
                             <el-icon v-else class="avatar-uploader-icon">
                                 <Plus />
                             </el-icon>
-                        </el-upload> -->
-                    </el-form-item>
+                        </el-upload>
+                    </el-form-item> -->
                     <!-- <el-form-item label="存储方式">
                         <el-radio-group>
                             <el-radio label="1" size="large">本地存储</el-radio>

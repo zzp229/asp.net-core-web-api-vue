@@ -6,7 +6,7 @@ import TreeModel from "../class/TreeModel";
 import jwtDecode from 'jwt-decode'
 import UserInfo from "../class/UserInfo";
 
-// 选择菜单时添加tag
+// 点击一次菜单就添加tag到全局变量
 export const handleSelect = (index: string) => {
     if (index == "/") return;
     let name = router.getRoutes().filter(item => item.path == index)[0].name as string
@@ -16,6 +16,7 @@ export const handleSelect = (index: string) => {
         Checked: false
     }
     let tags: Array<TagModel> = store().tags
+    // 如果没有渲染就加入渲染队列
     if (tags.find(p => p.Index == index) == undefined) {
         tags.push(model)
         store().$patch({

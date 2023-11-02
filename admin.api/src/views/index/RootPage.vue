@@ -19,10 +19,18 @@
                     </el-menu-item>
                 </el-sub-menu>
 
-                <el-menu-item index="/permission">
-                    <IconCom icon="monitor"></IconCom>
-                    <span>账户权限管理</span>
-                </el-menu-item>
+                <!-- 这里的index只是标识是否是同一组 -->
+                <el-sub-menu index="/permission1">
+                    <template #title>
+                        <IconCom icon="house"></IconCom>
+                        <span>账户权限</span>
+                    </template>
+                    <el-menu-item index="/permission">
+                        <IconCom icon="monitor"></IconCom>
+                        <span>权限管理</span>
+                    </el-menu-item>
+                </el-sub-menu>
+                
                 <el-menu-item index="/client">
                     <IconCom icon="monitor"></IconCom>
                     <span>顾客信息</span>
@@ -58,8 +66,10 @@
 import { computed } from 'vue';
 import HeaderCom from '../../components/HeaderCom.vue';
 import IconCom from '../../components/IconCom.vue';
+import { handleSelect } from '../../tool/index'
 import useStore from '../../store';
 import router from '../../router';
 
+// 给侧边栏绑定上
 const isCollapse = computed(() => useStore().isCollapse)
 </script>

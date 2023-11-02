@@ -19,30 +19,30 @@ const router = createRouter({
             component: () => import("../views/index/RootPage.vue"),
             children: [
                 {
-                    name: "permission",
+                    name: "权限",
                     path: "/permission",
                     component: () => import("../views/admin/permission/permission.vue")
                 },
                 {
-                    name: "agency",
+                    name: "经办人",
                     path: "/agency",
                     component: () => import("../views/admin/agency/agency.vue")
                 },
                 {
-                    name: "medicine",
+                    name: "药品",
                     path: "/medicine",
                     component: () => import("../views/admin/medicine/medicine.vue")
                 },
                 {
-                    name: "client",
+                    name: "顾客",
                     path: "/client",
                     component: () => import("../views/admin/client/client.vue")
                 },
-                {
-                    name: "medicine",
-                    path: "/medicine",
-                    component: () => import("../views/admin/medicine/medicine.vue")
-                },
+                // {
+                //     name: "药品",
+                //     path: "/medicine",
+                //     component: () => import("../views/admin/medicine/medicine.vue")
+                // },
                 // 没有后缀就显示到Desktop上面
                 {
                     name: "主页",

@@ -18,7 +18,7 @@
                     <el-col :span="24">
                         <el-image class="boxbg" :src="boxbg" fit="fit" />
                         <!-- <p class="p1">欢迎使用本系统</p> -->
-                        <p class="p1">医药管理系统</p>
+                        <p class="p1">欢迎使用医药管理系统</p>
                     </el-col>
                 </el-row>
             </div>
@@ -55,7 +55,7 @@ import { ref, reactive } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const url = ref('/images/logo.0606fdd2.png')
+const url = ref('/images/logo.0606fdd1.png')
 const boxbg = ref('/images/svgs/login-box-bg.svg')
 const form = reactive({
     userName: '',
