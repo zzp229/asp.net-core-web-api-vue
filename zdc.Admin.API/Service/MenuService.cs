@@ -80,6 +80,7 @@ namespace Service
             }
             else
             {
+                // 多表查询
                 var list = await _db.Queryable<Menu>()
                 .InnerJoin<MenuRoleRelation>((m, mrr) => m.Id == mrr.MenuId)
                 .InnerJoin<Role>((m, mrr, r) => r.Id == mrr.RoleId)

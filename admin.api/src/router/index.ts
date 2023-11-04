@@ -43,12 +43,6 @@ const router = createRouter({
                     path: "/client",
                     component: () => import("../views/admin/client/client.vue")
                 },
-                // {
-                //     name: "药品",
-                //     path: "/medicine",
-                //     component: () => import("../views/admin/medicine/medicine.vue")
-                // },
-                // 没有后缀就显示到Desktop上面
                 {
                     name: "主页",
                     path: "/",

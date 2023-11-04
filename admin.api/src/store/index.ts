@@ -9,11 +9,17 @@ const useStore = defineStore('main', {
     state: () => {
         return {
             isCollapse: false,  //控制侧边栏是否展开
+
+            //test
+            myBool: false,
+            isFull: false,
+
             tags: [] as TagModel[],
             token: "",
             UserMenus: [] as TreeModel[],
             // Token的刷新次数
-            RefreshTokenNum:0
+            RefreshTokenNum:0,
+            // 添加一个布尔类型的变量
         }
     },
     // 可同步异步操作数据

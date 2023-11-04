@@ -35,6 +35,7 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item @click="toPerson">我的主页</el-dropdown-item>
+                            <el-dropdown-item @click="toPermission">权限管理</el-dropdown-item>
                             <el-dropdown-item @click="logOut">退出</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -106,6 +107,10 @@ const logOut = () => {
 
 const toPerson = () => {
     router.push({ path: "/person" })
+}
+
+const toPermission = () => {
+    router.push({ path: "/Permission" })
 }
 </script>
 

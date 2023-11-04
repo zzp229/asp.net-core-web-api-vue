@@ -92,7 +92,7 @@ const open = () => {
 
 //add窗口创建响应式
 const info: Ref<Client> = ref<Client>(new Client())
-    const closeAdd = () => {
+const closeAdd = () => {
     isShow.value = false    //不显示
     info.value = new Client()
 }

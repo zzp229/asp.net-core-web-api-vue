@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         public async Task<ApiResult> GetMenus(MenuReq req)
         {
             //userId = HttpContext.User.Claims.ToList()[0].Value;
-            //这里要传入管理员权限才给查
+            //这里要传入管理员权限才给查，控制权限
             userId = "aca6e067-9c50-454e-ad8b-ae9e1efd645d";
             return ResultHelper.Success(await _Menu.GetMenus(req, userId));
         }
