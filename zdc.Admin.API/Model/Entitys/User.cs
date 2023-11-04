@@ -21,5 +21,9 @@ namespace Model.Entitys
 
         [SugarColumn(IsNullable = false)]
         public string Pwd { get; set; }
+
+        [SugarColumn(IsNullable = false)]
+        public string Type { get; set; }
+
     }
 }

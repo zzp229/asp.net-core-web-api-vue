@@ -132,6 +132,25 @@ export const addClient = (req: {}) => {
 }
 
 
+
+// ---------------账号管理--------------
+export const getUsers = (obj: {}) => {
+    return instance.post("/api/User/GetUsers", obj)
+}
+export const addUser = (req: {}) => {
+    return instance.post("/api/User/Add", req)
+}
+export const editUser = (req: {}) => {
+    return instance.post("/api/User/Edit", req)
+}
+export const delUser = (id: number) => {
+    return instance.get(`/api/User/Del?id=${id}`)
+}
+
+
+
+
+
 // ---------------认证相关的--------------
 export const getToken = (obj: {}) => {
     return instance.post(`/api/Login/GetToken`, obj)
@@ -174,18 +193,7 @@ export const settingMenu = (rid: string, mids: string) => {
 }
 
 
-export const getUsers = (obj: {}) => {
-    return instance.post("/api/User/GetUsers", obj) 
-}
-export const addUser = (req: {}) => {
-    return instance.post("/api/User/Add", req)
-}
-export const editUser = (req: {}) => {
-    return instance.post("/api/User/Edit", req)
-}
-export const delUser = (id: string) => {
-    return instance.get(`/api/User/Del?id=${id}`)
-}
+
 export const settingRole = (uid: string, rids: string) => {
     return instance.get(`/api/User/SettingRole?uid=${uid}&rids=${rids}`)
 }

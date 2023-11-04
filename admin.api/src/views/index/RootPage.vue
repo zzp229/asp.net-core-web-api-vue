@@ -47,6 +47,10 @@
                     <IconCom icon="monitor"></IconCom>
                     <span>药品信息</span>
                 </el-menu-item>
+                <el-menu-item index="/users">
+                    <IconCom icon="monitor"></IconCom>
+                    <span>用户管理</span>
+                </el-menu-item>
                 <!-- 这里应该获取剩下的菜单 -->
                 <!-- <TreeMenu :list="list"></TreeMenu> -->
             </el-menu>

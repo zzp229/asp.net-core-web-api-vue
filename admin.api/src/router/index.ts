@@ -53,6 +53,11 @@ const router = createRouter({
                     path: "/person",
                     component: () => import("../views/index/PersonPage.vue")
                 },
+                {
+                    name: "用户管理",
+                    path: "/users",
+                    component: () => import("../views/admin/Users/Users.vue")
+                },
             ]
         }
     ]
