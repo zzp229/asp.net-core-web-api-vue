@@ -160,7 +160,7 @@ export const editPermiss = (req: {}) => {
 }
 // 这个担心会出错
 export const delPermiss = (uid: string) => {
-    return instance.get(`/api/Permiss/Del?id=${uid}`)
+    return instance.get(`/api/Permiss/Del?uid=${uid}`)
 }
 
 

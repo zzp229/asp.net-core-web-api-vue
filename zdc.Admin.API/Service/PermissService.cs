@@ -28,7 +28,7 @@ namespace Service
         public async Task<bool> Del(string uid)
         {
             var info = _db.Queryable<Permiss>().First(m => m.Uid == uid);
-            return await _db.Deleteable<Permiss>(info).ExecuteCommandAsync() > 0;
+            return await _db.Deleteable(info).ExecuteCommandAsync() > 0;
         }
 
         public async Task<bool> Edit(Permiss req)

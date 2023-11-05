@@ -41,9 +41,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        private async Task<ApiResult> Del(string uid)
+        public async Task<ApiResult> Del(string uid)
         {
             var tmp = ResultHelper.Success(await _permissService.Del(uid));
+            int a = 0;
+            int b = 0;
             return tmp;
         }
     }

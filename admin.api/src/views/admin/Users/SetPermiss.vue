@@ -55,8 +55,13 @@
 <script lang="ts" setup>
 import { FormInstance, FormRules } from 'element-plus';
 import Permiss from '../../../class/Permiss'
-import { computed, reactive, ref, watch } from 'vue';
-import { editUser } from '../../../http';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { editPermiss, getPermisss } from '../../../http';
+
+// onMounted(() => {
+//     form.value = getPermisss(form.value)
+// })
+
 const props = defineProps({
     isShow: Boolean,
     permissInfo: Permiss
@@ -68,21 +73,21 @@ const ruleFormRef = ref<FormInstance>()
 const form = ref({
     Uid: "",
 
-    Smedicine: 0,
-    Sagency: 0,
-    Sclient: 0,
+    Smedicine: false,
+    Sagency: false,
+    Sclient: false,
 
-    Imedicine: 0,
-    Iagency: 0,
-    Iclient: 0,
+    Imedicine: false,
+    Iagency: false,
+    Iclient: false,
 
-    Dmedicine: 0,
-    Dagency: 0,
-    Dclient: 0,
+    Dmedicine: false,
+    Dagency: false,
+    Dclient: false,
 
-    Fmedicine: 0,
-    Fagency: 0,
-    Fclient: 0
+    Fmedicine: false,
+    Fagency: false,
+    Fclient: false
 })
 
 // 监听，属性和前端同时修改
@@ -110,13 +115,13 @@ const save = async (formEl: FormInstance | undefined) => {
     //valid是验证通过，field是处理失败字段
     await formEl.validate((valid, fields) => {
         if (valid) {
-            console.log("form.value.Id=" + form.value.Uid)
             // ts中也是和c语言一样0是false
-            console.log("form.value.Id=" + form.value.Uid)
+            console.log("form.value.uid=" + form.value.Uid)
             // 有用户表就一定要权限表
             if (form.value.Uid) {
                 //then是回调
-                editUser(form.value).then(function (res) {
+                console.log("SetPermiss中:" + form.value)
+                editPermiss(form.value).then(function (res) {
                     if (res) {
                         emits("success", "修改权限成功")
                     }

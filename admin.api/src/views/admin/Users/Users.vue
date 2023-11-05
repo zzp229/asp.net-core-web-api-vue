@@ -23,15 +23,15 @@
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
                             <!-- 通过全局变量控制是否可以使用这个按钮 -->
-                            <el-button :disabled="myBoolStore" size="small" @click="handleEdit(scope.$index, scope.row)">修改账户信息</el-button>
+                            <el-button :disabled="myBoolStore" size="small" 
+                                @click="handleEdit(scope.$index, scope.row)">修改账户信息</el-button>
                             <el-button size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                             <el-button size="small" type="danger"
-                                @click="permissShow">修改权限</el-button>
+                                @click="handlePermissEdit(scope.row)">修改权限</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
-                
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
@@ -42,7 +42,7 @@
 import { Ref, computed, onMounted, ref } from 'vue';
 import User from '../../../class/User';
 import Permiss from '../../../class/Permiss'
-import { delUser, getUsers } from '../../../http'
+import { delUser, getUsers, delPermiss } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import SetPermiss from './SetPermiss.vue';
@@ -94,6 +94,7 @@ const open = () => {
 
 // 点击修改权限
 const isPermissShow = ref(false)
+// 这个好像没什么用了
 const permissShow = () => {
     console.log("点击了修改权限")
     isPermissShow.value = true
@@ -123,6 +124,11 @@ const handleEdit = (index: number, row: User) => {
     isShow.value = true
 }
 
+const handlePermissEdit = (row: User) => {
+    permissInfo.value.Uid = row.Uid
+    isPermissShow.value = true
+}
+
 const success = async (message: string) => {
     isShow.value = false
     isPermissShow.value = false
@@ -134,6 +140,8 @@ const success = async (message: string) => {
 const handleDelete = async (index: number, row: User) => {
     index --
     await delUser(row.Id)
+    console.log("删除之前：row.Uid=" + row.Uid)
+    await delPermiss(row.Uid)
     await load()
 }
 

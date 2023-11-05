@@ -9,7 +9,7 @@ namespace Model.Entitys
 {
     public class Permiss
     {
-        [SugarColumn(IsNullable = false)]
+        [SugarColumn(IsPrimaryKey = true)]
         // 一个用户对应一张权限表，控制用户的权限
         public string Uid { get; set; }
 
