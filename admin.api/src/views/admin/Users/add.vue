@@ -28,14 +28,15 @@
         </template>
     </el-dialog>
 </template>
+
 <script lang="ts" setup>
 import { ref, computed, defineEmits, reactive, watch } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { addUser, editUser, addPermiss } from '../../../http/index'
-import Medicine from '../../../class/Medicine';
+import User from '../../../class/User';
 const props = defineProps({
     isShow: Boolean,
-    info: Medicine
+    info: User
 })
 const dialogVisible = computed(() => props.isShow)
 

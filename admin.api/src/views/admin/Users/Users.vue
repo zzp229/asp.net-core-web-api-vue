@@ -27,7 +27,7 @@
                             <el-button size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                             <el-button size="small" type="danger"
-                                @click="SetPermiss">修改权限</el-button>
+                                @click="permissShow">修改权限</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -35,14 +35,17 @@
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
+        <SetPermiss :isShow="isPermissShow" :permissInfo="permissInfo" @closeSetPermiss="closeSetPermiss" @success="success"></SetPermiss>
     </el-card>
 </template>
 <script lang="ts" setup>
 import { Ref, computed, onMounted, ref } from 'vue';
 import User from '../../../class/User';
+import Permiss from '../../../class/Permiss'
 import { delUser, getUsers } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
+import SetPermiss from './SetPermiss.vue';
 import useStore from '../../../store';
 
 const parms = ref({
@@ -90,17 +93,30 @@ const open = () => {
 }
 
 // 点击修改权限
-const isSetPermiss = ref(false)
-const SetPermiss = () => {
-    isSetPermiss.value = true
+const isPermissShow = ref(false)
+const permissShow = () => {
+    console.log("点击了修改权限")
+    isPermissShow.value = true
+    console.log("bool为:" + isPermissShow.value)
 }
 
 //为add窗口创建响应式对象
 const info: Ref<User> = ref<User>(new User())
 const closeAdd = () => {
+    console.log("状态修改add页面不显示")
     isShow.value = false    //不显示
     info.value = new User()
 }
+
+// 为SetPermiss窗口创建响应式对象
+const permissInfo: Ref<Permiss> = ref<Permiss>(new Permiss)
+const closeSetPermiss = () => {
+    console.log("状态修改权限页面不显示")
+    isPermissShow.value = false
+    permissInfo.value = new Permiss()   //Permiss新对象
+}
+
+
 const handleEdit = (index: number, row: User) => {
     info.value = row
     index ++
@@ -109,6 +125,7 @@ const handleEdit = (index: number, row: User) => {
 
 const success = async (message: string) => {
     isShow.value = false
+    isPermissShow.value = false
     info.value = new User()
     ElMessage.success(message)
     await load()

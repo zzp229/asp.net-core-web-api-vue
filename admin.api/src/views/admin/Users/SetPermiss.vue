@@ -1,19 +1,65 @@
 <!-- 权限管理 -->
 <template>
     <el-dialog v-model="dialogVisible" :title="form.Uid !== '' ? '修改' : '新增'" width="30%" draggable
-        @close="$emit('closeAdd')">
-        
+        @close="$emit('closeSetPermiss')">
+        <el-form :model="form" label-width="80px" ref="ruleFormRef">
+            <el-form-item label="查询药品">
+                <el-switch v-model="form.Smedicine" />
+            </el-form-item>
+            <el-form-item label="查询经办人">
+                <el-switch v-model="form.Sagency" />
+            </el-form-item>
+            <el-form-item label="查询顾客">
+                <el-switch v-model="form.Sclient" />
+            </el-form-item>
+
+            <el-form-item label="添加药品">
+                <el-switch v-model="form.Imedicine" />
+            </el-form-item>
+            <el-form-item label="添加经办人">
+                <el-switch v-model="form.Iagency" />
+            </el-form-item>
+            <el-form-item label="添加顾客">
+                <el-switch v-model="form.Iclient" />
+            </el-form-item>
+
+            <el-form-item label="删除药品">
+                <el-switch v-model="form.Dmedicine" />
+            </el-form-item>
+            <el-form-item label="删除经办人">
+                <el-switch v-model="form.Dagency" />
+            </el-form-item>
+            <el-form-item label="删除顾客">
+                <el-switch v-model="form.Dclient" />
+            </el-form-item>
+
+            <el-form-item label="修改药品">
+                <el-switch v-model="form.Fmedicine" />
+            </el-form-item>
+            <el-form-item label="修改经办人">
+                <el-switch v-model="form.Fagency" />
+            </el-form-item>
+            <el-form-item label="修改顾客">
+                <el-switch v-model="form.Fclient" />
+            </el-form-item>
+        </el-form>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="closeSetPermiss(ruleFormRef)">取消</el-button>
+                <el-button type="primary" @click="save(ruleFormRef)">确认</el-button>
+            </span>
+        </template>
     </el-dialog>
 </template>
 
 <script lang="ts" setup>
 import { FormInstance, FormRules } from 'element-plus';
-import User from '../../../class/User'
+import Permiss from '../../../class/Permiss'
 import { computed, reactive, ref, watch } from 'vue';
 import { editUser } from '../../../http';
 const props = defineProps({
     isShow: Boolean,
-    info: User
+    permissInfo: Permiss
 })
 
 const dialogVisible = computed(() => props.isShow)
@@ -22,25 +68,25 @@ const ruleFormRef = ref<FormInstance>()
 const form = ref({
     Uid: "",
 
-    smedicine: 0,
-    sagency: 0,
-    sclient: 0,
+    Smedicine: 0,
+    Sagency: 0,
+    Sclient: 0,
 
-    imedicine: 0,
-    iagency: 0,
-    isclient: 0,
+    Imedicine: 0,
+    Iagency: 0,
+    Iclient: 0,
 
-    dmedicine: 0,
-    dagency: 0,
-    dsclient: 0,
+    Dmedicine: 0,
+    Dagency: 0,
+    Dclient: 0,
 
-    fmedicine: 0,
-    fagency: 0,
-    fsclient: 0
+    Fmedicine: 0,
+    Fagency: 0,
+    Fclient: 0
 })
 
 // 监听，属性和前端同时修改
-watch(() => props.info, (newInfo: any) => {
+watch(() => props.permissInfo, (newInfo: any) => {
     if (newInfo) {
         form.value = newInfo
     }
@@ -51,11 +97,11 @@ const rules = reactive<FormRules>({
 
 })
 
-const emits = defineEmits(["closeAdd", "success"])
-const closeAdd = async (formEl: FormInstance | undefined) => {
+const emits = defineEmits(["closeSetPermiss", "success"])
+const closeSetPermiss = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.resetFields()
-    emits("closeAdd")
+    emits("closeSetPermiss")
 }
 
 
