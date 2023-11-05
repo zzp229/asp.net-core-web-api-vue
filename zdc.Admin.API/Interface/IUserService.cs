@@ -13,7 +13,7 @@ namespace Interface
 
         Task<bool> Edit(User req);
 
-        Task<bool> Del(int uid);
+        Task<bool> Del(int id);
 
         Task<bool> Add(User req);
     }

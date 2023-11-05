@@ -148,7 +148,20 @@ export const delUser = (id: number) => {
 }
 
 
-
+// ---------------权限管理--------------
+export const getPermisss = (obj: {}) => {
+    return instance.post("/api/Permiss/GetPermisss", obj)
+}
+export const addPermiss = (req: {}) => {
+    return instance.post("/api/Permiss/Add", req)
+}
+export const editPermiss = (req: {}) => {
+    return instance.post("/api/Permiss/Edit", req)
+}
+// 这个担心会出错
+export const delPermiss = (uid: string) => {
+    return instance.get(`/api/Permiss/Del?id=${uid}`)
+}
 
 
 // ---------------认证相关的--------------

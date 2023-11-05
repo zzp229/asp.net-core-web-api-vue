@@ -6,7 +6,7 @@
             </el-col>
             <el-col :span="12">
                 <el-button type="primary" @click="Search">查询</el-button>
-                <el-button @click="open" type="primary">新增</el-button>
+                <el-button @click="open" type="primary">添加用户</el-button>
             </el-col>
         </el-row>
         <br>
@@ -26,8 +26,8 @@
                             <el-button :disabled="myBoolStore" size="small" @click="handleEdit(scope.$index, scope.row)">修改账户信息</el-button>
                             <el-button size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                                <el-button size="small" type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">修改权限</el-button>
+                            <el-button size="small" type="danger"
+                                @click="SetPermiss">修改权限</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -89,6 +89,12 @@ const open = () => {
     isShow.value = true
 }
 
+// 点击修改权限
+const isSetPermiss = ref(false)
+const SetPermiss = () => {
+    isSetPermiss.value = true
+}
+
 //为add窗口创建响应式对象
 const info: Ref<User> = ref<User>(new User())
 const closeAdd = () => {
@@ -113,6 +119,7 @@ const handleDelete = async (index: number, row: User) => {
     await delUser(row.Id)
     await load()
 }
+
 
 // 测试全局变量控制权限
 const myBoolStore = computed(() => useStore().myBool)
