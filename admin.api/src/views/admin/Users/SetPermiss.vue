@@ -58,9 +58,10 @@ import Permiss from '../../../class/Permiss'
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { editPermiss, getPermisss } from '../../../http';
 
-// onMounted(() => {
-//     form.value = getPermisss(form.value)
-// })
+onMounted(() => {
+    // form.value = getPermisss(form.value)
+    console.log("修改权限页面中：" + props.permissInfo)
+})
 
 const props = defineProps({
     isShow: Boolean,
@@ -134,6 +135,5 @@ const save = async (formEl: FormInstance | undefined) => {
         }
     })
 }
-
 
 </script>

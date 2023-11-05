@@ -36,6 +36,12 @@ namespace Service
             return await _db.Updateable<Permiss>(req).ExecuteCommandAsync() > 0;
         }
 
+        public async Task<Permiss> GetPermiss(string uid)
+        {
+            var info = await _db.Queryable<Permiss>().FirstAsync(m => m.Uid == uid);
+            return info;
+        }
+
         public async Task<List<Permiss>> GetPermisss(Permiss permiss)
         {
             return await _db.Queryable<Permiss>()

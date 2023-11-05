@@ -48,5 +48,17 @@ namespace WebAPI.Controllers
             int b = 0;
             return tmp;
         }
+
+        /// <summary>
+        /// 这个是返回单个的权限信息
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetPermiss(string uid)
+        {
+            var tmp = ResultHelper.Success(await _permissService.GetPermiss(uid));
+            return tmp;
+        }
     }
 }

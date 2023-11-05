@@ -42,7 +42,7 @@
 import { Ref, computed, onMounted, ref } from 'vue';
 import User from '../../../class/User';
 import Permiss from '../../../class/Permiss'
-import { delUser, getUsers, delPermiss } from '../../../http'
+import { delUser, getUsers, delPermiss, getPermiss } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import SetPermiss from './SetPermiss.vue';
@@ -62,8 +62,8 @@ const tableData: Ref<Array<User>> = ref<Array<User>>([])
 const load = async() => {
     // console.log("进入了log")
     let res = await getUsers(parms.value) as any
-    // console.log("重新赋值的tableData" + res)
     tableData.value = res as Array<User>
+    console.log("重新赋值的tableData" + tableData.value)
     // console.log("结束了load")
 
     // 权限管理
@@ -110,7 +110,7 @@ const closeAdd = () => {
 }
 
 // 为SetPermiss窗口创建响应式对象
-const permissInfo: Ref<Permiss> = ref<Permiss>(new Permiss)
+const permissInfo: Ref<Permiss> = ref<Permiss>(new Permiss())
 const closeSetPermiss = () => {
     console.log("状态修改权限页面不显示")
     isPermissShow.value = false
@@ -120,12 +120,17 @@ const closeSetPermiss = () => {
 
 const handleEdit = (index: number, row: User) => {
     info.value = row
+    console.log("给响应式的值info:" + info.value.Uid)
     index ++
     isShow.value = true
 }
 
+// 点击修改权限
 const handlePermissEdit = (row: User) => {
-    permissInfo.value.Uid = row.Uid
+    // 将值从表中获取出来
+    let res = getPermiss(row.Uid) as any
+    permissInfo.value = res as Permiss  //给响应对象加上值
+    console.log("给响应式的值permissInfo:" + permissInfo.value.Uid as string)
     isPermissShow.value = true
 }
 

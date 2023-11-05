@@ -11,6 +11,8 @@ namespace Interface
     {
         Task<List<Permiss>> GetPermisss(Permiss permiss);
 
+        Task<Permiss> GetPermiss(string uid);
+
         Task<bool> Edit(Permiss req);
 
         Task<bool> Del(string uid);
