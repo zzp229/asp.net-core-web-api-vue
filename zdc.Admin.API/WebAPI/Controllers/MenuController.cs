@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
         {
             //userId = HttpContext.User.Claims.ToList()[0].Value;
             //这里要传入管理员权限才给查，控制权限
-            userId = "74ee55b1-1606-4a9f-be88-9cdc5c93ea86";
+            userId = "933f400b-d4ef-46f5-b9e2-2895bed9ca7a";
             return ResultHelper.Success(await _Menu.GetMenus(req, userId));
         }
         [HttpGet]

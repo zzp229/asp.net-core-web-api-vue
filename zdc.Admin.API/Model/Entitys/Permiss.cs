@@ -16,45 +16,45 @@ namespace Model.Entitys
 
         // s是search查找的意思，要不要显示侧边栏
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool smedicine { get; set; }
+        public bool Smedicine { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool sagency { get; set; }
+        public bool Sagency { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool sclient { get; set; }
+        public bool Sclient { get; set; }
 
 
         // insert权限
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool imedicine { get; set; }
+        public bool Imedicine { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool iagency { get; set; }
+        public bool Iagency { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool iclient { get; set; }
+        public bool Iclient { get; set; }
 
 
         // delete权限
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool dmedicine { get; set; }
+        public bool Dmedicine { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool dagency { get; set; }
+        public bool Dagency { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool dclient { get; set; }
+        public bool Dclient { get; set; }
 
 
         // fix修改
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool fmedicine { get; set; }
+        public bool Fmedicine { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool fagency { get; set; }
+        public bool Fagency { get; set; }
 
         [SugarColumn(IsNullable = false, DefaultValue = "0")]
-        public bool fclient { get; set; }
+        public bool Fclient { get; set; }
     }
 }
