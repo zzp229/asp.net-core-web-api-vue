@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public async Task<ApiResult> GetPermiss(string uid)
         {
             var tmp = ResultHelper.Success(await _permissService.GetPermiss(uid));

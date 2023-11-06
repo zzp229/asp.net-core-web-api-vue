@@ -154,7 +154,7 @@ export const getPermisss = (obj: {}) => {
 }
 // 获取单个的
 export const getPermiss = (uid: string) => {
-    return instance.get(`/api/Permiss/GetPermiss?uid=${uid}`)
+    return instance.post(`/api/Permiss/GetPermiss?uid=${uid}`)
 }
 export const addPermiss = (req: {}) => {
     return instance.post("/api/Permiss/Add", req)

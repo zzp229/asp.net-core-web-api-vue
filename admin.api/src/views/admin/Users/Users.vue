@@ -125,43 +125,62 @@ const handleEdit = (index: number, row: User) => {
     isShow.value = true
 }
 
-// 点击修改权限
+// 点击修改权限(初始版本)
 // const handlePermissEdit = (row: User) => {
 //     // 将值从表中获取出来
 //     // Uid正常获取
 //     // let res = getPermiss(row.Uid) as any
-//     // permissInfo.value = res as Permiss  //给响应对象加上值
+    
 
 //     let res = getPermiss(row.Uid)
+
+//     permissInfo.value = res as Permiss  //给响应对象加上值
+
 //     console.log("返回getPermiss的值res=" + res)
 
 //     console.log("给响应式的值permissInfo:" + permissInfo.value.Uid as string)
 //     isPermissShow.value = true
 // }
 
+const handlePermissEdit = async (row: User) => {
+    try {
+        let res = await getPermiss(row.Uid); // 使用await等待Promise完成
 
-// 这里被后端传来的小写属性坑了很久
-const handlePermissEdit = (row: User) => {
-    // 将值从表中获取出来
-    getPermiss(row.Uid)
-        .then(response => {
-            if (response && response.data) {    // 跑不到这里
-                const res = response.data;
-                console.log("返回getPermiss的值res=", res);
-                permissInfo.value = res as Permiss;  //给响应对象加上值
-                console.log("给响应式的值permissInfo:", permissInfo.value.Uid as string);
-                isPermissShow.value = true;
-            } else {
-                console.log("Invalid response data:", response);
-                permissInfo.value = response as any as Permiss
-                console.log("permissInfo.value=" + permissInfo.value.Uid + ",Boolean=" + response)
-                isPermissShow.value = true  // 显示组件
-            }
-        })
-        .catch(error => {
-            console.error("Error while fetching Permiss:", error);
-        });
+        permissInfo.value = res as Permiss; // 给响应对象赋值
+
+        console.log("返回getPermiss的值res=" + res);
+
+        console.log("给响应式的值permissInfo:" + permissInfo.value.Uid as string);
+        isPermissShow.value = true;
+    } catch (error) {
+        console.error("Error while fetching Permiss:", error);
+    }
 }
+
+
+
+// 这里被后端传来的小写属性坑了很久（需要错误拦截才能赋值成功）
+// const handlePermissEdit = (row: User) => {
+//     // 将值从表中获取出来
+//     getPermiss(row.Uid)
+//         .then(response => {
+//             if (response && response.data) {    // 跑不到这里
+//                 const res = response.data;
+//                 console.log("返回getPermiss的值res=", res);
+//                 permissInfo.value = res as Permiss;  //给响应对象加上值
+//                 console.log("给响应式的值permissInfo:", permissInfo.value.Uid as string);
+//                 isPermissShow.value = true;
+//             } else {
+//                 console.log("Invalid response data:", response);
+//                 permissInfo.value = response as any as Permiss
+//                 console.log("permissInfo.value=" + permissInfo.value.Uid + ",Boolean=" + response)
+//                 isPermissShow.value = true  // 显示组件
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error while fetching Permiss:", error);
+//         });
+// }
 
 
 

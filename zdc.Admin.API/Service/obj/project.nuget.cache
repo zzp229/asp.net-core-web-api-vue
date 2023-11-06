@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4VutFS+kdT+bEXYxmcJIpAnffthuiFd0eskdDMdzQz1YhGtaNeDu8md8GEP29FHsheAm7KxBzC8n00mXctdjTQ==",
+  "dgSpecHash": "gsAjAFrPfbLG6Z2KEKAUBaxihfa+XphQuQKQ4NWmjg3mO7RSBi041KUvkiszngumdjD3k+XcrnjFe1iFBlZ8zQ==",
   "success": true,
-  "projectFilePath": "D:\\desktop\\tmpgit\\asp.net-core-web-api-vue\\zdc.Admin.API\\Service\\Service.csproj",
+  "projectFilePath": "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\13556\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\13556\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
