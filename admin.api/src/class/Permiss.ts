@@ -1,19 +1,19 @@
 export default class Permiss{
     Uid: string=""
 
-    Smedicine: boolean = false
-    Sagency: boolean = false
-    Sclient: boolean = false
+    Smedicine: Boolean = false
+    Sagency: Boolean = false
+    Sclient: Boolean = false
 
-    Imedicine: boolean = false
-    Iagency: boolean = false
-    Iclient: boolean = false
+    Imedicine: Boolean = false
+    Iagency: Boolean = false
+    Iclient: Boolean = false
 
-    Dmedicine: boolean = false
-    Dagency: boolean = false
-    Dclient: boolean = false
+    Dmedicine: Boolean = false
+    Dagency: Boolean = false
+    Dclient: Boolean = false
 
-    Fmedicine: boolean = false
-    Fagency: boolean = false
-    Fclient: boolean = false
+    Fmedicine: Boolean = false
+    Fagency: Boolean = false
+    Fclient: Boolean = false
 }

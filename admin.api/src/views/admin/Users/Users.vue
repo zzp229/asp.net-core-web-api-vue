@@ -35,7 +35,8 @@
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
-        <SetPermiss :isShow="isPermissShow" :permissInfo="permissInfo" @closeSetPermiss="closeSetPermiss" @success="success"></SetPermiss>
+        <SetPermiss :isShow="isPermissShow" :permissInfo="permissInfo" @closeSetPermiss="closeSetPermiss" 
+            :userUid="Uid" @success="success"></SetPermiss>
     </el-card>
 </template>
 <script lang="ts" setup>
@@ -47,6 +48,7 @@ import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import SetPermiss from './SetPermiss.vue';
 import useStore from '../../../store';
+const Uid = ref('your-uid-value');
 
 const parms = ref({
     Id: 0,
@@ -63,7 +65,7 @@ const load = async() => {
     // console.log("进入了log")
     let res = await getUsers(parms.value) as any
     tableData.value = res as Array<User>
-    console.log("重新赋值的tableData" + tableData.value)
+    // console.log("重新赋值的tableData" + res) // 返回的是object类型
     // console.log("结束了load")
 
     // 权限管理
@@ -112,7 +114,6 @@ const closeAdd = () => {
 // 为SetPermiss窗口创建响应式对象
 const permissInfo: Ref<Permiss> = ref<Permiss>(new Permiss())
 const closeSetPermiss = () => {
-    console.log("状态修改权限页面不显示")
     isPermissShow.value = false
     permissInfo.value = new Permiss()   //Permiss新对象
 }
@@ -126,13 +127,47 @@ const handleEdit = (index: number, row: User) => {
 }
 
 // 点击修改权限
+// const handlePermissEdit = (row: User) => {
+//     // 将值从表中获取出来
+//     // Uid正常获取
+//     // let res = getPermiss(row.Uid) as any
+//     // permissInfo.value = res as Permiss  //给响应对象加上值
+
+//     let res = getPermiss(row.Uid)
+//     console.log("返回getPermiss的值res=" + res)
+
+//     console.log("给响应式的值permissInfo:" + permissInfo.value.Uid as string)
+//     isPermissShow.value = true
+// }
+
+
+
 const handlePermissEdit = (row: User) => {
     // 将值从表中获取出来
-    let res = getPermiss(row.Uid) as any
-    permissInfo.value = res as Permiss  //给响应对象加上值
-    console.log("给响应式的值permissInfo:" + permissInfo.value.Uid as string)
-    isPermissShow.value = true
+    getPermiss(row.Uid)
+        .then(response => {
+            if (response && response.data) {    // 跑不到这里
+                const res = response.data;
+                console.log("返回getPermiss的值res=", res);
+                permissInfo.value = res as Permiss;  //给响应对象加上值
+                console.log("给响应式的值permissInfo:", permissInfo.value.Uid as string);
+                isPermissShow.value = true;
+            } else {
+                console.log("Invalid response data:", response);
+                permissInfo.value = response as any as Permiss
+                console.log("permissInfo.value=" + permissInfo.value.Uid + ",Boolean=" + response)
+                isPermissShow.value = true  // 显示组件
+            }
+        })
+        .catch(error => {
+            console.error("Error while fetching Permiss:", error);
+        });
 }
+
+
+
+
+
 
 const success = async (message: string) => {
     isShow.value = false

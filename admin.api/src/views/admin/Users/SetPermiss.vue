@@ -58,14 +58,11 @@ import Permiss from '../../../class/Permiss'
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { editPermiss, getPermisss } from '../../../http';
 
-onMounted(() => {
-    // form.value = getPermisss(form.value)
-    console.log("修改权限页面中：" + props.permissInfo)
-})
 
 const props = defineProps({
     isShow: Boolean,
-    permissInfo: Permiss
+    permissInfo: Permiss,
+    userUid: String
 })
 
 const dialogVisible = computed(() => props.isShow)
@@ -95,7 +92,9 @@ const form = ref({
 watch(() => props.permissInfo, (newInfo: any) => {
     if (newInfo) {
         form.value = newInfo
-    }
+    } 
+    console.log("传入值props.Uid：" + props.permissInfo?.Uid + "  Boolean=" + props.permissInfo?.Dagency)
+    console.log("传入值props.permissInfo=" + (props.permissInfo as Permiss).Dagency)
 })
 
 // 输入限定，暂时没有限定
@@ -135,5 +134,6 @@ const save = async (formEl: FormInstance | undefined) => {
         }
     })
 }
+
 
 </script>
