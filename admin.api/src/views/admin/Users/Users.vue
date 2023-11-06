@@ -121,7 +121,6 @@ const closeSetPermiss = () => {
 
 const handleEdit = (index: number, row: User) => {
     info.value = row
-    console.log("给响应式的值info:" + info.value.Uid)
     index ++
     isShow.value = true
 }
@@ -141,7 +140,7 @@ const handleEdit = (index: number, row: User) => {
 // }
 
 
-
+// 这里被后端传来的小写属性坑了很久
 const handlePermissEdit = (row: User) => {
     // 将值从表中获取出来
     getPermiss(row.Uid)

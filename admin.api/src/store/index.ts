@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import TagModel from '../class/TagModel';
 import TreeModel from '../class/TreeModel';
+import User from '../class/User';
+import Permiss from '../class/Permiss';
 
 
 
@@ -20,6 +22,11 @@ const useStore = defineStore('main', {
             // Token的刷新次数
             RefreshTokenNum:0,
             // 添加一个布尔类型的变量
+
+            // test，还没有重置
+            NickName: "",
+            User: User,
+            Permission: Permiss
         }
     },
     // 可同步异步操作数据

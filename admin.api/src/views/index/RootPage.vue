@@ -77,10 +77,27 @@ import IconCom from '../../components/IconCom.vue';
 import { handleSelect } from '../../tool/index'
 import useStore from '../../store';
 import router from '../../router';
+import { getUsers, getPermiss } from '../../http';
+import User from '../../class/User';
+import Permiss from '../../class/Permiss';
 
-//在这里加载权限，控制显示什么东西
+// 从数据库载入全局存储
+const store = useStore()
+let user:User = new User()
+let permiss:Permiss = new Permiss()
+const loadInfo = () => {
+    user = getUsers(store.NickName) as any as User
+    permiss = getPermiss(store.NickName) as any as Permiss
+}
+
+//权限跟用户信息加载到全局
 onMounted(() => {
-
+    // 名称放到登录页面加载了
+    useStore().$patch({
+        NickName: "Tom", // 用户名
+        User: user,
+        Permission: permiss
+    })
 })
 
 // 给侧边栏绑定上全局状态属性

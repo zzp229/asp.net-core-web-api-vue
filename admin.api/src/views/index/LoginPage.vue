@@ -60,6 +60,8 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { useRouter } from 'vue-router'
+import useStore from '../../store'
+const store = useStore()
 const router = useRouter()
 const url = ref('/images/logo.0606fdd1.png')
 const boxbg = ref('/images/svgs/login-box-bg.svg')
@@ -77,7 +79,9 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
     if (!ruleFormRef) return;
     await ruleFormRef.validate(async (valid, fields) => {
         if (valid) {
+            // store.NickName = form.userName;
             ElMessage.success("验证通过！")
+            store.NickName = form.userName  // 记录到全局
             // 路由跳转
             router.push({
                 path:"/"

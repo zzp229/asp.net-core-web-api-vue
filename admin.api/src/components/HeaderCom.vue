@@ -26,8 +26,9 @@
                 <!-- <el-avatar :size="30" :src="circleUrl" /> -->
                 <el-dropdown>
                     <span>
-                        <!-- {{ NickName }} -->
-                        用户名
+                        <!-- 从全局中获取名称 -->
+                        {{ nickName }}
+                        <!-- 用户名 -->
                         <el-icon>
                             <arrow-down />
                         </el-icon>
@@ -64,6 +65,9 @@ import IconCom from './IconCom.vue';
 import { onMounted, ref } from 'vue';
 import { FormatToken, handleSelect, tagClick } from '../tool';
 
+// 全局中获取值 
+const useStore = store();
+const nickName = ref(useStore.NickName)
 
 //使用全局状态记录是否展开
 const ChangeisCollapse = () => {

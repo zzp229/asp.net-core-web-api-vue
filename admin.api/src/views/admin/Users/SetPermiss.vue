@@ -1,8 +1,8 @@
 <!-- 权限管理 -->
 <template>
-    <el-dialog v-model="dialogVisible" :title="form.Uid !== '' ? '修改' : '新增'" width="30%" draggable
+    <el-dialog v-model="dialogVisible" :title="form.Uid !== '' ? '修改' : '新增'" width="50%" draggable
         @close="$emit('closeSetPermiss')">
-        <el-form :model="form" label-width="80px" ref="ruleFormRef">
+        <el-form :model="form" label-width="100px" ref="ruleFormRef">
             <el-form-item label="查询药品">
                 <el-switch v-model="form.Smedicine" />
             </el-form-item>
@@ -12,7 +12,6 @@
             <el-form-item label="查询顾客">
                 <el-switch v-model="form.Sclient" />
             </el-form-item>
-
             <el-form-item label="添加药品">
                 <el-switch v-model="form.Imedicine" />
             </el-form-item>
@@ -22,7 +21,6 @@
             <el-form-item label="添加顾客">
                 <el-switch v-model="form.Iclient" />
             </el-form-item>
-
             <el-form-item label="删除药品">
                 <el-switch v-model="form.Dmedicine" />
             </el-form-item>
@@ -32,7 +30,6 @@
             <el-form-item label="删除顾客">
                 <el-switch v-model="form.Dclient" />
             </el-form-item>
-
             <el-form-item label="修改药品">
                 <el-switch v-model="form.Fmedicine" />
             </el-form-item>
@@ -51,6 +48,7 @@
         </template>
     </el-dialog>
 </template>
+
 
 <script lang="ts" setup>
 import { FormInstance, FormRules } from 'element-plus';
@@ -92,7 +90,7 @@ const form = ref({
 watch(() => props.permissInfo, (newInfo: any) => {
     if (newInfo) {
         form.value = newInfo
-    } 
+    }
     console.log("传入值props.Uid：" + props.permissInfo?.Uid + "  Boolean=" + props.permissInfo?.Dagency)
     console.log("传入值props.permissInfo=" + (props.permissInfo as Permiss).Dagency)
 })
