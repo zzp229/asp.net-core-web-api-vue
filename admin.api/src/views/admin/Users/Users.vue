@@ -150,7 +150,7 @@ const handlePermissEdit = async (row: User) => {
 
         console.log("返回getPermiss的值res=" + res);
 
-        console.log("给响应式的值permissInfo:" + permissInfo.value.Uid as string);
+        console.log("给响应式的值permissInfo:" + permissInfo.value.Uid);
         isPermissShow.value = true;
     } catch (error) {
         console.error("Error while fetching Permiss:", error);

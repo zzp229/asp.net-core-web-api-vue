@@ -77,21 +77,45 @@ import IconCom from '../../components/IconCom.vue';
 import { handleSelect } from '../../tool/index'
 import useStore from '../../store';
 import router from '../../router';
-import { getUsers, getPermiss } from '../../http';
+import { getUser, getPermiss } from '../../http';
 import User from '../../class/User';
 import Permiss from '../../class/Permiss';
 
 // 从数据库载入全局存储
 const store = useStore()
-let user:User = new User()
-let permiss:Permiss = new Permiss()
-const loadInfo = () => {
-    user = getUsers(store.NickName) as any as User
-    permiss = getPermiss(store.NickName) as any as Permiss
+// let user:User = new User()
+// let permiss:Permiss = new Permiss()
+
+// const loadInfo = async () => {
+//     console.log("进入了RootPage的loadInfo")
+//     user = await getUser(store.NickName) as User
+//     permiss = await getPermiss(store.NickName) as Permiss
+//     console.log("loadInfo中：")
+//     console.log("user=" + user?.Uid)
+//     console.log("permiss" + permiss?.Uid)
+// }
+let user: User | null = null;
+let permiss: Permiss | null = null;
+
+let tmp: string = "y"
+
+const loadInfo = async () => {
+    console.log("进入了RootPage的loadInfo");
+    user = await getUser(tmp) as User;
+    permiss = await getPermiss(tmp) as Permiss;
+    console.log("loadInfo中：");
+    if (user) {
+        console.log("user=" + user.Uid);
+    }
+    if (permiss) {
+        console.log("permiss=" + permiss.Uid);
+    }
 }
 
+
 //权限跟用户信息加载到全局
-onMounted(() => {
+onMounted(async () => {
+    await loadInfo()
     // 名称放到登录页面加载了
     useStore().$patch({
         NickName: "Tom", // 用户名

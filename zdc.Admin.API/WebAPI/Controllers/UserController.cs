@@ -26,6 +26,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        public async Task<ApiResult> GetUser(string uid)
+        {
+            var tmp = ResultHelper.Success(await _userService.GetUser(uid));
+            return tmp;
+        }
+
+        [HttpPost]
         public async Task<ApiResult> Edit(User user)
         {
             var tmp = ResultHelper.Success(await _userService.Edit(user));

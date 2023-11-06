@@ -33,6 +33,11 @@ namespace Service
             return await _db.Updateable<User>(req).ExecuteCommandAsync() > 0;
         }
 
+        public async Task<User> GetUser(string uid)
+        {
+            return await _db.Queryable<User>().FirstAsync(p => p.Uid == uid);
+        }
+
         public async Task<List<User>> GetUsers(User user)
         {
             var res = await _db.Queryable<User>()

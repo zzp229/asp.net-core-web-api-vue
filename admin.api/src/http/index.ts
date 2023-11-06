@@ -137,6 +137,9 @@ export const addClient = (req: {}) => {
 export const getUsers = (obj: {}) => {
     return instance.post("/api/User/GetUsers", obj)
 }
+export const getUser = (uid: string) => {
+    return instance.post(`/api/User/GetUser?uid=${uid}`)
+}
 export const addUser = (req: {}) => {
     return instance.post("/api/User/Add", req)
 }
