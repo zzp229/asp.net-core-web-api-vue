@@ -28,22 +28,22 @@
                         <IconCom icon="house"></IconCom>
                         <span>账户权限</span>
                     </template>
-                    <el-menu-item index="/permission">
+                    <el-menu-item index="/">
                         <IconCom icon="monitor"></IconCom>
                         <span>权限管理</span>
                     </el-menu-item>
                 </el-sub-menu>
                 
                 <!-- 需要权限控制顾客不能看顾客的表 -->
-                <el-menu-item index="/client">
+                <el-menu-item index="/client" v-if="permSclient">
                     <IconCom icon="monitor"></IconCom>
                     <span>顾客信息</span>
                 </el-menu-item>
-                <el-menu-item index="/agency" v-if="permissionSagency">
+                <el-menu-item index="/agency" v-if="permSagency">
                     <IconCom icon="monitor"></IconCom>
                     <span>经办人信息</span>
                 </el-menu-item>
-                <el-menu-item index="/medicine">
+                <el-menu-item index="/medicine" v-if="permSmedicine">
                     <IconCom icon="monitor"></IconCom>
                     <span>药品信息</span>
                 </el-menu-item>
@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, toRefs } from 'vue';
 import HeaderCom from '../../components/HeaderCom.vue';
 import IconCom from '../../components/IconCom.vue';
 import { handleSelect } from '../../tool/index'
@@ -81,9 +81,13 @@ import User from '../../class/User';
 import Permiss from '../../class/Permiss';
 import useStore from '../../store';
 
-// 从数据库载入全局存储
+// 从数据库载入全局存储，控制权限
 const store = useStore()
-const permissionSagency = ref(store.Permission.Sagency);
+const { Permission } = toRefs(store);
+const permSagency = ref(Permission.value.Sagency);
+const permSclient = ref(Permission.value.Sclient);
+const permSmedicine = ref(Permission.value.Smedicine);
+// const permissionSagency = ref(store.Permission.Sagency);
 // let user:User = new User()
 // let permiss:Permiss = new Permiss()
 
@@ -125,8 +129,6 @@ onMounted(async () => {
     //     User: user,
     //     Permission: permiss
     // })
-
-    await console.log("经办人的权限：" + permissionSagency.value)
 })
 
 // 给侧边栏绑定上全局状态属性

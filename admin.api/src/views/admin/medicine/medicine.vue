@@ -24,8 +24,8 @@
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
                             <!-- 通过全局变量控制是否可以使用这个按钮 -->
-                            <el-button :disabled="myBoolStore" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-                            <el-button size="small" type="danger"
+                            <el-button :disabled="!Dmedicine" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                            <el-button :disabled="!Fmedicine" size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
@@ -37,12 +37,13 @@
     </el-card>
 </template>
 <script lang="ts" setup>
-import { Ref, computed, onMounted, ref } from 'vue';
+import { Ref, computed, onMounted, ref, toRefs } from 'vue';
 import Medicine from '../../../class/Medicine';
 import { delMedicine, getMedicines } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import useStore from '../../../store';
+const store = useStore()
 
 const parms = ref({
     Id: 0,
@@ -115,7 +116,10 @@ const handleDelete = async (index: number, row: Medicine) => {
 }
 
 // 测试全局变量控制权限
-const myBoolStore = computed(() => useStore().myBool)
+// const myBoolStore = computed(() => useStore().myBool)
+const { Permission } = toRefs(store);
+const Dmedicine = ref(Permission.value.Dmedicine);
+const Fmedicine = ref(Permission.value.Fmedicine)
 
 </script>
 
