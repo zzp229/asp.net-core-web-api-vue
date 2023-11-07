@@ -118,7 +118,7 @@ onMounted(async () => {
     await loadInfo()
     // 名称放到登录页面加载了
     useStore().$patch({
-        NickName: "Tom", // 用户名
+        NickName: store.NickName, // 用户名
         User: user,
         Permission: permiss
     })

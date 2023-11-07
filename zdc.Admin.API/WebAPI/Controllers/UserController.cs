@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entitys;
 using Model.Other;
+using SqlSugar;
 using System.Runtime.InteropServices;
 using WebAPI.Config;
 
@@ -51,6 +52,35 @@ namespace WebAPI.Controllers
         {
             var tmp = ResultHelper.Success(await _userService.Add(user));
             return tmp;
+        }
+
+
+        /// <summary>
+        /// 登录验证
+        /// </summary>
+        /// <param name="loginModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ApiResult> Login(LoginModel loginModel)
+        {
+            // 登录逻辑
+            // 在此处验证用户名和密码，并返回相应的结果
+            // loginModel 包含用户名和密码
+
+            var user = await _userService.GetUser(loginModel.UserName);
+
+            if (user != null && user.Pwd == loginModel.Password)
+            {
+                // 登录成功
+                // 返回用户信息或其他成功信息
+                return ResultHelper.Success(true);
+            }
+            else
+            {
+                // 登录失败
+                // 返回错误信息
+                return ResultHelper.Error("用户名或密码错误");
+            }
         }
     }
 }

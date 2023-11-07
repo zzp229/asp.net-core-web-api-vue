@@ -61,6 +61,7 @@ import { ref, reactive } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { useRouter } from 'vue-router'
 import useStore from '../../store'
+import axios from 'axios';
 const store = useStore()
 const router = useRouter()
 const url = ref('/images/logo.0606fdd1.png')
@@ -79,15 +80,37 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
     if (!ruleFormRef) return;
     await ruleFormRef.validate(async (valid, fields) => {
         if (valid) {
-            // store.NickName = form.userName;
-            ElMessage.success("验证通过！")
-            store.NickName = form.userName  // 记录到全局
-            // 路由跳转
-            router.push({
-                path:"/"
-            })
+            const userName = form.userName;
+            const passWord = form.passWord
+            console.log("用户名：" + form.userName)
+            console.log("密码：" + form.passWord)
+            try {
+                const response = await axios.post('/api/User/Login', {
+                    userName,
+                    passWord,
+                });
+                console.log("登录校验： " + response.data.Result)
+
+                if (response.data.Result) {
+                    // 登录成功的逻辑
+                    ElMessage.success("验证通过！")
+                    store.NickName = form.userName  // 记录到全局
+                    // 路由跳转
+                    router.push({
+                        path: "/"
+                    })
+                } else {
+                    // 登录失败的逻辑
+                    ElMessage.success("登录失败！")
+                }
+            } catch (error) {
+                // 处理网络请求错误
+                ElMessage.success("请检查网络！")
+            }
         } else {
-            ElMessage.error("验证失败！")
+            // 前端对输入的校验
+            // ElMessage.error("验证失败！")
+            ElMessage.error("前端校验没有通过！")
         }
     });
 }
