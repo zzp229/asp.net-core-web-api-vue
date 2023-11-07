@@ -25,8 +25,8 @@ const useStore = defineStore('main', {
 
             // test，还没有重置
             NickName: "",
-            User: User,
-            Permission: Permiss
+            User: new User(),
+            Permission: new Permiss(),
         }
     },
     // 可同步异步操作数据

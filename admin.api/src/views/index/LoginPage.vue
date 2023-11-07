@@ -62,6 +62,10 @@ import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { useRouter } from 'vue-router'
 import useStore from '../../store'
 import axios from 'axios';
+import { getPermiss, getUser } from '../../http';
+import User from '../../class/User';
+import Permiss from '../../class/Permiss';
+import { loadInfo } from '../../tool/updatePermiss'
 const store = useStore()
 const router = useRouter()
 const url = ref('/images/logo.0606fdd1.png')
@@ -74,6 +78,33 @@ const rules = reactive<FormRules>({
     userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
     passWord: [{ required: true, message: '请输入密码', trigger: 'blur', type: "number" }]
 })
+
+// 弃用，被打包到updatePermiss.ts中
+// 获取用户的权限保存到全局
+// let user: User | null = null;
+// let permiss: Permiss | null = null;
+// const loadInfo = async (uid: string) => {
+//     console.log("进入了RootPage的loadInfo");
+//     user = await getUser(uid) as any as User;
+//     permiss = await getPermiss(uid) as any as Permiss;
+//     console.log("loadInfo中：");
+//     if (user) {
+//         console.log("user=" + user.Uid);
+//     }
+//     if (permiss) {
+//         console.log("permiss=" + permiss.Uid);
+//     }
+
+//     //装入全局
+//     useStore().$patch({
+//         NickName: store.NickName, // 用户名
+//         User: user,
+//         Permission: permiss
+//     })
+// }
+
+
+
 // 定义一个和表单同名的变量
 const ruleFormRef = ref<FormInstance>()
 const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
@@ -95,6 +126,7 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
                     // 登录成功的逻辑
                     ElMessage.success("验证通过！")
                     store.NickName = form.userName  // 记录到全局
+                    await loadInfo(form.userName)
                     // 路由跳转
                     router.push({
                         path: "/"

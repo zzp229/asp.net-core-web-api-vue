@@ -39,7 +39,7 @@
                     <IconCom icon="monitor"></IconCom>
                     <span>顾客信息</span>
                 </el-menu-item>
-                <el-menu-item index="/agency">
+                <el-menu-item index="/agency" v-if="permissionSagency">
                     <IconCom icon="monitor"></IconCom>
                     <span>经办人信息</span>
                 </el-menu-item>
@@ -71,18 +71,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import HeaderCom from '../../components/HeaderCom.vue';
 import IconCom from '../../components/IconCom.vue';
 import { handleSelect } from '../../tool/index'
-import useStore from '../../store';
 import router from '../../router';
 import { getUser, getPermiss } from '../../http';
 import User from '../../class/User';
 import Permiss from '../../class/Permiss';
+import useStore from '../../store';
 
 // 从数据库载入全局存储
 const store = useStore()
+const permissionSagency = ref(store.Permission.Sagency);
 // let user:User = new User()
 // let permiss:Permiss = new Permiss()
 
@@ -97,12 +98,14 @@ const store = useStore()
 let user: User | null = null;
 let permiss: Permiss | null = null;
 
-let tmp: string = "y"
+let tmp: string = "admin"
 
-const loadInfo = async () => {
+
+// 将权限载入全局，已抛用
+const loadInfo = async (uid: string) => {
     console.log("进入了RootPage的loadInfo");
-    user = await getUser(tmp) as User;
-    permiss = await getPermiss(tmp) as Permiss;
+    user = await getUser(uid) as any as User;
+    permiss = await getPermiss(tmp) as any as Permiss;
     console.log("loadInfo中：");
     if (user) {
         console.log("user=" + user.Uid);
@@ -115,13 +118,15 @@ const loadInfo = async () => {
 
 //权限跟用户信息加载到全局
 onMounted(async () => {
-    await loadInfo()
+    // await loadInfo(tmp)  //test
     // 名称放到登录页面加载了
-    useStore().$patch({
-        NickName: store.NickName, // 用户名
-        User: user,
-        Permission: permiss
-    })
+    // useStore().$patch({
+    //     NickName: store.NickName, // 用户名
+    //     User: user,
+    //     Permission: permiss
+    // })
+
+    await console.log("经办人的权限：" + permissionSagency.value)
 })
 
 // 给侧边栏绑定上全局状态属性

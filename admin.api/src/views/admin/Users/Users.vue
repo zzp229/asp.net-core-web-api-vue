@@ -48,7 +48,9 @@ import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import SetPermiss from './SetPermiss.vue';
 import useStore from '../../../store';
+import { loadInfo } from '../../../tool/updatePermiss';
 const Uid = ref('your-uid-value');
+const store = useStore()
 
 const parms = ref({
     Id: 0,
@@ -190,6 +192,8 @@ const handlePermissEdit = async (row: User) => {
 const success = async (message: string) => {
     isShow.value = false
     isPermissShow.value = false
+    // console.log("111111111111111111111111111111111111111111")
+    loadInfo(store.NickName)
     info.value = new User()
     ElMessage.success(message)
     await load()
