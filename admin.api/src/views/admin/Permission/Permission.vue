@@ -66,13 +66,13 @@ let parms = {
 const tableData: Ref<Array<Menu>> = ref<Array<Menu>>([])
 const load = async () => {
     parms.Name = searchVal.value
-    console.log("before")
-    console.log(tableData.value)
-    console.log("parms" + parms)
-    console.log("Menu:" + Menu)
+    // console.log("before")
+    // console.log(tableData.value)
+    // console.log("parms" + parms)
+    // console.log("Menu:" + Menu)
     tableData.value = await getTreeMenu(parms) as any as Array<Menu>
-    console.log("tableData.value:")
-    console.log(tableData.value)
+    // console.log("tableData.value:")
+    // console.log(tableData.value)
 }
 
 
@@ -100,8 +100,8 @@ onMounted(load)
 const isShow = ref(false)
 const open = () => {
     isShow.value = true
-    console.log("点击率isShow")
-    console.log(isShow.value)
+    // console.log("点击率isShow")
+    // console.log(isShow.value)
 }
 
 

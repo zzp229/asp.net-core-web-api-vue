@@ -5,8 +5,8 @@
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
             <el-col :span="12">
-                <el-button type="primary" @click="Search">查询</el-button>
-                <el-button @click="open" type="primary">新增</el-button>
+                <el-button :disabled="!Smedicine" type="primary" @click="Search">查询</el-button>
+                <el-button :disabled="!Imedicine" @click="open" type="primary">新增</el-button>
             </el-col>
         </el-row>
         <br>
@@ -24,8 +24,8 @@
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
                             <!-- 通过全局变量控制是否可以使用这个按钮 -->
-                            <el-button :disabled="!Dmedicine" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-                            <el-button :disabled="!Fmedicine" size="small" type="danger"
+                            <el-button :disabled="!Fmedicine" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                            <el-button :disabled="!Dmedicine" size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
@@ -43,6 +43,7 @@ import { delMedicine, getMedicines } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import useStore from '../../../store';
+import router from '../../../router';
 const store = useStore()
 
 const parms = ref({
@@ -59,8 +60,21 @@ const tableData: Ref<Array<Medicine>> = ref<Array<Medicine>>([])
 // 这里获取的数据是旧数据？
 const load = async() => {
     // console.log("进入了log")
+    // 应该将store中的Uid传过去
     let res = await getMedicines(parms.value) as any
+    // 有时候返回string类型，判断一下
+    let permiss : string = res as string    // 控制权限没有就跳转到404页面
+    if(permiss == "没有获取药品信息的权限")
+    {
+        console.log("没有权限")
+        router.push({ path: "/NotPermission" })
+    } else {
+        console.log("有权限")
+    }
+    // console.log("权限的res=" + res)
+    // if((res as string) === "")
     // console.log("重新赋值的tableData" + res)
+    // debugger
     tableData.value = res as Array<Medicine>
     // console.log("结束了load")
 
@@ -119,7 +133,9 @@ const handleDelete = async (index: number, row: Medicine) => {
 // const myBoolStore = computed(() => useStore().myBool)
 const { Permission } = toRefs(store);
 const Dmedicine = ref(Permission.value.Dmedicine);
-const Fmedicine = ref(Permission.value.Fmedicine)
+const Fmedicine = ref(Permission.value.Fmedicine);
+const Imedicine = ref(Permission.value.Imedicine);
+const Smedicine = ref(Permission.value.Smedicine);
 
 </script>
 

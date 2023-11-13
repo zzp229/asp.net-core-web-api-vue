@@ -5,8 +5,8 @@
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
             <el-col :span="12">
-                <el-button type="primary" @click="Search">查询</el-button>
-                <el-button @click="open" type="primary">新增</el-button>
+                <el-button :disabled="!Sagency" type="primary" @click="Search">查询</el-button>
+                <el-button :disabled="!Iagency" @click="open" type="primary">新增</el-button>
             </el-col>
         </el-row>
         <br>
@@ -23,8 +23,8 @@
                     <el-table-column label="操作" align="center">
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
-                            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-                            <el-button size="small" type="danger"
+                            <el-button :disabled="!Fagency" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                            <el-button :disabled="!Dagency" size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
@@ -41,10 +41,12 @@
 </template>
 <script lang="ts" setup>
 import { ElMessage, ElTable } from 'element-plus';
-import { onMounted, Ref, ref } from 'vue';
+import { onMounted, Ref, ref, toRefs } from 'vue';
 import Agency from '../../../class/Agency';
 import { delAgency, getAgency } from '../../../http';
 import add from './add.vue';
+import useStore from '../../../store';
+const store = useStore()
 const total = ref(10)
 const parms = ref({
     Id: 0,
@@ -121,5 +123,12 @@ const handlePageChange = async (page: number) => {
     // page = 10;
     await load();
 };
+
+
+const { Permission } = toRefs(store);
+const Dagency = ref(Permission.value.Dagency);
+const Fagency = ref(Permission.value.Fagency);
+const Iagency = ref(Permission.value.Iagency);
+const Sagency = ref(Permission.value.Sagency);
+
 </script>
-<style lang="scss" scoped></style>  

@@ -5,8 +5,8 @@
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
             <el-col :span="12">
-                <el-button type="primary" @click="Search">查询</el-button>
-                <el-button @click="open" type="primary">新增</el-button>
+                <el-button :disabled="!Sclient" type="primary" @click="Search">查询</el-button>
+                <el-button :disabled="!Iclient" @click="open" type="primary">新增</el-button>
             </el-col>
         </el-row>
         <br>
@@ -29,8 +29,8 @@
                     <el-table-column label="操作" align="center">
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
-                            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-                            <el-button size="small" type="danger"
+                            <el-button :disabled="!Fclient" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                            <el-button :disabled="!Dclient" size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
@@ -43,11 +43,13 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, onMounted, ref } from 'vue';
+import { Ref, onMounted, ref, toRefs } from 'vue';
 import Client from '../../../class/Client';
 import { delClient, getClients } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
+import useStore from '../../../store';
+const store = useStore()
 
 const parms = ref({
     Id: 0,
@@ -114,5 +116,11 @@ const handleDelete = async (index: number, row: Client) => {
     await delClient(row.Id)
     await load()
 }
+
+const { Permission } = toRefs(store)
+const Dclient = ref(Permission.value.Dclient);
+const Fclient = ref(Permission.value.Fclient);
+const Iclient = ref(Permission.value.Iclient);
+const Sclient = ref(Permission.value.Sclient);
 
 </script>

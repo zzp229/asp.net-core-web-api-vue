@@ -18,6 +18,11 @@ const router = createRouter({
             component: () => import("../views/index/NotFound.vue")
         },
         {
+            name: "NotPermission",
+            path: "/NotPermission",
+            component: () => import("../views/index/NotPermission.vue")
+        },
+        {
             //要被包在RootPage中
             name: "admin",
             path: "/",

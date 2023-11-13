@@ -6,35 +6,37 @@
             <el-form-item label="查询药品">
                 <el-switch v-model="form.Smedicine" />
             </el-form-item>
-            <el-form-item label="查询经办人">
-                <el-switch v-model="form.Sagency" />
-            </el-form-item>
-            <el-form-item label="查询顾客">
-                <el-switch v-model="form.Sclient" />
-            </el-form-item>
             <el-form-item label="添加药品">
                 <el-switch v-model="form.Imedicine" />
-            </el-form-item>
-            <el-form-item label="添加经办人">
-                <el-switch v-model="form.Iagency" />
-            </el-form-item>
-            <el-form-item label="添加顾客">
-                <el-switch v-model="form.Iclient" />
             </el-form-item>
             <el-form-item label="删除药品">
                 <el-switch v-model="form.Dmedicine" />
             </el-form-item>
-            <el-form-item label="删除经办人">
-                <el-switch v-model="form.Dagency" />
-            </el-form-item>
-            <el-form-item label="删除顾客">
-                <el-switch v-model="form.Dclient" />
-            </el-form-item>
             <el-form-item label="修改药品">
                 <el-switch v-model="form.Fmedicine" />
             </el-form-item>
+
+            <el-form-item label="查询经办人">
+                <el-switch v-model="form.Sagency" />
+            </el-form-item>
+            <el-form-item label="添加经办人">
+                <el-switch v-model="form.Iagency" />
+            </el-form-item>
+            <el-form-item label="删除经办人">
+                <el-switch v-model="form.Dagency" />
+            </el-form-item>
             <el-form-item label="修改经办人">
                 <el-switch v-model="form.Fagency" />
+            </el-form-item>
+
+            <el-form-item label="查询顾客">
+                <el-switch v-model="form.Sclient" />
+            </el-form-item>
+            <el-form-item label="添加顾客">
+                <el-switch v-model="form.Iclient" />
+            </el-form-item>         
+            <el-form-item label="删除顾客">
+                <el-switch v-model="form.Dclient" />
             </el-form-item>
             <el-form-item label="修改顾客">
                 <el-switch v-model="form.Fclient" />

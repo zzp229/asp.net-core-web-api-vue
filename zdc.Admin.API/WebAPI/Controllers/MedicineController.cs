@@ -9,7 +9,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class MedicineController : ControllerBase
+    public class MedicineController : BaseController
     {
         private readonly IMedicineService _medicine;
         public MedicineController(IMedicineService medicine)
@@ -20,8 +20,13 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ApiResult> GetMedicines(Medicine med)
         {
-            var tmp = ResultHelper.Success(await _medicine.GetMedicines(med));
-            return tmp;
+            if(IsApiEnabled("ApiName") == true)
+            {
+                return ResultHelper.Success(await _medicine.GetMedicines(med));
+            } else
+            {
+                return ResultHelper.Success("没有获取药品信息的权限");
+            }
         }
 
         [HttpPost]
