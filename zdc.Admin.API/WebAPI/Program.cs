@@ -17,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
 //自己注册MenuController，没有用
 //builder.Services.AddScoped<IMenuService, MenuService>();
 

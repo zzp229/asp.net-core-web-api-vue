@@ -10,11 +10,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class PermissController : ControllerBase
+    public class PermissController : BaseController
     {
 
         private readonly IPermissService _permissService;
-        public PermissController(IPermissService permiss)
+        public PermissController(IPermissService permiss) : base(permiss) // 访问父类的构造方法
         {
             _permissService = permiss;
         }

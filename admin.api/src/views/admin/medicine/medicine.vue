@@ -52,7 +52,8 @@ const parms = ref({
     Mname: "",
     Mmode: "",
     Mefficacy: "",
-    Mnum: 0
+    Mnum: 0,
+    Uid: ""
 })
 
 // Ref是声明类型，ref是创建响应式
@@ -60,7 +61,8 @@ const tableData: Ref<Array<Medicine>> = ref<Array<Medicine>>([])
 // 这里获取的数据是旧数据？
 const load = async() => {
     // console.log("进入了log")
-    // 应该将store中的Uid传过去
+    // 应该将store中的Uid传过
+    parms.value.Uid = User.value.Uid
     let res = await getMedicines(parms.value) as any
     // 有时候返回string类型，判断一下
     let permiss : string = res as string    // 控制权限没有就跳转到404页面
@@ -74,7 +76,7 @@ const load = async() => {
     // console.log("权限的res=" + res)
     // if((res as string) === "")
     // console.log("重新赋值的tableData" + res)
-    // debugger
+    debugger
     tableData.value = res as Array<Medicine>
     // console.log("结束了load")
 
@@ -132,6 +134,7 @@ const handleDelete = async (index: number, row: Medicine) => {
 // 测试全局变量控制权限
 // const myBoolStore = computed(() => useStore().myBool)
 const { Permission } = toRefs(store);
+const { User } = toRefs(store)
 const Dmedicine = ref(Permission.value.Dmedicine);
 const Fmedicine = ref(Permission.value.Fmedicine);
 const Imedicine = ref(Permission.value.Imedicine);

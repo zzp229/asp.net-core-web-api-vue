@@ -1,6 +1,7 @@
 ﻿using Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.Dto.Medicine;
 using Model.Entitys;
 using Model.Other;
 using WebAPI.Config;
@@ -12,20 +13,22 @@ namespace WebAPI.Controllers
     public class MedicineController : BaseController
     {
         private readonly IMedicineService _medicine;
-        public MedicineController(IMedicineService medicine)
-        { 
+        public MedicineController(IPermissService permiss, IMedicineService medicine)
+            : base(permiss)
+        {
             _medicine = medicine;
         }
 
         [HttpPost]
-        public async Task<ApiResult> GetMedicines(Medicine med)
+        public async Task<ApiResult> GetMedicines(MedicineReq med)
         {
-            if(IsApiEnabled("ApiName") == true)
+            // 通过Req中的Uid判断这个用户有没有权限
+            if(IsApiEnabled(med.Uid, "GetMedicines") == true)
             {
                 return ResultHelper.Success(await _medicine.GetMedicines(med));
             } else
             {
-                return ResultHelper.Success("没有获取药品信息的权限");
+                return ResultHelper.Success(false); // 没有权限
             }
         }
 

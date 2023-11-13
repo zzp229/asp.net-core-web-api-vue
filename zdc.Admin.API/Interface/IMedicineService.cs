@@ -1,4 +1,5 @@
-﻿using Model.Entitys;
+﻿using Model.Dto.Medicine;
+using Model.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Interface
 {
     public interface IMedicineService
     {
-        Task<List<Medicine>> GetMedicines(Medicine agency);
+        Task<List<Medicine>> GetMedicines(MedicineReq agency);
 
         Task<bool> Edit(Medicine req);
 

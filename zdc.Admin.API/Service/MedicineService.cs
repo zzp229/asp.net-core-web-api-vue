@@ -1,4 +1,5 @@
 ﻿using Interface;
+using Model.Dto.Medicine;
 using Model.Entitys;
 using SqlSugar;
 using System;
@@ -34,7 +35,7 @@ namespace Service
             return tmp;
         }
 
-        public async Task<List<Medicine>> GetMedicines(Medicine med)
+        public async Task<List<Medicine>> GetMedicines(MedicineReq med)
         {
             List<Medicine> medicines = await _db.Queryable<Medicine>()
                 .Where(m => m.Mno.Contains(med.Mname) || m.Mname.Contains(med.Mname) || m.Mmode.Contains(med.Mname) || m.Mefficacy.Contains(med.Mname))
