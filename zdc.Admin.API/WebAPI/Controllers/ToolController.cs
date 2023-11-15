@@ -44,111 +44,36 @@ namespace WebAPI.Controllers
             // 3、添加测试数据
             //初始化炒鸡管理员和菜单
             //初始化炒鸡管理员和菜单
-            Users user = new Users()
+            User user = new User()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = 1,
+                Uid = "admin",
                 Name = "admin",
-                NickName = "炒鸡管理员",
-                Password = "123456",
-                UserType = 0,
-                IsEnable = true,
-                Description = "数据库初始化时默认添加的炒鸡管理员",
-                CreateDate = DateTime.Now,
-                CreateUserId = "",
+                Pwd = "123456",
+                Type = "管理员",
             };
-            string userId = (await _db.Insertable(user).ExecuteReturnEntityAsync()).Id;
-            var m1 = new Menu()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "菜单管理",
-                Index = "/menu",
-                FilePath = "menu.vue",
-                ParentId = "",
-                Order = 1,
-                IsEnable = true,
-                Icon = "folder",
-                Description = "数据库初始化时默认添加的默认菜单",
-                CreateDate = DateTime.Now,
-                CreateUserId = userId
-            };
-            string mid1 = (await _db.Insertable(m1).ExecuteReturnEntityAsync()).Id;
-            var m11 = new Menu()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "菜单列表",
-                Index = "/menu",
-                FilePath = "menu.vue",
-                ParentId = mid1,
-                Order = 1,
-                IsEnable = true,
-                Icon = "notebook",
-                Description = "数据库初始化时默认添加的默认菜单",
-                CreateDate = DateTime.Now,
-                CreateUserId = userId
-            };
-            await _db.Insertable(m11).ExecuteReturnEntityAsync();
+            var tmp = await _db.Insertable(user).ExecuteCommandIdentityIntoEntityAsync();
 
-            var m2 = new Menu()
+            Permiss permiss = new Permiss()
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = "角色管理",
-                Index = "/role",
-                FilePath = "role.vue",
-                ParentId = "",
-                Order = 1,
-                IsEnable = true,
-                Icon = "folder",
-                Description = "数据库初始化时默认添加的默认菜单",
-                CreateDate = DateTime.Now,
-                CreateUserId = userId
-            };
-            string mid2 = (await _db.Insertable(m2).ExecuteReturnEntityAsync()).Id;
-            var m22 = new Menu()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "角色列表",
-                Index = "/role",
-                FilePath = "role.vue",
-                ParentId = mid2,
-                Order = 1,
-                IsEnable = true,
-                Icon = "notebook",
-                Description = "数据库初始化时默认添加的默认菜单",
-                CreateDate = DateTime.Now,
-                CreateUserId = userId
-            };
-            await _db.Insertable(m22).ExecuteReturnEntityAsync();
+                Uid = "admin",
+                Smedicine = true,
+                Sagency = true,
+                Sclient = true,
 
-            var m3 = new Menu()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "用户管理",
-                Index = "/user",
-                FilePath = "user.vue",
-                ParentId = "",
-                Order = 1,
-                IsEnable = true,
-                Icon = "folder",
-                Description = "数据库初始化时默认添加的默认菜单",
-                CreateDate = DateTime.Now,
-                CreateUserId = userId
+                Dagency = true,
+                Dclient = true,
+                Dmedicine = true,
+
+                Iagency = true,
+                Iclient = true,
+                Imedicine = true,
+
+                Fagency = true,
+                Fclient = true,
+                Fmedicine = true,
             };
-            string mid3 = (await _db.Insertable(m3).ExecuteReturnEntityAsync()).Id;
-            var m33 = new Menu()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "用户列表",
-                Index = "/user",
-                FilePath = "user.vue",
-                ParentId = mid3,
-                Order = 1,
-                IsEnable = true,
-                Icon = "notebook",
-                Description = "数据库初始化时默认添加的默认菜单",
-                CreateDate = DateTime.Now,
-                CreateUserId = userId
-            };
-            return await _db.Insertable(m33).ExecuteCommandIdentityIntoEntityAsync();
+            return await _db.Insertable(permiss).ExecuteCommandIdentityIntoEntityAsync();
         }
     }
 }

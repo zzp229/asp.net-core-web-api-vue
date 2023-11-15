@@ -34,6 +34,9 @@ const form = ref({
     day: "",
     todo: ""
 })
+
+console.log("进入了主页，进入了主页，进入了主页========================")
+
 const formRef = ref<FormInstance>()
 const tolist = ref([
     {

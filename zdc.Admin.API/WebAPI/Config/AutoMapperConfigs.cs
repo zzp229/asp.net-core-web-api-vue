@@ -26,11 +26,7 @@ namespace WebAPI.Config
             //用户
             //CreateMap<Users, UserRes>();
             CreateMap<UserAdd, Users>();
-            CreateMap<UserEdit, Users>();
-            //菜单
-            //CreateMap<Menu, MenuRes>();
-            CreateMap<MenuAdd, Menu>(); //左映射到右
-            CreateMap<MenuEdit, Menu>();
+            CreateMap<UserEdit, Users>();   
             // 修改药品
             CreateMap<MedicineReq, Medicine>();
         }
