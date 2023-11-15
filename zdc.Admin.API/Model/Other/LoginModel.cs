@@ -12,7 +12,7 @@ namespace Model.Other
 		/// <summary>
 		/// 账号
 		/// </summary>
-		public string UserName
+		public string Uid
         {
 			get { return userName; }
 			set { userName = value; }
@@ -23,7 +23,7 @@ namespace Model.Other
 		/// <summary>
 		/// 密码
 		/// </summary>
-		public string Password
+		public string Pwd
         {
 			get { return password; }
 			set { password = value; }

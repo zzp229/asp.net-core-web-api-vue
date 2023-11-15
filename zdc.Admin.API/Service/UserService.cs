@@ -1,4 +1,5 @@
 ﻿using Interface;
+using Model.Dto.Login;
 using Model.Entitys;
 using SqlSugar;
 using System;
@@ -36,6 +37,11 @@ namespace Service
         public async Task<User> GetUser(string uid)
         {
             return await _db.Queryable<User>().FirstAsync(p => p.Uid == uid);
+        }
+
+        public Task<User> GetUserByUidPwd(LoginReq loginReq)
+        {
+            return _db.Queryable<User>().Where(u=>u.Uid == loginReq.Uid && u.Pwd==loginReq.Pwd).FirstAsync();   // 找出符合条件的第一个
         }
 
         public async Task<List<User>> GetUsers(User user)

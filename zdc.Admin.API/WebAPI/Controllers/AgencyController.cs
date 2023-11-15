@@ -12,11 +12,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AgencyController : ControllerBase
+    public class AgencyController : BaseController
     {
         private readonly IAgencyService _Agency;
         //autofac自己注册
-        public AgencyController(IAgencyService Agency)
+        public AgencyController(IPermissService permiss, IAgencyService Agency):base(permiss)
         {
             _Agency = Agency;
         }

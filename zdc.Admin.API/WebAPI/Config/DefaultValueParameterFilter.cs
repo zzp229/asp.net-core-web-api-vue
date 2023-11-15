@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace WebAPI.Config
 {
+    /// <summary>
+    /// api输入的时候给的提示，对象类型的不行
+    /// </summary>
     public class DefaultValueParameterFilter : IParameterFilter
     {
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
@@ -13,7 +16,7 @@ namespace WebAPI.Config
             // 设置普通的string类型默认值
             if (parameter.In == ParameterLocation.Query && parameter.Schema.Type == "string")
             {
-                parameter.Example = new OpenApiString("value111111");   
+                parameter.Example = new OpenApiString("value");   
             }
         }
     }

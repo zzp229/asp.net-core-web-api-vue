@@ -5,10 +5,10 @@ namespace Model.Dto.Login
     public class LoginReq
     {
         [Required]
-        [DefaultValue("admin")]
-        public string UserName { get; set; }
+        //[DefaultValue("admin")]
+        public string Uid { get; set; }
         [Required]
-        [DefaultValue("123456")]
-        public string PassWord { get; set; }
+        //[DefaultValue("123456")]
+        public string Pwd { get; set; }
     }
 }

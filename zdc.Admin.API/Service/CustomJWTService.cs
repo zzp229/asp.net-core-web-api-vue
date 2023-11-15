@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Model.Dto.User;
+using Model.Entitys;
 using Model.Other;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,17 @@ namespace Service
         {
             _JWTTokenOptions = jwtTokenOptions.CurrentValue;
         }
-        public async Task<string> GetToken(UserRes user)
+        public async Task<string> GetToken(User user)
         {
             var result = await Task.Run(() =>
             {
-                // 有效载荷，大家可以自己写，爱写多少写多少；尽量避免敏感信息
+                // 有效载荷,要避免敏感信息
                 var claims = new[]
 {
                     new Claim("Id",user.Id),
-                    new Claim("NickName",user.NickName),
-                    new Claim("Name",user.Name),
-                    new Claim("UserType",user.UserType.ToString()),
-                    new Claim("Image",user.Image==null?"":user.Image
-                    ),
+                    new Claim("Uid", user.Uid),
+                    new Claim("Name", user.Name),
+                    new Claim("Type", user.Type),
                 };
                 //需要加密：需要加密key:
                 //Nuget引入：Microsoft.IdentityModel.Tokens
@@ -44,7 +43,7 @@ namespace Service
                 JwtSecurityToken token = new JwtSecurityToken(
                  issuer: _JWTTokenOptions.Issuer,
                  audience: _JWTTokenOptions.Audience,
-                 claims: claims,
+                 claims: claims,    // 参数
                  expires: DateTime.Now.AddMinutes(10),//10分钟有效期 
                  notBefore: null,
                  signingCredentials: creds);

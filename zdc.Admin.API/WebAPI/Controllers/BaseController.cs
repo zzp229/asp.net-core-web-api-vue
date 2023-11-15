@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    //[Authorize]
+    [Authorize] // 需要授权才能访问子类api
     public class BaseController : ControllerBase
     {
         private readonly IPermissService _permissService;

@@ -9,10 +9,10 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class ClientController : BaseController
     {
         private readonly IClientService _client;
-        public ClientController(IClientService client)
+        public ClientController(IPermissService permiss, IClientService client) : base(permiss)
         {
             _client = client;
         }

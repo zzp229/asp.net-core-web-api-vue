@@ -1,4 +1,5 @@
-﻿using Model.Entitys;
+﻿using Model.Dto.Login;
+using Model.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Interface
         Task<List<User>> GetUsers(User user);
 
         Task<User> GetUser(string uid);
+
+        Task<User> GetUserByUidPwd(LoginReq loginReq);
 
         Task<bool> Edit(User req);
 

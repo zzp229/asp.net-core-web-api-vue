@@ -48,12 +48,13 @@ namespace WebAPI.Controllers
             {
                 Id = Guid.NewGuid().ToString(),
                 Uid = "admin",
-                Name = "admin",
+                Name = "李华",
                 Pwd = "123456",
                 Type = "管理员",
             };
             var tmp = await _db.Insertable(user).ExecuteCommandIdentityIntoEntityAsync();
 
+            // 给管理员全部权限
             Permiss permiss = new Permiss()
             {
                 Uid = "admin",

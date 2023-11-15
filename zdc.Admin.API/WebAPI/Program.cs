@@ -6,6 +6,12 @@ using Newtonsoft.Json;
 using Service;
 using SqlSugar;
 using WebAPI.Config;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Model.Other;
+using System.Text;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +20,36 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// 设置版本和标题
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title ="医药管理系统api", Version = "v1" });
+    // 设置参数默认值
+    options.ParameterFilter<DefaultValueParameterFilter>();
+    // 设置对象类型参数默认值
+    options.SchemaFilter<DefaultValueSchemaFilter>();
+    //添加安全定义
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "请输入token,格式为 Bearer xxxxxxxx（注意中间必须有空格）",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    //添加安全要求
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme{
+                            Reference =new OpenApiReference{
+                                Type = ReferenceType.SecurityScheme,
+                                Id ="Bearer"
+                            }
+                        },Array.Empty<string>()
+                    }
+                });
+});
 
 
 
@@ -57,6 +92,39 @@ builder.Host.ConfigureContainer<ContainerBuilder>(container =>
 builder.Services.AddAutoMapper(typeof(AutoMapperConfigs));
 
 
+
+// 读取jwt的配置
+builder.Services.Configure<JWTTokenOptions>(builder.Configuration.GetSection("JWTTokenOptions"));
+
+
+#region jwt校验 
+{
+    //第二步，增加鉴权逻辑
+    JWTTokenOptions tokenOptions = new JWTTokenOptions();
+    builder.Configuration.Bind("JWTTokenOptions", tokenOptions);
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)//Scheme鉴权
+     .AddJwtBearer(options =>  //这里是配置的鉴权的逻辑
+     {
+         options.TokenValidationParameters = new TokenValidationParameters
+         {
+             //JWT有一些默认的属性，就是给鉴权时就可以筛选了
+             ValidateIssuer = true,//是否验证Issuer
+             ValidateAudience = true,//是否验证Audience
+             ValidateLifetime = true,//是否验证失效时间
+             ValidateIssuerSigningKey = true,//是否验证SecurityKey
+             ValidAudience = tokenOptions.Audience,//
+             ClockSkew = TimeSpan.FromSeconds(0),//设置token过期后多久失效，默认过期后300秒内仍有效
+             ValidIssuer = tokenOptions.Issuer,//Issuer，这两项和前面签发jwt的设置一致
+             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.SecurityKey))//拿到SecurityKey 
+         };
+     });
+}
+#endregion
+
+
+
+
+
 //要安装nuget，返回原本的大小写
 builder.Services.AddControllers().AddNewtonsoftJson(options => {
     // 指定如何解决循环引用：
@@ -80,7 +148,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

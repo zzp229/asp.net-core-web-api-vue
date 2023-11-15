@@ -343,3 +343,4 @@ D:\desktop\tmpgit\设置权限\asp.net-core-web-api-vue\zdc.Admin.API\WebAPI\obj
 D:\desktop\tmpgit\设置权限\asp.net-core-web-api-vue\zdc.Admin.API\WebAPI\obj\Debug\net7.0\WebAPI.pdb
 D:\desktop\tmpgit\设置权限\asp.net-core-web-api-vue\zdc.Admin.API\WebAPI\obj\Debug\net7.0\WebAPI.genruntimeconfig.cache
 D:\desktop\tmpgit\设置权限\asp.net-core-web-api-vue\zdc.Admin.API\WebAPI\obj\Debug\net7.0\ref\WebAPI.dll
+D:\desktop\tmpgit\设置权限\asp.net-core-web-api-vue\zdc.Admin.API\WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

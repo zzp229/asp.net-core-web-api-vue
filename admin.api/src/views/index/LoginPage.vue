@@ -33,10 +33,10 @@
                         <el-form :model="form" label-width="120px" label-position="top" size="large" class="form"
                             :rules="rules" ref="ruleFormRef">
                             <el-form-item label="账号" prop="account">
-                                <el-input v-model="form.userName" />
+                                <el-input v-model="form.Uid" />
                             </el-form-item>
-                            <el-form-item label="密码" prop="passWord">
-                                <el-input v-model.number="form.passWord" type="password" show-password
+                            <el-form-item label="密码" prop="Pwd">
+                                <el-input v-model.number="form.Pwd" type="Pwd" show-Pwd
                                     @keyup.enter="onSubmit(ruleFormRef)" />
                             </el-form-item>
                             <el-form-item>
@@ -65,18 +65,19 @@ import axios from 'axios';
 import { getPermiss, getUser } from '../../http';
 import User from '../../class/User';
 import Permiss from '../../class/Permiss';
+import { getToken } from '../../http';
 import { loadInfo } from '../../tool/updatePermiss'
 const store = useStore()
 const router = useRouter()
 const url = ref('/images/logo.0606fdd1.png')
 const boxbg = ref('/images/svgs/login-box-bg.svg')
 const form = reactive({
-    userName: '',
-    passWord: ''
+    Uid: '',
+    Pwd: ''
 })
 const rules = reactive<FormRules>({
-    userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    passWord: [{ required: true, message: '请输入密码', trigger: 'blur', type: "number" }]
+    Uid: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+    Pwd: [{ required: true, message: '请输入密码', trigger: 'blur', type: "number" }]
 })
 
 // 弃用，被打包到updatePermiss.ts中
@@ -111,22 +112,43 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
     if (!ruleFormRef) return;
     await ruleFormRef.validate(async (valid, fields) => {
         if (valid) {
-            const userName = form.userName;
-            const passWord = form.passWord
-            console.log("用户名：" + form.userName)
-            console.log("密码：" + form.passWord)
+
+            // 请求登录接口
+            // let token: string = await getToken(form) as any as string
+            // store.$patch({
+            //     token: token
+            // })
+            // ElMessage.success("验证通过！")
+            // store.NickName = form.Uid  // 记录到全局
+            // await loadInfo(form.Uid)
+            // // 路由跳转
+            // router.push({
+            //     path: "/"
+            // })
+
+
+            // 下面是原本正确的debugging
+            const Uid = form.Uid;
+            const Pwd = form.Pwd
+            console.log("用户名：" + form.Uid)
+            console.log("密码：" + form.Pwd)
             try {
                 const response = await axios.post('/api/User/Login', {
-                    userName,
-                    passWord,
+                    Uid,
+                    Pwd,
                 });
                 console.log("登录校验： " + response.data.Result)
 
                 if (response.data.Result) {
+                    // token写入store中
+                    let token: string = await getToken(form) as any as string
+                    store.$patch({
+                        token: token
+                    })
                     // 登录成功的逻辑
-                    ElMessage.success("验证通过！")
-                    store.NickName = form.userName  // 记录到全局
-                    await loadInfo(form.userName)
+                    ElMessage.success("登录成功！")
+                    store.NickName = form.Uid  // 记录到全局
+                    await loadInfo(form.Uid)
                     // 路由跳转
                     router.push({
                         path: "/"

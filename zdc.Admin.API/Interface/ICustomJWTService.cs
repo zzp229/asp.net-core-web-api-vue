@@ -1,4 +1,5 @@
 ﻿using Model.Dto.User;
+using Model.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Interface
 {
     public interface ICustomJWTService
     {
-        Task<string> GetToken(UserRes user);
+        Task<string> GetToken(User user);
     }
 }
