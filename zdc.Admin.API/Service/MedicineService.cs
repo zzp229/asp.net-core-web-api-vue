@@ -27,9 +27,9 @@ namespace Service
             return await _db.Insertable(medicine).ExecuteCommandAsync() > 0;
         }
 
-        public async Task<bool> Del(int id)
+        public async Task<bool> Del(string mno)
         {
-            var info = _db.Queryable<Medicine>().First(m => m.Id == id);
+            var info = _db.Queryable<Medicine>().First(m => m.Mno == mno);
             return await _db.Deleteable(info).ExecuteCommandAsync() > 0;
         }
 

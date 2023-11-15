@@ -9,7 +9,7 @@ namespace Model.Common
 {
     public class Base
     {
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
-        public int Id { get; set; }
+        [SugarColumn(IsPrimaryKey = true)]
+        public string Id { get; set; }
     }
 }

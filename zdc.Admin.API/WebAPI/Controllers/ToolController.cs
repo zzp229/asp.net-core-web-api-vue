@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             //初始化炒鸡管理员和菜单
             User user = new User()
             {
-                Id = 1,
+                Id = Guid.NewGuid().ToString(),
                 Uid = "admin",
                 Name = "admin",
                 Pwd = "123456",

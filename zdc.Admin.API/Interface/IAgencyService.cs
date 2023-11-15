@@ -15,7 +15,7 @@ namespace Interface
 
         Task<bool> Edit(Agency req);
 
-        Task<bool> Del(int id);
+        Task<bool> Del(string id);
 
         Task<bool> Add(Agency req);
     }

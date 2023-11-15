@@ -127,7 +127,7 @@ const success = async (message: string) => {
 
 const handleDelete = async (index: number, row: Medicine) => {
     index --
-    await delMedicine(row.Id)
+    await delMedicine(row.Mno)
     await load()
 }
 

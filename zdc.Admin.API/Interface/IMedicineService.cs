@@ -14,7 +14,7 @@ namespace Interface
 
         Task<bool> Edit(MedicineReq req);
 
-        Task<bool> Del(int id);
+        Task<bool> Del(string mid);
 
         Task<bool> Add(MedicineReq req);
     }

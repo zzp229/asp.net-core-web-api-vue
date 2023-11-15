@@ -109,9 +109,9 @@ export const getMedicines = (obj: {}) => {
 export const editMedicine = (req: {}) => {
     return instance.post(`/api/Medicine/Edit`, req)
 }
-export const delMedicine = (id: number) => {
+export const delMedicine = (mno: string) => {
     console.log("进入删除api：delMedicine")
-    return instance.get(`/api/Medicine/Del?id=${id}`)
+    return instance.get(`/api/Medicine/Del?id=${mno}`)
 }
 export const addMedicine = (req: {}) => {
     return instance.post("/api/Medicine/Add", req)
@@ -124,8 +124,8 @@ export const getClients = (obj: {}) => {
 export const editClient = (req: {}) => {
     return instance.post(`/api/Client/Edit`, req)
 }
-export const delClient = (id: number) => {
-    return instance.get(`/api/Client/Del?id=${id}`)
+export const delClient = (cno: string) => {
+    return instance.get(`/api/Client/Del?id=${cno}`)
 }
 export const addClient = (req: {}) => {
     return instance.post("/api/Client/Add", req)
@@ -146,8 +146,8 @@ export const addUser = (req: {}) => {
 export const editUser = (req: {}) => {
     return instance.post("/api/User/Edit", req)
 }
-export const delUser = (id: number) => {
-    return instance.get(`/api/User/Del?id=${id}`)
+export const delUser = (uid: string) => {
+    return instance.get(`/api/User/Del?id=${uid}`)
 }
 
 

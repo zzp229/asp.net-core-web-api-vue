@@ -201,7 +201,7 @@ const success = async (message: string) => {
 
 const handleDelete = async (index: number, row: User) => {
     index --
-    await delUser(row.Id)
+    await delUser(row.Uid)
     console.log("删除之前：row.Uid=" + row.Uid)
     await delPermiss(row.Uid)
     await load()

@@ -22,9 +22,9 @@ namespace Service
             return await _db.Insertable<Client>( req ).ExecuteCommandAsync() > 0;
         }
 
-        public async Task<bool> Del(int id)
+        public async Task<bool> Del(string cno)
         {
-            var info = _db.Queryable<Client>().First(c => c.Id == id);
+            var info = _db.Queryable<Client>().First(c => c.Cno == cno);
 
             return await _db.Deleteable<Client>( info ).ExecuteCommandAsync() > 0;
         }

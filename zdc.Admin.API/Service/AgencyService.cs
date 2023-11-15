@@ -52,7 +52,7 @@ namespace Service
             return tmp;
         }
 
-        public async Task<bool> Del(int id)
+        public async Task<bool> Del(string id)
         {
             var info = _db.Queryable<Agency>().First(p => p.Id == id);
             return await _db.Deleteable(info).ExecuteCommandAsync() > 0;

@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ApiResult> Del(int id)
+        public async Task<ApiResult> Del(string id)
         {
             var tmp = ResultHelper.Success(await _medicine.Del(id));
             return tmp;

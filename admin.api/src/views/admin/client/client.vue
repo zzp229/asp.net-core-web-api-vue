@@ -113,7 +113,7 @@ const success = async (message: string) => {
 
 const handleDelete = async (index: number, row: Client) => {
     index --
-    await delClient(row.Id)
+    await delClient(row.Cno)
     await load()
 }
 
