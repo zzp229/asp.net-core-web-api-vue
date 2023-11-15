@@ -65,18 +65,18 @@ const load = async() => {
     parms.value.Uid = User.value.Uid
     let res = await getMedicines(parms.value) as any
     // 有时候返回string类型，判断一下
-    let permiss : string = res as string    // 控制权限没有就跳转到404页面
-    if(permiss == "没有获取药品信息的权限")
+    let permiss : Boolean = res as Boolean    // 控制权限没有就跳转到404页面
+    if(!permiss)
     {
         console.log("没有权限")
-        router.push({ path: "/NotPermission" })
+        // router.push({ path: "/NotPermission" })
     } else {
         console.log("有权限")
     }
     // console.log("权限的res=" + res)
     // if((res as string) === "")
     // console.log("重新赋值的tableData" + res)
-    debugger
+    // debugger
     tableData.value = res as Array<Medicine>
     // console.log("结束了load")
 

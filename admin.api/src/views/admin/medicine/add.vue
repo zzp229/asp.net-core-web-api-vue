@@ -34,6 +34,8 @@ import { ref, computed, defineEmits, reactive, watch } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { addMedicine, editMedicine } from '../../../http/index'
 import Medicine from '../../../class/Medicine';
+import useStore from '../../../store';
+const store = useStore()
 const props = defineProps({
     isShow: Boolean,
     info: Medicine
@@ -47,7 +49,8 @@ const form = ref({
     Mname: "",
     Mmode: "",
     Mefficacy: "",
-    Mnum: 0
+    Mnum: 0,
+    Uid: ""
 })
 //组件的实例只会在加载的时候渲染一次，如果想实现form的值和参数联动，需要使用监听
 //props.info改变，就执行回调函数，将修改后的值复制回去给form
@@ -87,11 +90,13 @@ const save = async (formEl: FormInstance | undefined) => {
     //valid是验证通过，field是处理失败字段
     await formEl.validate((valid, fields) => {
         if (valid) {
-            console.log("form.value.Id=" + form.value.Id)
-            // ts中也是和c语言一样0是false
-            console.log("form.value.Id=" + form.value.Id)
-            if (form.value.Id) {
+            form.value.Uid = store.User.Uid // 赋值uid，查找权限
+            console.log("form.Id = " + form.value.Id)
+            if (form.value.Id) {    // 通过id判断是修改还是删除
                 //then是回调
+                // console.log("进入修改")
+                // console.log("form.value.Uid =" + form.value.Uid)
+                // debugger
                 editMedicine(form.value).then(function (res) {
                     if (res) {
                         emits("success", "修改成功！")
@@ -100,7 +105,7 @@ const save = async (formEl: FormInstance | undefined) => {
             } 
             //添加
             else {
-                console.log("进入了添加的")
+                // console.log("进入了添加的")
                 addMedicine(form.value).then(function (res) {
                     if (res) {
                         emits("success", "添加成功！")

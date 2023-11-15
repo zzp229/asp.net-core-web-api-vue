@@ -1,4 +1,5 @@
-﻿using Interface;
+﻿using AutoMapper;
+using Interface;
 using Model.Dto.Medicine;
 using Model.Entitys;
 using SqlSugar;
@@ -13,14 +14,17 @@ namespace Service
     internal class MedicineService : IMedicineService
     {
         private ISqlSugarClient _db;
-        public MedicineService(ISqlSugarClient db)
+        private IMapper _mapper;
+        public MedicineService(IMapper mapper, ISqlSugarClient db)
         {
+            _mapper = mapper;
             _db = db;
         }
 
-        public async Task<bool> Add(Medicine req)
+        public async Task<bool> Add(MedicineReq req)
         {
-            return await _db.Insertable(req).ExecuteCommandAsync() > 0;
+            var medicine = _mapper.Map<Medicine>(req);
+            return await _db.Insertable(medicine).ExecuteCommandAsync() > 0;
         }
 
         public async Task<bool> Del(int id)
@@ -29,9 +33,11 @@ namespace Service
             return await _db.Deleteable(info).ExecuteCommandAsync() > 0;
         }
 
-        public async Task<bool> Edit(Medicine req)
+        public async Task<bool> Edit(MedicineReq req)
         {
-            var tmp = await _db.Updateable(req).ExecuteCommandAsync() > 0;
+            // MedicineReq要映射回Medicine
+            var medicine = _mapper.Map<Medicine>(req);  // req映射到Medicine
+            var tmp = await _db.Updateable(medicine).ExecuteCommandAsync() > 0;
             return tmp;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Model.Dto.Medicine;
 using Model.Dto.Menu;
 using Model.Dto.Role;
 using Model.Dto.User;
@@ -30,6 +31,8 @@ namespace WebAPI.Config
             //CreateMap<Menu, MenuRes>();
             CreateMap<MenuAdd, Menu>(); //左映射到右
             CreateMap<MenuEdit, Menu>();
+            // 修改药品
+            CreateMap<MedicineReq, Medicine>();
         }
     }
 }

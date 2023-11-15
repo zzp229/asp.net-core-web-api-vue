@@ -12,10 +12,10 @@ namespace Interface
     {
         Task<List<Medicine>> GetMedicines(MedicineReq agency);
 
-        Task<bool> Edit(Medicine req);
+        Task<bool> Edit(MedicineReq req);
 
         Task<bool> Del(int id);
 
-        Task<bool> Add(Medicine req);
+        Task<bool> Add(MedicineReq req);
     }
 }

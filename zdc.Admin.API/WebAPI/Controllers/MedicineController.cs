@@ -33,10 +33,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult> Edit(Medicine med)
+        public async Task<ApiResult> Edit(MedicineReq med)
         {
-            var tmp = ResultHelper.Success( await _medicine.Edit(med));
-            return tmp;
+            if (IsApiEnabled(med.Uid, "MedicineEdit") == true)
+            {
+                var tmp = ResultHelper.Success(await _medicine.Edit(med));
+                return tmp;
+            } else
+            {
+                return ResultHelper.Success(false); // 没有权限
+            }
         }
 
         [HttpGet]
@@ -47,10 +53,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult> Add(Medicine med)
+        public async Task<ApiResult> Add(MedicineReq med)
         {
-            var tmp = ResultHelper.Success(await _medicine.Add(med));
-            return tmp;
+            if (IsApiEnabled(med.Uid, "MedicineAdd") == true)
+            {
+                return ResultHelper.Success(await _medicine.Add(med));
+            }
+            else
+            {
+                return ResultHelper.Success(false); // 没有权限
+            }
         }
     }
 }
