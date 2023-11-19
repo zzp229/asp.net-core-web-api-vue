@@ -41,6 +41,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ApiResult> Add(Client req)
         {
+            req.Id = Guid.NewGuid().ToString();
             return  ResultHelper.Success(await _client.Add(req));
         }
     }

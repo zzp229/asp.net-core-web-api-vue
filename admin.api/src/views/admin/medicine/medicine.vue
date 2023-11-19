@@ -7,6 +7,9 @@
             <el-col :span="12">
                 <el-button :disabled="!Smedicine" type="primary" @click="Search">查询</el-button>
                 <el-button :disabled="!Imedicine" @click="open" type="primary">新增</el-button>
+                <!-- 在模板中添加导出按钮 -->
+                <el-button type="primary" @click="exportToExcel">导出Excel</el-button>
+
             </el-col>
         </el-row>
         <br>
@@ -24,13 +27,16 @@
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
                             <!-- 通过全局变量控制是否可以使用这个按钮 -->
-                            <el-button :disabled="!Fmedicine" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                            <el-button :disabled="!Fmedicine" size="small"
+                                @click="handleEdit(scope.$index, scope.row)">修改</el-button>
                             <el-button :disabled="!Dmedicine" size="small" type="danger"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
-                
+                <!-- <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="1000" /> -->
+
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
@@ -44,6 +50,8 @@ import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import useStore from '../../../store';
 import router from '../../../router';
+import * as XLSX from 'xlsx';
+
 const store = useStore()
 
 const parms = ref({
@@ -58,35 +66,19 @@ const parms = ref({
 
 // Ref是声明类型，ref是创建响应式
 const tableData: Ref<Array<Medicine>> = ref<Array<Medicine>>([])
-// 这里获取的数据是旧数据？
-const load = async() => {
-    // console.log("进入了log")
-    // 应该将store中的Uid传过
+
+// debugging
+const load = async () => {
     parms.value.Uid = User.value.Uid
     let res = await getMedicines(parms.value) as any
-    // 有时候返回string类型，判断一下
-    let permiss : Boolean = res as Boolean    // 控制权限没有就跳转到404页面
-    if(!permiss)
-    {
-        console.log("没有权限")
-        // router.push({ path: "/NotPermission" })
-    } else {
-        console.log("有权限")
-    }
-    // console.log("权限的res=" + res)
-    // if((res as string) === "")
-    // console.log("重新赋值的tableData" + res)
-    // debugger
     tableData.value = res as Array<Medicine>
-    // console.log("结束了load")
-
-    // 权限管理
-    // myBool = myBoolStore.value
 }
+
+
 
 //查询
 const searchVal = ref("")
-const Search = async() => {
+const Search = async () => {
     parms.value.Mname = searchVal.value
     await load()
 
@@ -96,7 +88,7 @@ const Search = async() => {
     })
 }
 
-onMounted(async() => {
+onMounted(async () => {
     await load()
 })
 
@@ -114,7 +106,7 @@ const closeAdd = () => {
 }
 const handleEdit = (index: number, row: Medicine) => {
     info.value = row
-    index ++
+    index++
     isShow.value = true
 }
 
@@ -126,7 +118,7 @@ const success = async (message: string) => {
 }
 
 const handleDelete = async (index: number, row: Medicine) => {
-    index --
+    index--
     await delMedicine(row.Mno)
     await load()
 }
@@ -139,6 +131,48 @@ const Dmedicine = ref(Permission.value.Dmedicine);
 const Fmedicine = ref(Permission.value.Fmedicine);
 const Imedicine = ref(Permission.value.Imedicine);
 const Smedicine = ref(Permission.value.Smedicine);
+
+
+
+// 导出 Excel
+const exportToExcel = () => {
+    // 构建工作簿
+    const wb = XLSX.utils.book_new();
+
+    // 复制数据以便进行修改，以防影响原始数据
+    const modifiedData = JSON.parse(JSON.stringify(tableData.value));
+
+    // 移除不需要导出的列（比如 Id 列）
+    modifiedData.forEach(item => delete item.Id);
+
+    // 将修改后的数据转换为工作表
+    const ws = XLSX.utils.json_to_sheet(modifiedData);
+
+    // 修改列标题
+    XLSX.utils.sheet_add_aoa(ws, [['药品编号', '名称', '服用方法', '功效', '数量']], { origin: 0 });
+
+    // 将工作表添加到工作簿
+    XLSX.utils.book_append_sheet(wb, ws, '药品信息');
+
+    // 将工作簿转为 ArrayBuffer
+    const arrayBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+    // 创建 Blob
+    const blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+    // 创建下载链接
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '药品信息.xlsx'; // 指定文件名为 "药品信息"
+
+    // 模拟点击下载链接
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
 
 </script>
 

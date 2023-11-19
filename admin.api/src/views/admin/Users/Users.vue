@@ -23,11 +23,11 @@
                         <template #default="scope">
                             <!-- 将这一行的数据都传出去 -->
                             <!-- 通过全局变量控制是否可以使用这个按钮 -->
-                            <el-button :disabled="myBoolStore" size="small" 
+                            <el-button v-if="scope.row.Uid !== 'admin'" :disabled="myBoolStore" size="small" 
                                 @click="handleEdit(scope.$index, scope.row)">修改账户信息</el-button>
-                            <el-button size="small" type="danger"
+                            <el-button size="small" type="danger" v-if="scope.row.Uid !== 'admin'"
                                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                            <el-button size="small" type="danger"
+                            <el-button size="small" type="danger" v-if="scope.row.Uid !== 'admin'"
                                 @click="handlePermissEdit(scope.row)">修改权限</el-button>
                         </template>
                     </el-table-column>
@@ -160,35 +160,6 @@ const handlePermissEdit = async (row: User) => {
 }
 
 
-
-// 这里被后端传来的小写属性坑了很久（需要错误拦截才能赋值成功）
-// const handlePermissEdit = (row: User) => {
-//     // 将值从表中获取出来
-//     getPermiss(row.Uid)
-//         .then(response => {
-//             if (response && response.data) {    // 跑不到这里
-//                 const res = response.data;
-//                 console.log("返回getPermiss的值res=", res);
-//                 permissInfo.value = res as Permiss;  //给响应对象加上值
-//                 console.log("给响应式的值permissInfo:", permissInfo.value.Uid as string);
-//                 isPermissShow.value = true;
-//             } else {
-//                 console.log("Invalid response data:", response);
-//                 permissInfo.value = response as any as Permiss
-//                 console.log("permissInfo.value=" + permissInfo.value.Uid + ",Boolean=" + response)
-//                 isPermissShow.value = true  // 显示组件
-//             }
-//         })
-//         .catch(error => {
-//             console.error("Error while fetching Permiss:", error);
-//         });
-// }
-
-
-
-
-
-
 const success = async (message: string) => {
     isShow.value = false
     isPermissShow.value = false
@@ -202,7 +173,7 @@ const success = async (message: string) => {
 const handleDelete = async (index: number, row: User) => {
     index --
     await delUser(row.Uid)
-    console.log("删除之前：row.Uid=" + row.Uid)
+    // console.log("删除之前：row.Uid=" + row.Uid)
     await delPermiss(row.Uid)
     await load()
 }

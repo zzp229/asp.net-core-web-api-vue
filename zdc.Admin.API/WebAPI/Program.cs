@@ -113,7 +113,7 @@ builder.Services.Configure<JWTTokenOptions>(builder.Configuration.GetSection("JW
              ValidateLifetime = true,//是否验证失效时间
              ValidateIssuerSigningKey = true,//是否验证SecurityKey
              ValidAudience = tokenOptions.Audience,//
-             ClockSkew = TimeSpan.FromSeconds(0),//设置token过期后多久失效，默认过期后300秒内仍有效
+             ClockSkew = TimeSpan.FromSeconds(1500),//设置token过期后多久失效，默认过期后1500秒内仍有效
              ValidIssuer = tokenOptions.Issuer,//Issuer，这两项和前面签发jwt的设置一致
              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.SecurityKey))//拿到SecurityKey 
          };

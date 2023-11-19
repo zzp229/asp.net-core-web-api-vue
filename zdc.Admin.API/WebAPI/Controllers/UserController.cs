@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             // loginModel 包含用户名和密码
 
             var user = await _userService.GetUser(loginModel.Uid);
-
+            
             if (user != null && user.Pwd == loginModel.Pwd)
             {
                 // 登录成功

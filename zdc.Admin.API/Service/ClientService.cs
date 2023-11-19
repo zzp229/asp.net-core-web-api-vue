@@ -34,10 +34,23 @@ namespace Service
             return await _db.Updateable<Client>( req ).ExecuteCommandAsync() > 0;
         }
 
+        // 这里要加上条件
         public async Task<List<Client>> GetClients(Client client)
         {
-            List<Client> clients = await _db.Queryable<Client>().ToListAsync();
-            return clients;
+            //List<Agency> agencies = await _db.Queryable<Agency>()
+            //    .Where(m => m.Ano.Contains(agency.Aname) || m.Aname.Contains(agency.Aname) || m.Asex.Contains(agency.Aname) || m.Aremark.Contains(agency.Aname))
+            //    .Select(m => new Agency() { }, true)
+            //    .ToListAsync();
+
+            string cond = client.Cname;
+
+            List<Client> clients1 = await _db.Queryable<Client>()
+                .Where(m => m.Cno.Contains(cond) || m.Cname.Contains(cond) || m.Csex.Contains(cond)
+                        || m.Caddress.Contains(cond) || m.Cphone.Contains(cond) || m.Csymptom.Contains(cond) 
+                        || m.Mno.Contains(cond) || m.Ano.Contains(cond) || m.Cremark.Contains(cond))
+                .Select(m => new Client() { }, true) .ToListAsync();
+
+            return clients1;
         }
     }
 }

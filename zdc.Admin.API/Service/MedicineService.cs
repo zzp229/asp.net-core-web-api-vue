@@ -24,6 +24,7 @@ namespace Service
         public async Task<bool> Add(MedicineReq req)
         {
             var medicine = _mapper.Map<Medicine>(req);
+            medicine.Id = Guid.NewGuid().ToString();
             return await _db.Insertable(medicine).ExecuteCommandAsync() > 0;
         }
 

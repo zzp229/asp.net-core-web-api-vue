@@ -60,6 +60,7 @@ namespace Service
 
         public async Task<bool> Add(Agency req)
         {
+            req.Id = Guid.NewGuid().ToString();
             return await _db.Insertable(req).ExecuteCommandAsync() > 0;
         }
 

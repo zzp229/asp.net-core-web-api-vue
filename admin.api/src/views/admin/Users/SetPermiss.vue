@@ -3,44 +3,70 @@
     <el-dialog v-model="dialogVisible" :title="form.Uid !== '' ? '修改' : '新增'" width="50%" draggable
         @close="$emit('closeSetPermiss')">
         <el-form :model="form" label-width="100px" ref="ruleFormRef">
-            <el-form-item label="查询药品">
-                <el-switch v-model="form.Smedicine" />
-            </el-form-item>
-            <el-form-item label="添加药品">
-                <el-switch v-model="form.Imedicine" />
-            </el-form-item>
-            <el-form-item label="删除药品">
-                <el-switch v-model="form.Dmedicine" />
-            </el-form-item>
-            <el-form-item label="修改药品">
-                <el-switch v-model="form.Fmedicine" />
-            </el-form-item>
 
-            <el-form-item label="查询经办人">
-                <el-switch v-model="form.Sagency" />
-            </el-form-item>
-            <el-form-item label="添加经办人">
-                <el-switch v-model="form.Iagency" />
-            </el-form-item>
-            <el-form-item label="删除经办人">
-                <el-switch v-model="form.Dagency" />
-            </el-form-item>
-            <el-form-item label="修改经办人">
-                <el-switch v-model="form.Fagency" />
-            </el-form-item>
+            <el-card class="group-box">
+                <div slot="header">
+                    <strong>顾客</strong>
+                </div>
+                <el-form :model="form" label-width="100px" ref="ruleFormRef">
+                    <el-form-item label="查询顾客">
+                        <el-switch v-model="form.Sclient" />
+                    </el-form-item>
+                    <el-form-item label="添加顾客">
+                        <el-switch v-model="form.Iclient" />
+                    </el-form-item>
+                    <el-form-item label="删除顾客">
+                        <el-switch v-model="form.Dclient" />
+                    </el-form-item>
+                    <el-form-item label="修改顾客">
+                        <el-switch v-model="form.Fclient" />
+                    </el-form-item>
+                </el-form>
+            </el-card>
 
-            <el-form-item label="查询顾客">
-                <el-switch v-model="form.Sclient" />
-            </el-form-item>
-            <el-form-item label="添加顾客">
-                <el-switch v-model="form.Iclient" />
-            </el-form-item>         
-            <el-form-item label="删除顾客">
-                <el-switch v-model="form.Dclient" />
-            </el-form-item>
-            <el-form-item label="修改顾客">
-                <el-switch v-model="form.Fclient" />
-            </el-form-item>
+
+            <el-card class="group-box">
+                <div slot="header">
+                    <strong>经办人</strong>
+                </div>
+                <el-form :model="form" label-width="100px" ref="ruleFormRef">
+                    <el-form-item label="查询经办人">
+                        <el-switch v-model="form.Sagency" />
+                    </el-form-item>
+                    <el-form-item label="添加经办人">
+                        <el-switch v-model="form.Iagency" />
+                    </el-form-item>
+                    <el-form-item label="删除经办人">
+                        <el-switch v-model="form.Dagency" />
+                    </el-form-item>
+                    <el-form-item label="修改经办人">
+                        <el-switch v-model="form.Fagency" />
+                    </el-form-item>
+                </el-form>
+            </el-card>
+
+
+            <el-card class="group-box">
+                <div slot="header">
+                    <strong>药品</strong>
+                </div>
+                <el-form :model="form" label-width="100px" ref="ruleFormRef">
+                    <el-form-item label="查询药品">
+                        <el-switch v-model="form.Smedicine" />
+                    </el-form-item>
+                    <el-form-item label="添加药品">
+                        <el-switch v-model="form.Imedicine" />
+                    </el-form-item>
+                    <el-form-item label="删除药品">
+                        <el-switch v-model="form.Dmedicine" />
+                    </el-form-item>
+                    <el-form-item label="修改药品">
+                        <el-switch v-model="form.Fmedicine" />
+                    </el-form-item>
+                </el-form>
+            </el-card>
+
+
         </el-form>
         <template #footer>
             <span class="dialog-footer">
