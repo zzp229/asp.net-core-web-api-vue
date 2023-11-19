@@ -13,7 +13,7 @@
         <br>
         <el-row>
             <el-col>
-                <el-table :data="tableData" style="width: 100%;height: 65vh;" border ref="tb">
+                <el-table :data="paginatedData" style="width: 100%;height: 65vh;" border ref="tb">
                     <el-table-column type="selection" width="55" />
                     <el-table-column prop="Ano" label="编号" width="150" />
                     <el-table-column prop="Aname" label="姓名" width="150" />
@@ -30,11 +30,10 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <!-- <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="total" /> -->
-                <!-- <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="pageSize"
-                    @current-change="handlePageChange" /> -->
-                <el-pagination style="margin-top: 10px;" background layout="prev, pager, next" :total="total"
-                    :current-page="parms.PageIndex" :page-size="pageSize" @current-change="handlePageChange" />
+
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalItems">
+                </el-pagination>
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
@@ -48,7 +47,7 @@ import { delAgency, getAgency } from '../../../http';
 import add from './add.vue';
 import useStore from '../../../store';
 import { exportToExcel } from '../../../tool/report'
-
+import { computed } from 'vue';
 const store = useStore()
 const total = ref(10)
 const parms = ref({
@@ -77,6 +76,7 @@ const Search = async () => {
     parms.value.Aname = searchVal.value
     // console.log("parms.value.Aname:" + parms.value.Aname)
     await load()
+    currentPage.value = 1; // 重置页码
 }
 
 onMounted(async () => {
@@ -116,17 +116,6 @@ const handleDelete = async (index: number, row: Agency) => {
 
 const tb = ref<InstanceType<typeof ElTable>>()
 
-// -------------------- 设置分页 ----------------------
-const pageSize = ref(10); // Number of records to display per page
-
-// Handle page change
-const handlePageChange = async (page: number) => {
-    // parms.PageIndex = page;
-    page ++;
-    // page = 10;
-    await load();
-};
-
 
 const { Permission } = toRefs(store);
 const Dagency = ref(Permission.value.Dagency);
@@ -136,8 +125,30 @@ const Sagency = ref(Permission.value.Sagency);
 
 // Excel
 const handleExport = () => {
-    const columnHeaders = ['经办人编号', '姓名', '性别', '电话', '备注'];
+    const columnHeaders = ['编号', '姓名', '性别', '电话', '备注'];
     exportToExcel(tableData.value, '经办人信息', columnHeaders);
 };
+
+
+
+// 实现分页
+const currentPage = ref(1);
+const pageSize = ref(10);
+const totalItems = computed(() => tableData.value.length);
+const paginatedData = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value;
+    const end = start + pageSize.value;
+    return tableData.value.slice(start, end);
+});
+
+
+const handleCurrentChange = (newPage) => {
+    currentPage.value = newPage;
+};
+
+const handleSizeChange = (newSize) => {
+    pageSize.value = newSize;
+};
+
 
 </script>
