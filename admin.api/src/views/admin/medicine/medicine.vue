@@ -14,7 +14,7 @@
         <br>
         <el-row>
             <el-col>
-                <el-table :data="tableData" style="width: 100%;height: 65vh;" border ref="tb">
+                <el-table :data="paginatedData" style="width: 100%;height: 65vh;" border ref="tb">
                     <el-table-column type="selection" width="55" />
                     <el-table-column prop="Mno" label="编号" width="150" />
                     <el-table-column prop="Mname" label="名称" width="150" />
@@ -83,10 +83,10 @@ const load = async () => {
 //查询
 const searchVal = ref("")
 const Search = async () => {
-    parms.value.Mname = searchVal.value
-    await load()
+    parms.value.Mname = searchVal.value;
+    await load();
     currentPage.value = 1; // 重置页码
-}
+};
 
 onMounted(async () => {
     await load()
@@ -150,6 +150,7 @@ const paginatedData = computed(() => {
     const end = start + pageSize.value;
     return tableData.value.slice(start, end);
 });
+
 
 const handleCurrentChange = (newPage) => {
     currentPage.value = newPage;
