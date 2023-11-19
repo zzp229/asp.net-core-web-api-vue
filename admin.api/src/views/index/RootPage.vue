@@ -12,7 +12,7 @@
                         <IconCom icon="house"></IconCom>
                         <span>我的主页</span>
                     </template>
-                    <el-menu-item index="/">
+                    <el-menu-item index="/work">
                         <IconCom icon="wallet"></IconCom>
                         <span>工作台</span>
                     </el-menu-item>
@@ -28,7 +28,7 @@
                         <IconCom icon="house"></IconCom>
                         <span>账户权限</span>
                     </template>
-                    <el-menu-item index="/">
+                    <el-menu-item index="/work">
                         <IconCom icon="monitor"></IconCom>
                         <span>权限管理</span>
                     </el-menu-item>

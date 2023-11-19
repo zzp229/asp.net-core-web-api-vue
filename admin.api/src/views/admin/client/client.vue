@@ -24,7 +24,7 @@
                     <el-table-column prop="Csymptom" label="症状" width="100" />
                     <el-table-column prop="Mno" label="已购药品" width="100" />
                     <el-table-column prop="Ano" label="经办人" width="100" />
-                    <el-table-column prop="Cdate" label="录入日期" width="100" />
+                    <el-table-column prop="Cdate" label="录入日期" width="110" />
                     <el-table-column prop="Cremark" label="备注" width="100" />
 
                     <el-table-column label="操作" align="center">

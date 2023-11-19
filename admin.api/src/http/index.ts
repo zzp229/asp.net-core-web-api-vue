@@ -68,7 +68,7 @@ instance.interceptors.response.use(
         // 401表示未授权=>跳到登录页
         else if (error.response.status === 401) {
             router.push({
-                path: "/login"
+                path: "/"
             })
         } else if (error.response.status === 500) {
             ElMessage.error("内部服务器错误，请检查服务是否启动！")
@@ -180,7 +180,6 @@ export const getNewToken = (userId: string) => {
 }
 
 
-// 从后端获取数据
 export const getTreeMenu = (obj: {}) => {
     return instance.post("/api/Menu/GetMenus", obj)
 }
@@ -195,31 +194,4 @@ export const delMenu = (id: string) => {
 }
 
 
-
-export const getRoles = (obj: {}) => {
-    return instance.post("/api/Role/GetRoles", obj)
-}
-export const addRole = (req: {}) => {
-    return instance.post("/api/Role/Add", req)
-}
-export const editRole = (req: {}) => {
-    return instance.post("/api/Role/Edit", req)
-}
-export const delRole = (id: string) => {
-    return instance.get(`/api/Role/Del?id=${id}`)
-}
-export const settingMenu = (rid: string, mids: string) => {
-    return instance.get(`/api/Menu/SettingMenu?rid=${rid}&mids=${mids}`)
-}
-
-
-
-export const settingRole = (uid: string, rids: string) => {
-    return instance.get(`/api/User/SettingRole?uid=${uid}&rids=${rids}`)
-}
-
-
-export const editPersonInfo = (req: {}) => {
-    return instance.post(`/api/User/EditNickNameOrPassword`, req)
-}
 

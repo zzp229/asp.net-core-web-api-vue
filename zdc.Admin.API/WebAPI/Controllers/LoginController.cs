@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         public async Task<ApiResult> GetToken([FromBody] LoginReq req)
         {
             if (ModelState.IsValid)
-            {
+            { 
                 User user = await _userService.GetUserByUidPwd(req);
                 if (user == null)
                 {

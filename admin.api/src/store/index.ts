@@ -40,6 +40,7 @@ const useStore = defineStore('main', {
             this.UserMenus = [];
             this.RefreshTokenNum = 0;
             this.NickName = "";
+            this.token = "";
             // 这两个对应都会被重新加载的
             // this.User = new User(); // 重新创建一个 User 对象
             // this.Permission = new Permiss(); // 重新创建一个 Permiss 对象

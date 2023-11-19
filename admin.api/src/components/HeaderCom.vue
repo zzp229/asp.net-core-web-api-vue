@@ -106,7 +106,7 @@ const handleClose = (index: string) => {
 
 const logOut = () => {
     store().reset() //重置全局状态
-    router.push({ path: "/login" })
+    router.push({ path: "/" })
 }
 
 const toPerson = () => {

@@ -44,11 +44,7 @@
                                 </el-button>
                             </el-form-item>
 
-                            <a href="Register">注册</a>
-                            <!-- <el-form-item>
-                                <el-button class="submitBtn" type="primary" @click="onSubmit(ruleFormRef)">注册
-                                </el-button>
-                            </el-form-item> -->
+                            <el-button class="registerBtn" type="default" @click="goToRegister">注册</el-button>
                         </el-form>
                     </el-col>
                 </el-row>
@@ -104,6 +100,11 @@ const rules = reactive<FormRules>({
 //     })
 // }
 
+const goToRegister = () => {
+    // console.log("点击了注册按钮")
+    router.push('/Register');
+}
+
 
 
 // 定义一个和表单同名的变量
@@ -151,15 +152,15 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
                     await loadInfo(form.Uid)
                     // 路由跳转
                     router.push({
-                        path: "/"
+                        path: "/work"
                     })
                 } else {
                     // 登录失败的逻辑
-                    ElMessage.success("登录失败！")
+                    ElMessage.error("登录失败！")
                 }
             } catch (error) {
                 // 处理网络请求错误
-                ElMessage.success("请检查网络！")
+                ElMessage.error("请检查网络！")
             }
         } else {
             // 前端对输入的校验

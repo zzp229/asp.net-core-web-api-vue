@@ -4,7 +4,7 @@ const router = createRouter({
     routes: [
         {
             name: "login",
-            path: "/login",
+            path: "/",
             component: () => import("../views/index/LoginPage.vue")
         },
         {
@@ -49,8 +49,8 @@ const router = createRouter({
                     component: () => import("../views/admin/client/client.vue")
                 },
                 {
-                    name: "主页",
-                    path: "/",
+                    name: "工作台",
+                    path: "/work",
                     component: () => import("../views/index/Desktop.vue")
                 },
                 {
