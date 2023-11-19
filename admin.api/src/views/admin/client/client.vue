@@ -36,6 +36,10 @@
                         </template>
                     </el-table-column>
                 </el-table>
+
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalItems">
+                </el-pagination>
                 
             </el-col>
         </el-row>
@@ -44,7 +48,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, onMounted, ref, toRefs } from 'vue';
+import { Ref, computed, onMounted, ref, toRefs } from 'vue';
 import Client from '../../../class/Client';
 import { delClient, getClients } from '../../../http'
 import { ElMessage } from 'element-plus';
@@ -129,6 +133,26 @@ const Sclient = ref(Permission.value.Sclient);
 const handleExport = () => {
     const columnHeaders = ['编号', '姓名', '性别', '年龄', '住址', '电话', '症状', '已购药品', '经办人', '录入时间', '备注'];
     exportToExcel(tableData.value, '顾客信息', columnHeaders);
+};
+
+
+// 实现分页
+const currentPage = ref(1);
+const pageSize = ref(10);
+const totalItems = computed(() => tableData.value.length);
+const paginatedData = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value;
+    const end = start + pageSize.value;
+    return tableData.value.slice(start, end);
+});
+
+
+const handleCurrentChange = (newPage) => {
+    currentPage.value = newPage;
+};
+
+const handleSizeChange = (newSize) => {
+    pageSize.value = newSize;
 };
 
 </script>

@@ -32,6 +32,11 @@
                         </template>
                     </el-table-column>
                 </el-table>
+
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalItems">
+                </el-pagination>
+                
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
@@ -78,7 +83,8 @@ const load = async() => {
 const searchVal = ref("")
 const Search = async() => {
     parms.value.Name = searchVal.value
-    await load()
+    await load();
+    currentPage.value = 1; // 重置页码
 
     // test，在ts中只是定义而已，没有初始化的作用，需要通过$patch方法来修改值
     useStore().$patch({
@@ -181,6 +187,25 @@ const handleDelete = async (index: number, row: User) => {
 
 // 测试全局变量控制权限
 const myBoolStore = computed(() => useStore().myBool)
+
+// 实现分页
+const currentPage = ref(1);
+const pageSize = ref(10);
+const totalItems = computed(() => tableData.value.length);
+const paginatedData = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value;
+    const end = start + pageSize.value;
+    return tableData.value.slice(start, end);
+});
+ 
+ 
+const handleCurrentChange = (newPage) => {
+    currentPage.value = newPage;
+};
+ 
+const handleSizeChange = (newSize) => {
+    pageSize.value = newSize;
+};
 
 </script>
 
