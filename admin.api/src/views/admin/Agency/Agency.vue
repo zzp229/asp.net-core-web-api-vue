@@ -7,6 +7,7 @@
             <el-col :span="12">
                 <el-button :disabled="!Sagency" type="primary" @click="Search">查询</el-button>
                 <el-button :disabled="!Iagency" @click="open" type="primary">新增</el-button>
+                <el-button type="primary" @click="handleExport">导出Excel</el-button>
             </el-col>
         </el-row>
         <br>
@@ -46,6 +47,8 @@ import Agency from '../../../class/Agency';
 import { delAgency, getAgency } from '../../../http';
 import add from './add.vue';
 import useStore from '../../../store';
+import { exportToExcel } from '../../../tool/report'
+
 const store = useStore()
 const total = ref(10)
 const parms = ref({
@@ -130,5 +133,11 @@ const Dagency = ref(Permission.value.Dagency);
 const Fagency = ref(Permission.value.Fagency);
 const Iagency = ref(Permission.value.Iagency);
 const Sagency = ref(Permission.value.Sagency);
+
+// Excel
+const handleExport = () => {
+    const columnHeaders = ['经办人编号', '姓名', '性别', '电话', '备注'];
+    exportToExcel(tableData.value, '经办人信息', columnHeaders);
+};
 
 </script>

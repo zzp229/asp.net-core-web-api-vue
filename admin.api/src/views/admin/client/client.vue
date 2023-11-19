@@ -7,6 +7,7 @@
             <el-col :span="12">
                 <el-button :disabled="!Sclient" type="primary" @click="Search">查询</el-button>
                 <el-button :disabled="!Iclient" @click="open" type="primary">新增</el-button>
+                <el-button type="primary" @click="handleExport">导出Excel</el-button>
             </el-col>
         </el-row>
         <br>
@@ -49,6 +50,7 @@ import { delClient, getClients } from '../../../http'
 import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import useStore from '../../../store';
+import { exportToExcel } from '../../../tool/report'
 const store = useStore()
 
 const parms = ref({
@@ -122,5 +124,11 @@ const Dclient = ref(Permission.value.Dclient);
 const Fclient = ref(Permission.value.Fclient);
 const Iclient = ref(Permission.value.Iclient);
 const Sclient = ref(Permission.value.Sclient);
+
+// Excel
+const handleExport = () => {
+    const columnHeaders = ['编号', '姓名', '性别', '年龄', '住址', '电话', '症状', '已购药品', '经办人', '录入时间', '备注'];
+    exportToExcel(tableData.value, '顾客信息', columnHeaders);
+};
 
 </script>

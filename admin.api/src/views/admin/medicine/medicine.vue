@@ -7,8 +7,7 @@
             <el-col :span="12">
                 <el-button :disabled="!Smedicine" type="primary" @click="Search">查询</el-button>
                 <el-button :disabled="!Imedicine" @click="open" type="primary">新增</el-button>
-                <!-- 在模板中添加导出按钮 -->
-                <el-button type="primary" @click="exportToExcel">导出Excel</el-button>
+                <el-button type="primary" @click="handleExport">导出Excel</el-button>
 
             </el-col>
         </el-row>
@@ -37,6 +36,10 @@
                 <!-- <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                     :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="1000" /> -->
 
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalItems">
+                </el-pagination>
+
             </el-col>
         </el-row>
         <add :isShow="isShow" :info="info" @closeAdd="closeAdd" @success="success"></add>
@@ -50,6 +53,7 @@ import { ElMessage } from 'element-plus';
 import add from './add.vue'
 import useStore from '../../../store';
 import router from '../../../router';
+import { exportToExcel } from '../../../tool/report'
 import * as XLSX from 'xlsx';
 
 const store = useStore()
@@ -81,11 +85,7 @@ const searchVal = ref("")
 const Search = async () => {
     parms.value.Mname = searchVal.value
     await load()
-
-    // test，在ts中只是定义而已，没有初始化的作用，需要通过$patch方法来修改值
-    useStore().$patch({
-        myBool: false
-    })
+    currentPage.value = 1; // 重置页码
 }
 
 onMounted(async () => {
@@ -121,6 +121,7 @@ const handleDelete = async (index: number, row: Medicine) => {
     index--
     await delMedicine(row.Mno)
     await load()
+    // currentPage.value = 1; // 重置页码
 }
 
 // 测试全局变量控制权限
@@ -133,44 +134,29 @@ const Imedicine = ref(Permission.value.Imedicine);
 const Smedicine = ref(Permission.value.Smedicine);
 
 
+// Excel
+const handleExport = () => {
+    const columnHeaders = ['药品编号', '名称', '服用方法', '功效', '数量'];
+    exportToExcel(tableData.value, '药品信息', columnHeaders);
+};
 
-// 导出 Excel
-const exportToExcel = () => {
-    // 构建工作簿
-    const wb = XLSX.utils.book_new();
 
-    // 复制数据以便进行修改，以防影响原始数据
-    const modifiedData = JSON.parse(JSON.stringify(tableData.value));
+// 实现分页
+const currentPage = ref(1);
+const pageSize = ref(10);
+const totalItems = computed(() => tableData.value.length);
+const paginatedData = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value;
+    const end = start + pageSize.value;
+    return tableData.value.slice(start, end);
+});
 
-    // 移除不需要导出的列（比如 Id 列）
-    modifiedData.forEach(item => delete item.Id);
+const handleCurrentChange = (newPage) => {
+    currentPage.value = newPage;
+};
 
-    // 将修改后的数据转换为工作表
-    const ws = XLSX.utils.json_to_sheet(modifiedData);
-
-    // 修改列标题
-    XLSX.utils.sheet_add_aoa(ws, [['药品编号', '名称', '服用方法', '功效', '数量']], { origin: 0 });
-
-    // 将工作表添加到工作簿
-    XLSX.utils.book_append_sheet(wb, ws, '药品信息');
-
-    // 将工作簿转为 ArrayBuffer
-    const arrayBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
-    // 创建 Blob
-    const blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-
-    // 创建下载链接
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = '药品信息.xlsx'; // 指定文件名为 "药品信息"
-
-    // 模拟点击下载链接
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+const handleSizeChange = (newSize) => {
+    pageSize.value = newSize;
 };
 
 
