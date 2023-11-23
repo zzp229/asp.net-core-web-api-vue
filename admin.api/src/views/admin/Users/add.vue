@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" :title="form.Uid !== '' ? '修改' : '新增'" width="30%" draggable
+    <el-dialog v-model="dialogVisible" :title="form.Id !== '' ? '修改' : '新增'" width="30%" draggable
         @close="$emit('closeAdd')">
         <el-form :model="form" label-width="80px" ref="ruleFormRef" :rules="rules">
             <el-form-item label="用户名" prop="Name">
@@ -42,7 +42,7 @@ const dialogVisible = computed(() => props.isShow)
 
 const ruleFormRef = ref<FormInstance>()
 const form = ref({
-    Id: 0,
+    Id: "",
     Uid: "",
     Name: "",
     Pwd: "",

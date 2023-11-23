@@ -21,5 +21,8 @@ namespace Interface
         Task<bool> Del(string id);
 
         Task<bool> Add(User req);
+
+        // 通过Uid和新密码更新密码
+        Task<bool> EditPwd(User req);
     }
 }

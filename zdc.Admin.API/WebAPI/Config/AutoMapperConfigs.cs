@@ -24,9 +24,6 @@ namespace WebAPI.Config
             CreateMap<RoleAdd, Role>();
             CreateMap<RoleEdit, Role>();
             //用户
-            //CreateMap<Users, UserRes>();
-            CreateMap<UserAdd, Users>();
-            CreateMap<UserEdit, Users>();   
             // 修改药品
             CreateMap<MedicineReq, Medicine>();
         }

@@ -36,7 +36,8 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item @click="toPerson">我的主页</el-dropdown-item>
-                            <el-dropdown-item @click="toPermission">权限管理</el-dropdown-item>
+                            <el-dropdown-item v-if="useStore.NickName === 'admin'" @click="toPermission">权限管理</el-dropdown-item>
+                            <el-dropdown-item @click="fixPwd">修改密码</el-dropdown-item>
                             <el-dropdown-item @click="logOut">退出</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -64,6 +65,8 @@ import router from '../router';
 import IconCom from './IconCom.vue';
 import { onMounted, ref } from 'vue';
 import { FormatToken, handleSelect, tagClick } from '../tool';
+import { editUser } from '../http';
+import { ElMessage } from 'element-plus';
 
 // 全局中获取值 
 const useStore = store();
@@ -115,6 +118,20 @@ const toPerson = () => {
 
 const toPermission = () => {
     router.push({ path: "/Permission" })
+}
+
+
+const form = ref({
+    Id: "",
+    Uid: "",
+    Name: "",
+    Pwd: "",
+    Type: ""
+})
+
+
+const fixPwd = () => {
+    router.push({path: "/UserPage"})
 }
 </script>
 

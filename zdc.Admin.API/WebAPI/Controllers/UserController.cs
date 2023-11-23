@@ -51,6 +51,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ApiResult> Add(User user)
         {
+            user.Id = Guid.NewGuid().ToString();
             var tmp = ResultHelper.Success(await _userService.Add(user));
             return tmp;
         }

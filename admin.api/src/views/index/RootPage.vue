@@ -47,7 +47,7 @@
                     <IconCom icon="monitor"></IconCom>
                     <span>药品信息</span>
                 </el-menu-item>
-                <el-menu-item index="/users">
+                <el-menu-item v-if="store.NickName === 'admin'" index="/users">
                     <IconCom icon="monitor"></IconCom>
                     <span>用户管理</span>
                 </el-menu-item>

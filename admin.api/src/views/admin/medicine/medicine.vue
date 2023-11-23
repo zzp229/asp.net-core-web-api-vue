@@ -5,8 +5,8 @@
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
             <el-col :span="12">
-                <el-button :disabled="!Smedicine" type="primary" @click="Search">查询</el-button>
-                <el-button :disabled="!Imedicine" @click="open" type="primary">新增</el-button>
+                <el-button v-if="Smedicine" type="primary" @click="Search">查询</el-button>
+                <el-button v-if="Imedicine" @click="open" type="primary">新增</el-button>
                 <el-button type="primary" @click="handleExport">导出Excel</el-button>
 
             </el-col>

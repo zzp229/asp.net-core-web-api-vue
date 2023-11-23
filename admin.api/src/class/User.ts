@@ -7,14 +7,14 @@
 // }
 
 export default class User {
-    Id: number;
+    Id: string;
     Uid: string;
     Name: string;
     Pwd: string;
     Type: string;
 
     constructor() {
-        this.Id = 0;
+        this.Id = "";
         this.Uid = "";
         this.Name = "";
         this.Pwd = "";
