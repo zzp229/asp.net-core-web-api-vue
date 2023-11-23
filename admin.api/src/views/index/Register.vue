@@ -57,7 +57,7 @@ const registe = () => {
             ElMessage.success("添加用户成功！")
             router.push("/")
         } else {
-            ElMessage.error("注册失败！")
+            ElMessage.error("注册失败，该账号已被注册！")
         }
     })
 }

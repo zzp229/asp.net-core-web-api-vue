@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, defineEmits, reactive, watch } from 'vue'
-import { FormInstance, FormRules } from 'element-plus'
+import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { addUser, editUser, addPermiss } from '../../../http/index'
 import User from '../../../class/User';
 const props = defineProps({
@@ -81,6 +81,12 @@ const closeAdd = async (formEl: FormInstance | undefined) => {
     emits("closeAdd")
 }
 
+const permissForm = ref({
+    Uid: "",
+    Smedicine: 1,
+    Sagency: 1,
+})
+
 const save = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
     //valid是验证通过，field是处理失败字段
@@ -103,8 +109,11 @@ const save = async (formEl: FormInstance | undefined) => {
                 addUser(form.value).then(function (res) {
                     if (res) {
                         // 需要创建一张权限表给该用户
-                        addPermiss(form.value)
+                        permissForm.value.Uid = form.value.Uid;
+                        addPermiss(permissForm.value)
                         emits("success", "添加成功！")
+                    } else {
+                        ElMessage.error("该账号已经存在！")
                     }
                 })
             }

@@ -150,7 +150,7 @@ export const editPwd = (req: {}) => {
     return instance.post("/api/User/EditPwd", req)
 }
 export const delUser = (uid: string) => {
-    return instance.get(`/api/User/Del?id=${uid}`)
+    return instance.get(`/api/User/Del?uid=${uid}`)
 }
 
 

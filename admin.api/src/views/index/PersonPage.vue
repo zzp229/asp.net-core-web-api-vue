@@ -33,7 +33,7 @@
             <el-card>
                 <p style="color:red;">注意事项</p>
                 
-                <p>......</p>
+                <p>购买药品尽快使用</p>
             </el-card>
         </el-col>
     </el-row>

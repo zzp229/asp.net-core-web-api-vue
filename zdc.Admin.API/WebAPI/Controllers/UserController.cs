@@ -51,9 +51,18 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ApiResult> Add(User user)
         {
-            user.Id = Guid.NewGuid().ToString();
-            var tmp = ResultHelper.Success(await _userService.Add(user));
-            return tmp;
+            // 如果数据库有的就返回false
+            if (await _userService.GetUser(user.Uid) != null)
+            {
+                return ResultHelper.Success(false);
+            }
+            else
+            {
+                // 有效的新用户
+                user.Id = Guid.NewGuid().ToString();
+                var tmp = ResultHelper.Success(await _userService.Add(user));
+                return tmp;
+            }
         }
 
 

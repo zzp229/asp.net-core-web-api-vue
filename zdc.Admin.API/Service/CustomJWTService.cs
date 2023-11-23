@@ -23,6 +23,10 @@ namespace Service
         }
         public async Task<string> GetToken(User user)
         {
+            if(user == null)
+            {
+                return null;
+            }
             var result = await Task.Run(() =>
             {
                 // 有效载荷,要避免敏感信息

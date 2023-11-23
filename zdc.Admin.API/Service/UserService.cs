@@ -34,12 +34,7 @@ namespace Service
             return await _db.Updateable<User>(req).ExecuteCommandAsync() > 0;
         }
 
-        public Task<bool> EditPwd(User req)
-        {
-            // 拿到这个id的人
-            var info = _db.Queryable<User>().First(x => x.Uid == req.Uid);
-            return Edit(info);  //修改密码
-        }
+        
 
         public async Task<User> GetUser(string uid)
         {

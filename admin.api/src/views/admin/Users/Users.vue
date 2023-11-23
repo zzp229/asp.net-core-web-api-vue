@@ -178,8 +178,11 @@ const success = async (message: string) => {
 
 const handleDelete = async (index: number, row: User) => {
     index --
+    console.log(row.Uid)
+    
     await delUser(row.Uid)
     // console.log("删除之前：row.Uid=" + row.Uid)
+    ElMessage.success("删除成功！");
     await delPermiss(row.Uid)
     await load()
 }
