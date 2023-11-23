@@ -148,6 +148,7 @@ const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
                     })
                     // 登录成功的逻辑
                     ElMessage.success("登录成功！")
+                    // 这个不是
                     store.NickName = form.Uid  // 记录到全局
                     await loadInfo(form.Uid)
                     // 路由跳转

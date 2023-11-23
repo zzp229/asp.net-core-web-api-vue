@@ -21,8 +21,8 @@ export const loadInfo = async (uid: string) => {
 
     //装入全局
     useStore().$patch({
-        NickName: store.NickName, // 用户名
         User: user,
+        NickName: user.Name, // 用户名
         Permission: permiss
     })
 }
