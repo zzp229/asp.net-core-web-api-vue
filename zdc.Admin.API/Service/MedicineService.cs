@@ -44,10 +44,31 @@ namespace Service
 
         public async Task<List<Medicine>> GetMedicines(MedicineReq med)
         {
-            List<Medicine> medicines = await _db.Queryable<Medicine>()
-                .Where(m => m.Mno.Contains(med.Mname) || m.Mname.Contains(med.Mname) || m.Mmode.Contains(med.Mname) || m.Mefficacy.Contains(med.Mname))
-                .Select(m => new Medicine() { }, true)
-                .ToListAsync();
+
+            var tmp = med.Mnum; // 标记非0就是多条件查询
+
+            if(tmp == 0)
+            {
+                List<Medicine> medicines = await _db.Queryable<Medicine>()
+                    .Where(m => m.Mno.Contains(med.Mname) || m.Mname.Contains(med.Mname) || m.Mmode.Contains(med.Mname) || m.Mefficacy.Contains(med.Mname))
+                    .Select(m => new Medicine() { }, true)
+                    .ToListAsync();
+
+                return medicines;
+            } 
+            else
+            {
+                List<Medicine> medicines = await _db.Queryable<Medicine>()
+                    .WhereIF(!string.IsNullOrEmpty(med.Id), m => m.Mno.Contains(med.Id))
+                    .WhereIF(!string.IsNullOrEmpty(med.Mname), m => m.Mname.Contains(med.Mname))
+                    .WhereIF(!string.IsNullOrEmpty(med.Mmode), m => m.Mmode.Contains(med.Mmode))
+                    .WhereIF(!string.IsNullOrEmpty(med.Mefficacy), m => m.Mefficacy.Contains(med.Mefficacy))
+                    .Select(m => new Medicine() { }, true)
+                    .ToListAsync();
+
+                return medicines;
+            }
+
 
             //List<Medicine> medicines = await _db.Queryable<Medicine>()
             //    .WhereIF(!string.IsNullOrEmpty(med.Mno), m => m.Mno.Contains(med.Mname))
@@ -65,7 +86,7 @@ namespace Service
             //    .Select(m => new Medicine() { }, true)
             //    .ToListAsync();
 
-            return medicines;
+            
         }
     }
 }

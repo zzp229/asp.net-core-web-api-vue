@@ -1,6 +1,13 @@
 <template>
     <el-card class="box-card">
-        <el-row>
+        
+        <!-- 根据条件显示行 -->
+        <el-row v-if="showFirstRow">
+            <!-- 第一行的内容 -->
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">任意查询</el-button>
+            </el-col>
             <el-col :span="5">
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
@@ -8,19 +15,48 @@
                 <el-button v-if="Smedicine" type="primary" @click="Search">查询</el-button>
                 <el-button v-if="Imedicine" @click="open" type="primary">新增</el-button>
                 <el-button type="primary" @click="handleExport">导出Excel</el-button>
-
             </el-col>
         </el-row>
+
+        <!-- 多条件查询 -->
+        <el-row v-else>
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">多条件查询</el-button>
+            </el-col>
+            <!-- 第二行的内容 -->
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Id" placeholder="编号" @change="Search" />
+            </el-col>
+            <el-col :span="3">
+                <el-input v-model="parmsSearch.Mname" placeholder="名称" @change="Search" />
+            </el-col>
+            <el-col :span="3">
+                <el-input v-model="parmsSearch.Mmode" placeholder="服用方法" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Mefficacy" placeholder="功效" @change="Search" />
+            </el-col>
+
+            <el-col :span="7">
+                <el-button v-if="Smedicine" type="primary" @click="Search">查询</el-button>
+                <el-button v-if="Imedicine" @click="open" type="primary">新增</el-button>
+                <el-button type="primary" @click="handleExport">导出Excel</el-button>
+            </el-col>
+        </el-row>
+
+
+        <!-- 数据表 -->
         <br>
         <el-row>
             <el-col>
                 <el-table :data="paginatedData" style="width: 100%;height: 65vh;" border ref="tb">
                     <el-table-column type="selection" width="55" />
-                    <el-table-column prop="Mno" label="编号" width="150" />
-                    <el-table-column prop="Mname" label="名称" width="150" />
-                    <el-table-column prop="Mmode" label="服用方法" width="150" />
-                    <el-table-column prop="Mefficacy" label="功效" width="150" />
-                    <el-table-column prop="Mnum" label="数量" width="190" />
+                    <el-table-column prop="Mno" label="编号" width="160" />
+                    <el-table-column prop="Mname" label="名称" width="155" />
+                    <el-table-column prop="Mmode" label="服用方法" width="160" />
+                    <el-table-column prop="Mefficacy" label="功效" width="110" />
+                    <el-table-column prop="Mnum" label="数量" width="100" />
 
                     <el-table-column label="操作" align="center">
                         <template #default="scope">
@@ -33,7 +69,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                
+
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                     :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="totalItems">
                 </el-pagination>
@@ -57,7 +93,18 @@ import * as XLSX from 'xlsx';
 const store = useStore()
 
 const parms = ref({
-    Id: 0,
+    Id: "",
+    Mno: "",
+    Mname: "",
+    Mmode: "",
+    Mefficacy: "",
+    Mnum: 0,
+    Uid: ""
+})
+
+
+const parmsSearch = ref({
+    Id: "",
     Mno: "",
     Mname: "",
     Mmode: "",
@@ -69,13 +116,20 @@ const parms = ref({
 // Ref是声明类型，ref是创建响应式
 const tableData: Ref<Array<Medicine>> = ref<Array<Medicine>>([])
 
-// debugging
+// debugging，一个是单条件，一个是多条件
 const load = async () => {
-    parms.value.Uid = User.value.Uid
-    let res = await getMedicines(parms.value) as any
-    tableData.value = res as Array<Medicine>
+    
+    if(showFirstRow.value == true){
+        parms.value.Uid = User.value.Uid
+        let res = await getMedicines(parms.value) as any
+        tableData.value = res as Array<Medicine>
+    } else {
+        parmsSearch.value.Uid = User.value.Uid
+        parmsSearch.value.Mnum = 100
+        let res = await getMedicines(parmsSearch.value) as any
+        tableData.value = res as Array<Medicine>
+    }
 }
-
 
 
 //查询
@@ -157,6 +211,15 @@ const handleCurrentChange = (newPage) => {
 const handleSizeChange = (newSize) => {
     pageSize.value = newSize;
 };
+
+
+
+// 查询切换
+const showFirstRow = ref(true)
+const toggleRows = () => {
+    showFirstRow.value = !showFirstRow.value
+}
+
 
 
 </script>

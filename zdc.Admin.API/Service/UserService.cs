@@ -49,7 +49,7 @@ namespace Service
         public async Task<List<User>> GetUsers(User user)
         {
             var res = await _db.Queryable<User>()
-                .Where(m => m.Uid.Contains(user.Uid) || m.Name.Contains(user.Name) || m.Pwd.Contains(user.Pwd))
+                .Where(m => m.Uid.Contains(user.Name) || m.Name.Contains(user.Name) || m.Type.Contains(user.Name))
                 .Select(m => new User() { }, true) .ToListAsync();
 
             return res;

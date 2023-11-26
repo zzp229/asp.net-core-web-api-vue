@@ -1,6 +1,11 @@
 <template>
     <el-card class="box-card">
-        <el-row>
+        <!-- 根据条件显示行 -->
+        <el-row v-if="showFirstRow">
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">任意查询</el-button>
+            </el-col>
             <el-col :span="5">
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
@@ -10,6 +15,42 @@
                 <el-button type="primary" @click="handleExport">导出Excel</el-button>
             </el-col>
         </el-row>
+
+        <!-- 多条件查询 -->
+        <el-row v-else>
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">多条件查询</el-button>
+            </el-col>
+            <!-- 第二行的内容 -->
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Cno" placeholder="编号" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Cname" placeholder="姓名" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Csex" placeholder="性别" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Mno" placeholder="已购药品" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Ano" placeholder="经办人" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Cremark" placeholder="备注" @change="Search" />
+            </el-col>
+
+            <el-col :span="7">
+                <el-button v-if="Sclient" type="primary" @click="Search">查询</el-button>
+                <el-button v-if="Iclient" @click="open" type="primary">新增</el-button>
+                <el-button type="primary" @click="handleExport">导出Excel</el-button>
+            </el-col>
+        </el-row>
+
+
+
         <br>
         <el-row>
             <el-col>
@@ -74,11 +115,35 @@ const parms = ref({
 })
 
 
+
+const parmsSearch = ref({
+    Id: 0,
+    Cno: "",
+    Cname: "",
+    Csex: "",
+    Caddress: "",
+    Cphone: "",
+    Csymptom: "",
+    Mno: "",
+    Ano: "",
+    Cremark: "",
+
+    Cdate: new Date(),
+    Cage: 0
+})
+
+
 const tableData: Ref<Array<Client>> = ref<Array<Client>>([])
 
 const load =async() => {
-    let res = await getClients(parms.value) as any
-    tableData.value = res as Array<Client>
+    if(showFirstRow.value == true){
+        let res = await getClients(parms.value) as any
+        tableData.value = res as Array<Client>
+    } else {
+        parmsSearch.value.Cphone = "paramsSearch"   // 标记参数
+        let res = await getClients(parmsSearch.value) as any
+        tableData.value = res as Array<Client>
+    }
 }
 
 //查询
@@ -154,5 +219,13 @@ const handleCurrentChange = (newPage) => {
 const handleSizeChange = (newSize) => {
     pageSize.value = newSize;
 };
+
+
+// 查询切换
+const showFirstRow = ref(true)
+const toggleRows = () => {
+    showFirstRow.value = !showFirstRow.value
+}
+
 
 </script>

@@ -1,6 +1,10 @@
 <template>
     <el-card class="box-card">
-        <el-row>
+        <el-row v-if="showFirstRow">
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">任意查询</el-button>
+            </el-col>
             <el-col :span="5">
                 <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
             </el-col>
@@ -10,6 +14,34 @@
                 <el-button type="primary" @click="handleExport">导出Excel</el-button>
             </el-col>
         </el-row>
+
+        <!-- 多条件查询 -->
+        <el-row v-else>
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">多条件查询</el-button>
+            </el-col>
+            <!-- 第二行的内容 -->
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Ano" placeholder="编号" @change="Search" />
+            </el-col>
+            <el-col :span="3">
+                <el-input v-model="parmsSearch.Aname" placeholder="姓名" @change="Search" />
+            </el-col>
+            <el-col :span="3">
+                <el-input v-model="parmsSearch.Asex" placeholder="性别" @change="Search" />
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Aremark" placeholder="备注" @change="Search" />
+            </el-col>
+
+            <el-col :span="7">
+                <el-button v-if="Sagency" type="primary" @click="Search">查询</el-button>
+                <el-button v-if="Iagency" @click="open" type="primary">新增</el-button>
+                <el-button type="primary" @click="handleExport">导出Excel</el-button>
+            </el-col>
+        </el-row>
+
         <br>
         <el-row>
             <el-col>
@@ -61,14 +93,31 @@ const parms = ref({
     PageSize: 10
 })
 
+const parmsSearch = ref({
+    Id: 0,
+    Ano: "",
+    Aname: "",
+    Asex: "",
+    Aphone: "",
+    Aremark: "",
+    PageIndex: 2,
+    PageSize: 10
+})
+
 
 // -------------------- 载入数据 --------------------
 const tableData: Ref<Array<Agency>> = ref<Array<Agency>>([])
 const load = async () => {
-    console.log("load中：" + parms.value.Aname)
-    let res = await getAgency(parms.value) as any
-    // console.log("查询结果：" + res as Array<Agency>)
-    tableData.value = res as Array<Agency>
+    if(showFirstRow.value == true){
+        let res = await getAgency(parms.value) as any
+        // console.log("查询结果：" + res as Array<Agency>)
+        tableData.value = res as Array<Agency>
+    } else {
+        parmsSearch.value.Aphone = "parmsSearch"    //标记
+        let res = await getAgency(parmsSearch.value) as any
+        // console.log("查询结果：" + res as Array<Agency>)
+        tableData.value = res as Array<Agency>
+    }
 }
 // 查询
 const searchVal = ref("")
@@ -149,6 +198,13 @@ const handleCurrentChange = (newPage) => {
 const handleSizeChange = (newSize) => {
     pageSize.value = newSize;
 };
+
+
+// 查询切换
+const showFirstRow = ref(true)
+const toggleRows = () => {
+    showFirstRow.value = !showFirstRow.value
+}
 
 
 </script>

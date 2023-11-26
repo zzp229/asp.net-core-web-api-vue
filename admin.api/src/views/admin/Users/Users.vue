@@ -1,14 +1,44 @@
 <template>
     <el-card class="box-card">
-        <el-row>
+        <el-row v-if="showFirstRow">
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">多条件查询</el-button>
+            </el-col>
             <el-col :span="5">
-                <el-input v-model="searchVal" placeholder="请输入需要查询内容" @change="Search" />
+                <el-input v-model="searchVal" placeholder="任意查询内容" @change="Search" />
             </el-col>
             <el-col :span="12">
                 <el-button type="primary" @click="Search">查询</el-button>
                 <el-button @click="open" type="primary">添加用户</el-button>
             </el-col>
         </el-row>
+
+        <!-- 多条件查询 -->
+        <el-row v-else>
+            <el-col :span="2">
+                <!-- 单条件查询 -->
+                <el-button @click="toggleRows" type="primary">多条件查询</el-button>
+            </el-col>
+            <!-- 第二行的内容 -->
+            <el-col :span="2">
+                <el-input v-model="parmsSearch.Name" placeholder="用户名" @change="Search" />
+            </el-col>
+            <el-col :span="3">
+                <el-input v-model="parmsSearch.Uid" placeholder="账号" @change="Search" />
+            </el-col>
+            <el-col :span="3">
+                <el-input v-model="parmsSearch.Type" placeholder="账户类型" @change="Search" />
+            </el-col>
+
+            <el-col :span="7">
+                <el-button type="primary" @click="Search">查询</el-button>
+                <el-button @click="open" type="primary">添加用户</el-button>
+            </el-col>
+        </el-row>
+
+
+
         <br>
         <el-row>
             <el-col>
@@ -65,18 +95,29 @@ const parms = ref({
     Type: ""
 })
 
+const parmsSearch = ref({
+    Id: 0,
+    Uid: "",
+    Name: "",
+    Pwd: "",
+    Type: ""
+})
+
 // Ref是声明类型，ref是创建响应式
 const tableData: Ref<Array<User>> = ref<Array<User>>([])
 // 这里获取的数据是旧数据？
 const load = async() => {
     // console.log("进入了log")
-    let res = await getUsers(parms.value) as any
-    tableData.value = res as Array<User>
-    // console.log("重新赋值的tableData" + res) // 返回的是object类型
-    // console.log("结束了load")
+    if(showFirstRow.value == true){
+        let res = await getUsers(parms.value) as any
+        tableData.value = res as Array<User>
+    } else {
+        parmsSearch.value.Pwd = "parmsSearch"
+        let res = await getUsers(parmsSearch.value) as any
+        tableData.value = res as Array<User>
+    }
+    
 
-    // 权限管理
-    // myBool = myBoolStore.value
 }
 
 //查询
@@ -209,6 +250,13 @@ const handleCurrentChange = (newPage) => {
 const handleSizeChange = (newSize) => {
     pageSize.value = newSize;
 };
+
+
+// 查询切换
+const showFirstRow = ref(true)
+const toggleRows = () => {
+    showFirstRow.value = !showFirstRow.value
+}
 
 </script>
 

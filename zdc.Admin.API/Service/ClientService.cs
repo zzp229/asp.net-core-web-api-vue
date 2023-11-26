@@ -42,15 +42,34 @@ namespace Service
             //    .Select(m => new Agency() { }, true)
             //    .ToListAsync();
 
-            string cond = client.Cname;
+            if(client.Cphone != "paramsSearch")
+            {
+                string cond = client.Cname;
 
-            List<Client> clients1 = await _db.Queryable<Client>()
-                .Where(m => m.Cno.Contains(cond) || m.Cname.Contains(cond) || m.Csex.Contains(cond)
-                        || m.Caddress.Contains(cond) || m.Cphone.Contains(cond) || m.Csymptom.Contains(cond) 
-                        || m.Mno.Contains(cond) || m.Ano.Contains(cond) || m.Cremark.Contains(cond))
-                .Select(m => new Client() { }, true) .ToListAsync();
+                List<Client> clients1 = await _db.Queryable<Client>()
+                    .Where(m => m.Cno.Contains(cond) || m.Cname.Contains(cond) || m.Csex.Contains(cond)
+                            || m.Caddress.Contains(cond) || m.Cphone.Contains(cond) || m.Csymptom.Contains(cond)
+                            || m.Mno.Contains(cond) || m.Ano.Contains(cond) || m.Cremark.Contains(cond))
+                    .Select(m => new Client() { }, true).ToListAsync();
 
-            return clients1;
+                return clients1;
+            }
+            else
+            {
+                List<Client> clients1 = await _db.Queryable<Client>()
+                    .WhereIF(!string.IsNullOrEmpty(client.Cno), m => m.Cno.Contains(client.Cno))
+                    .WhereIF(!string.IsNullOrEmpty(client.Cname), m => m.Cname.Contains(client.Cname))
+                    .WhereIF(!string.IsNullOrEmpty(client.Csex), m => m.Csex.Contains(client.Csex))
+                    .WhereIF(!string.IsNullOrEmpty(client.Mno), m => m.Mno.Contains(client.Mno))
+                    .WhereIF(!string.IsNullOrEmpty(client.Ano), m => m.Ano.Contains(client.Ano))
+                    .WhereIF(!string.IsNullOrEmpty(client.Cremark), m => m.Id.Contains(client.Cremark))
+                    .Select(m => new Client() { }, true)
+                    .ToListAsync();
+
+                return clients1;
+            }
+
+            
         }
     }
 }

@@ -24,6 +24,7 @@ namespace WebAPI.Controllers
 
         protected bool IsApiEnabled(string uid, string apiName)
         {
+            //return true;
             // 访问数据库判断是否有权限
             if (apiName == "GetMedicines")
             {
