@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+6M4oDyrG2HYSBRkwHk4slzlUdvpJ63BHpWpQoMNLbOgVcbUxWGcq5P2k3pjIJX/bKkUkI6HSNviC9Pc/b3u9Q==",
+  "dgSpecHash": "8MhdATpeBrO8PEYjDIrxDPAw4P5OCBW9supvcyC4Pg/z5CagaMyckPLEVGrP9wKdpL6a++9hOGmgE372Cbhf7w==",
   "success": true,
-  "projectFilePath": "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
+  "projectFilePath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\13556\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\13556\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

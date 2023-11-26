@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {}
+    "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {}
   },
   "projects": {
-    "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
+    "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
+        "projectUniqueName": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
+        "projectPath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\13556\\.nuget\\packages\\",
-        "outputPath": "D:\\desktop\\tmpgit\\设置权限\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\obj\\",
+        "outputPath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\c\\app\\Visual Studio\\tool\\NuGetPackages"

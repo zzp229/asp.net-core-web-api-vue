@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entitys;
 using Model.Other;
+using StackExchange.Redis;
 using System.Security;
 using WebAPI.Config;
 
@@ -12,7 +13,6 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PermissController : ControllerBase
     {
-
         private readonly IPermissService _permissService;
         //public PermissController(IPermissService permiss) : base(permiss) // 访问父类的构造方法
         //{

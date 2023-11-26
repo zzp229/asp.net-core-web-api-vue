@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\public",
-    "\\public\\json"
+    "\\public\\json",
+    "\\src",
+    "\\src\\views",
+    "\\src\\views\\admin",
+    "\\src\\views\\index"
   ],
-  "SelectedNode": "\\public\\json\\Role.json",
+  "SelectedNode": "\\src\\views\\index\\Desktop.vue",
   "PreviewInSolutionExplorer": false
 }

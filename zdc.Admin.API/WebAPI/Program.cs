@@ -12,6 +12,7 @@ using Model.Other;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// 注册 Redis 服务
+builder.Host.ConfigureContainer<ContainerBuilder>(container =>
+{
+    // 注册 Redis 连接
+    container.RegisterInstance(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("RedisConnection")))
+        .As<IConnectionMultiplexer>()
+        .SingleInstance();
+
+    // 注册 IDatabase 接口，用于与 Redis 进行交互
+    container.Register(context => context.Resolve<IConnectionMultiplexer>().GetDatabase())
+        .As<IDatabase>()
+        .SingleInstance();
+});
+
+
 builder.Services.AddEndpointsApiExplorer();
 // 设置版本和标题
 builder.Services.AddSwaggerGen(options =>

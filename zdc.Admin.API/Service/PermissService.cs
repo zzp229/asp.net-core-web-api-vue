@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Interface;
 using Model.Entitys;
+using Newtonsoft.Json;
 using SqlSugar;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,11 @@ namespace Service
     public class PermissService : IPermissService
     {
         private readonly ISqlSugarClient _db;
-        public PermissService(ISqlSugarClient db)
+        private readonly IDatabase _redisDatabase;
+        public PermissService(ISqlSugarClient db, IDatabase redisDatabase)
         {
             _db = db;
+            _redisDatabase = redisDatabase;
         }
 
 
@@ -38,8 +42,24 @@ namespace Service
 
         public async Task<Permiss> GetPermiss(string uid)
         {
-            var info = await _db.Queryable<Permiss>().FirstAsync(m => m.Uid == uid);
-            return info;
+            // 从redis中读取存的权限表先
+            string key = "permiss:";
+            string serializedPermiss = _redisDatabase.StringGet(key);
+            Permiss permissRedis = null;
+            if (serializedPermiss != null)
+            {
+                permissRedis = JsonConvert.DeserializeObject<Permiss>(serializedPermiss);
+            }
+
+            // 如果是目标对象就返回这个redis的数据
+            if (permissRedis.Uid == uid)
+            {
+                return permissRedis;
+            } else
+            {
+                var info = await _db.Queryable<Permiss>().FirstAsync(m => m.Uid == uid);
+                return info;
+            }
         }
 
         public async Task<List<Permiss>> GetPermisss(Permiss permiss)
