@@ -52,7 +52,7 @@ namespace Service
             }
 
             // 如果是目标对象就返回这个redis的数据
-            if (permissRedis.Uid == uid)
+            if (serializedPermiss != null && permissRedis.Uid == uid)
             {
                 return permissRedis;
             } else
