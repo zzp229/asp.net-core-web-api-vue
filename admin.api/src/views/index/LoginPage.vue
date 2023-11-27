@@ -36,7 +36,7 @@
                                 <el-input v-model="form.Uid" />
                             </el-form-item>
                             <el-form-item label="密码" prop="Pwd">
-                                <el-input v-model.number="form.Pwd" type="Pwd" show-Pwd
+                                <el-input v-model.number="form.Pwd" type="password" show-Pwd
                                     @keyup.enter="onSubmit(ruleFormRef)" />
                             </el-form-item>
                             <el-form-item>
@@ -73,7 +73,7 @@ const form = reactive({
 })
 const rules = reactive<FormRules>({
     Uid: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    Pwd: [{ required: true, message: '请输入密码', trigger: 'blur', type: "number" }]
+    Pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 
 // 弃用，被打包到updatePermiss.ts中

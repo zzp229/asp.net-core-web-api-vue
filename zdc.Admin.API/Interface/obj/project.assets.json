@@ -3232,11 +3232,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
+      "projectUniqueName": "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
       "projectName": "Interface",
-      "projectPath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
+      "projectPath": "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\Interface.csproj",
       "packagesPath": "C:\\Users\\13556\\.nuget\\packages\\",
-      "outputPath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\obj\\",
+      "outputPath": "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\Interface\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\c\\app\\Visual Studio\\tool\\NuGetPackages"
@@ -3257,8 +3257,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
-              "projectPath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj"
+            "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj": {
+              "projectPath": "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\Model\\Model.csproj"
             }
           }
         }

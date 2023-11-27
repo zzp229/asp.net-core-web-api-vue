@@ -9,7 +9,10 @@
                 <el-input v-model="form.Uid" />
             </el-form-item>
             <el-form-item label="密码" prop="Pwd">
-                <el-input v-model="form.Pwd" />
+                <el-input v-model="form.Pwd" type="password" />
+            </el-form-item>
+            <el-form-item label="确认密码" prop="Pwd">
+                <el-input v-model="pwd1.pwd" type="password" />
             </el-form-item>
             <el-form-item label="用户类型" prop="Mmode">
                 <el-select v-model="form.Type">
@@ -50,8 +53,13 @@ const form = ref({
     Pwd: "",
     Type: ""
 })
-//组件的实例只会在加载的时候渲染一次，如果想实现form的值和参数联动，需要使用监听
-//props.info改变，就执行回调函数，将修改后的值复制回去给form
+
+
+const pwd1 = ref({
+    pwd: "",
+})
+
+
 watch(() => props.info, (newInfo: any) => {
     if (newInfo) {
         form.value = newInfo

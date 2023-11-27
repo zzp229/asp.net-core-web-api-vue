@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U9hi2sw9AaX1X3ozWmEpKiPXKSKQvWcNdcqu5+V/KHREv6KtFBpuwmfJq9EcFhRuq+s75I0lzVCKMbZvcRQwgQ==",
+  "dgSpecHash": "oI/Lzu+LqEEOcFzVC7MzH/7KGfeaYskbk5cCUOdGU1PcHUnMjXyVcwspHX7mNrC/U5gCv7fpel/AqeqhbtwPCQ==",
   "success": true,
-  "projectFilePath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\Service\\Service.csproj",
+  "projectFilePath": "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\13556\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\13556\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.12\\microsoft.aspnetcore.authentication.jwtbearer.7.0.12.nupkg.sha512",

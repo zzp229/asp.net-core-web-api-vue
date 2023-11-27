@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W89g+sV/x7aAtCM3XTfbu4XwFqmMAKf49FRX0PylR5Eqh6rPs9NwD8W57cExrBV3KU1CXz/rX3c9ne4tDFXEqw==",
+  "dgSpecHash": "he8cVtfUmqtbVBn/owvJVCcKk0GOfjMmchVeAUGK0u31z5adjbbU6Y6ac14eIMOvzy0/TkN0y3azVg37X7Q8wA==",
   "success": true,
-  "projectFilePath": "D:\\desktop\\tmpgit\\增加redis\\asp.net-core-web-api-vue\\zdc.Admin.API\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "D:\\desktop\\tmpgit\\密码明文了\\asp.net-core-web-api-vue\\zdc.Admin.API\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\13556\\.nuget\\packages\\autofac\\7.1.0\\autofac.7.1.0.nupkg.sha512",
     "C:\\Users\\13556\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
