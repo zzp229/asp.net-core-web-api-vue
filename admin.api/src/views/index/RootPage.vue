@@ -10,28 +10,29 @@
                 <el-sub-menu index="/desktop">
                     <template #title>
                         <IconCom icon="house"></IconCom>
-                        <span>我的主页</span>
+                        <span>首页</span>
                     </template>
                     <el-menu-item index="/work">
                         <IconCom icon="wallet"></IconCom>
                         <span>工作台</span>
                     </el-menu-item>
-                    <el-menu-item index="/person">
-                        <IconCom icon="monitor"></IconCom>
-                        <span>个人信息</span>
-                    </el-menu-item>
+                    
                 </el-sub-menu>
 
                 <!-- 这里的index只是标识是否是同一组 -->
                 <el-sub-menu index="/permission1">
                     <template #title>
                         <IconCom icon="house"></IconCom>
-                        <span>账户权限</span>
+                        <span>个人中心</span>
                     </template>
-                    <el-menu-item index="/work">
+                    <el-menu-item index="/person">
+                        <IconCom icon="monitor"></IconCom>
+                        <span>个人信息</span>
+                    </el-menu-item>
+                    <!-- <el-menu-item index="/work">
                         <IconCom icon="monitor"></IconCom>
                         <span>权限管理</span>
-                    </el-menu-item>
+                    </el-menu-item> -->
                 </el-sub-menu>
                 
                 <!-- 需要权限控制顾客不能看顾客的表 -->
@@ -105,7 +106,7 @@ let permiss: Permiss | null = null;
 let tmp: string = "admin"
 
 
-// 将权限载入全局，已抛用
+// 将权限载入全局
 const loadInfo = async (uid: string) => {
     console.log("进入了RootPage的loadInfo");
     user = await getUser(uid) as any as User;

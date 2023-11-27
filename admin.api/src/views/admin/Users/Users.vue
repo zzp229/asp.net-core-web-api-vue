@@ -3,7 +3,7 @@
         <el-row v-if="showFirstRow">
             <el-col :span="2">
                 <!-- 单条件查询 -->
-                <el-button @click="toggleRows" type="primary">多条件查询</el-button>
+                <el-button @click="toggleRows" type="primary">任意查询</el-button>
             </el-col>
             <el-col :span="5">
                 <el-input v-model="searchVal" placeholder="任意查询内容" @change="Search" />
@@ -21,7 +21,7 @@
                 <el-button @click="toggleRows" type="primary">多条件查询</el-button>
             </el-col>
             <!-- 第二行的内容 -->
-            <el-col :span="2">
+            <el-col :span="2" >
                 <el-input v-model="parmsSearch.Name" placeholder="用户名" @change="Search" />
             </el-col>
             <el-col :span="3">
@@ -29,6 +29,14 @@
             </el-col>
             <el-col :span="3">
                 <el-input v-model="parmsSearch.Type" placeholder="账户类型" @change="Search" />
+                <!-- <el-form-item label="用户类型：" prop="Mmode">
+                <el-select v-model="parmsSearch.Type">
+                    <el-option label="顾客" value="顾客"></el-option>
+                    <el-option label="销售人员" value="销售人员"></el-option>
+                    <el-option label="管理员" value="管理员"></el-option>
+                    <el-option label="采购人员" value="采购人员"></el-option>
+                </el-select>
+                </el-form-item> -->
             </el-col>
 
             <el-col :span="7">

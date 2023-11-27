@@ -32,8 +32,10 @@
 <script lang="ts" setup>
 import { ref, computed, defineEmits, reactive, watch } from 'vue'
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
-import { addUser, editUser, addPermiss } from '../../../http/index'
+import { addUser, editUser, addPermiss, editPermiss } from '../../../http/index'
 import User from '../../../class/User';
+import Permiss from '../../../class/Permiss';
+import { tr } from 'element-plus/es/locale/index.mjs';
 const props = defineProps({
     isShow: Boolean,
     info: User
@@ -87,19 +89,67 @@ const permissForm = ref({
     Sagency: 1,
 })
 
+
+
 const save = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
     //valid是验证通过，field是处理失败字段
     await formEl.validate((valid, fields) => {
         if (valid) {
-            console.log("form.value.Id=" + form.value.Id)
-            // ts中也是和c语言一样0是false
-            console.log("form.value.Id=" + form.value.Id)
+            // console.log("form.value.Id=" + form.value.Id)
+            // // ts中也是和c语言一样0是false
+            // console.log("form.value.Id=" + form.value.Id)
+            // 需要创建一张权限表给该用户
+            let permissForType: Permiss = new Permiss(); 
+            permissForType.Uid = form.value.Uid;
+            if(form.value.Type == "顾客"){
+                permissForType.Smedicine = true;
+                permissForType.Sagency = true;
+            } 
+            else if (form.value.Type == "销售人员")
+            {
+                permissForType.Smedicine = true;
+                permissForType.Sclient = true;
+                permissForType.Imedicine = true;
+                permissForType.Iclient = true;
+                permissForType.Dclient = true;
+                permissForType.Fclient = true;
+                permissForType.Fagency = true
+            } 
+            else if (form.value.Type == "采购人员")
+            {
+                permissForType.Smedicine = true;
+                permissForType.Imedicine = true;
+                permissForType.Iagency = true;
+                permissForType.Dmedicine = true;
+                permissForType.Fmedicine = true;
+            } 
+            else if (form.value.Type == "管理员")
+            {
+                permissForType.Smedicine = true;
+                permissForType.Sclient = true;
+                permissForType.Sagency = true;
+                permissForType.Imedicine = true;
+                permissForType.Iclient = true;
+                permissForType.Iagency = true;
+                permissForType.Dmedicine = true;
+                permissForType.Dclient = true;
+                permissForType.Dagency = true;
+                permissForType.Fmedicine = true;
+                permissForType.Fclient = true;
+                permissForType.Fagency = true
+            }
+
+
+            // 修改
             if (form.value.Id) {
                 //then是回调
                 editUser(form.value).then(function (res) {
                     if (res) {
+                        editPermiss(permissForType);    // 修改权限
                         emits("success", "修改成功！")
+                    } else {
+                        ElMessage.error("修改不合法")
                     }
                 })
             } 
@@ -108,9 +158,7 @@ const save = async (formEl: FormInstance | undefined) => {
                 console.log("进入了添加的")
                 addUser(form.value).then(function (res) {
                     if (res) {
-                        // 需要创建一张权限表给该用户
-                        permissForm.value.Uid = form.value.Uid;
-                        addPermiss(permissForm.value)
+                        addPermiss(permissForType);
                         emits("success", "添加成功！")
                     } else {
                         ElMessage.error("该账号已经存在！")

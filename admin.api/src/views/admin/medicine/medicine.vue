@@ -53,9 +53,9 @@
                 <el-table :data="paginatedData" style="width: 100%;height: 65vh;" border ref="tb">
                     <el-table-column type="selection" width="55" />
                     <el-table-column prop="Mno" label="编号" width="160" />
-                    <el-table-column prop="Mname" label="名称" width="155" />
-                    <el-table-column prop="Mmode" label="服用方法" width="160" />
-                    <el-table-column prop="Mefficacy" label="功效" width="110" />
+                    <el-table-column prop="Mname" label="名称" width="185" />
+                    <el-table-column prop="Mmode" label="服用方法" width="150" />
+                    <el-table-column prop="Mefficacy" label="功效" width="290" />
                     <el-table-column prop="Mnum" label="数量" width="100" />
 
                     <el-table-column label="操作" align="center">

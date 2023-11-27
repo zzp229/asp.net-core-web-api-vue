@@ -50,8 +50,8 @@
                     <el-table-column prop="Ano" label="编号" width="150" />
                     <el-table-column prop="Aname" label="姓名" width="150" />
                     <el-table-column prop="Asex" label="性别" width="150" />
-                    <el-table-column prop="Aphone" label="电话" width="150" />
-                    <el-table-column prop="Aremark" label="备注" width="190" />
+                    <el-table-column prop="Aphone" label="电话" width="250" />
+                    <el-table-column prop="Aremark" label="备注" width="290" />
 
                     <el-table-column label="操作" align="center">
                         <template #default="scope">

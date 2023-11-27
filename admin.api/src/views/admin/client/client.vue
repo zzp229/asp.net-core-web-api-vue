@@ -60,13 +60,13 @@
                     <el-table-column prop="Cname" label="姓名" width="100" />
                     <el-table-column prop="Csex" label="性别" width="100" />
                     <el-table-column prop="Cage" label="年龄" width="100" />
-                    <el-table-column prop="Caddress" label="住址" width="100" />
+                    <el-table-column prop="Caddress" label="住址" width="180" />
                     <el-table-column prop="Cphone" label="电话" width="100" />
-                    <el-table-column prop="Csymptom" label="症状" width="100" />
+                    <el-table-column prop="Csymptom" label="症状" width="180" />
                     <el-table-column prop="Mno" label="已购药品" width="100" />
                     <el-table-column prop="Ano" label="经办人" width="100" />
                     <el-table-column prop="Cdate" label="录入日期" width="110" />
-                    <el-table-column prop="Cremark" label="备注" width="100" />
+                    <el-table-column prop="Cremark" label="备注" width="250" />
 
                     <el-table-column label="操作" align="center">
                         <template #default="scope">

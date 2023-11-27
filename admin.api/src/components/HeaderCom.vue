@@ -36,7 +36,7 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item @click="toPerson">我的主页</el-dropdown-item>
-                            <el-dropdown-item v-if="useStore.NickName === 'admin'" @click="toPermission">权限管理</el-dropdown-item>
+                            <el-dropdown-item v-if="useStore.User.Type === '管理员'" @click="toPermission">权限管理</el-dropdown-item>
                             <el-dropdown-item @click="fixPwd">修改密码</el-dropdown-item>
                             <el-dropdown-item @click="logOut">退出</el-dropdown-item>
                         </el-dropdown-menu>
@@ -117,7 +117,7 @@ const toPerson = () => {
 }
 
 const toPermission = () => {
-    router.push({ path: "/Permission" })
+    router.push({ path: "/users" })
 }
 
 

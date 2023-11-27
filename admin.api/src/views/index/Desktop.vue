@@ -39,22 +39,7 @@ console.log("进入了主页，进入了主页，进入了主页================
 
 const formRef = ref<FormInstance>()
 const tolist = ref([
-    {
-        day: "2023-11-03",
-        todo: "test1"
-    },
-    {
-        day: "2023-11-05",
-        todo: "ghjk"
-    },
-    {
-        day: "2023-11-08",
-        todo: "hoij"
-    },
-    {
-        day: "2023-11-09",
-        todo: "joij"
-    }
+    
 ])
 const read = (day: string): string => {
     return tolist.value.find(p => p.day == day)?.todo!
