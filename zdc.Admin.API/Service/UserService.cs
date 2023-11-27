@@ -48,11 +48,24 @@ namespace Service
 
         public async Task<List<User>> GetUsers(User user)
         {
-            var res = await _db.Queryable<User>()
+            if (user.Pwd != "parmsSearch")
+            {
+                var res = await _db.Queryable<User>()
                 .Where(m => m.Uid.Contains(user.Name) || m.Name.Contains(user.Name) || m.Type.Contains(user.Name))
-                .Select(m => new User() { }, true) .ToListAsync();
+                .Select(m => new User() { }, true).ToListAsync();
 
-            return res;
+                return res;
+            }
+            else
+            {
+                var res = await _db.Queryable<User>()
+                    .WhereIF(!string.IsNullOrEmpty(user.Name), m => m.Name.Contains(user.Name))
+                    .WhereIF(!string.IsNullOrEmpty(user.Uid), m => m.Uid.Contains(user.Uid))
+                    .WhereIF(!string.IsNullOrEmpty(user.Type), m => m.Type.Contains(user.Type))
+                    .Select(m => new User() { }, true)
+                    .ToListAsync();
+                return res;
+            }
         }
     }
 }

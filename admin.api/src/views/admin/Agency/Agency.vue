@@ -182,7 +182,7 @@ const handleExport = () => {
 
 // 实现分页
 const currentPage = ref(1);
-const pageSize = ref(10);
+const pageSize = ref(14);
 const totalItems = computed(() => tableData.value.length);
 const paginatedData = computed(() => {
     const start = (currentPage.value - 1) * pageSize.value;

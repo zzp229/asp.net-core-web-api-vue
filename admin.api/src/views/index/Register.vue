@@ -6,7 +6,7 @@
             </el-form-item>
 
             <el-form-item label="账号" prop="account">
-                <el-input v-model="form.Uid" placeholder="请输入邮箱"></el-input>
+                <el-input v-model="form.Uid" placeholder="请输入账号"></el-input>
             </el-form-item>
 
             <el-form-item label="密码" prop="password">
