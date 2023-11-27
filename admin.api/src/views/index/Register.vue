@@ -14,7 +14,7 @@
             </el-form-item>
 
             <el-form-item label="确认密码" prop="ConfirePassword">
-                <el-input type="password" v-model="form.Pwd" placeholder="请输入密码"></el-input>
+                <el-input type="password" v-model="form1.Pwd" placeholder="确认密码"></el-input>
             </el-form-item>
 
             <el-form-item>
@@ -35,6 +35,10 @@ const form = ref({
     Name: "",
     Pwd: "",
     Type: "顾客"
+})
+
+const form1 = ref({
+    Pwd: ""
 })
 
 const permissForm = ref({
